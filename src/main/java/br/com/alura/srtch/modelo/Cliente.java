@@ -22,8 +22,10 @@ public class Cliente {
   @CsvBindByName(required = true)
   private BigDecimal renda;
 
+  @CsvBindByName(required = true)
   private Conta conta;
 
+  @CsvBindByName(required = true)
   private Endereco endereco;
 
   public String getCpf() {
