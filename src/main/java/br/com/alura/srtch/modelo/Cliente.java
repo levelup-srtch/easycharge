@@ -22,9 +22,11 @@ public class Cliente {
   @CsvBindByName(required = true)
   private BigDecimal renda;
 
+  @OneToOne
   @CsvBindByName(required = true)
-  private Conta conta;
+  private Cadastro conta;
 
+  @OneToOne
   @CsvBindByName(required = true)
   private Endereco endereco;
 
@@ -60,23 +62,31 @@ public class Cliente {
     this.renda = renda;
   }
 
+  public Cadastro getConta() {
+    return conta;
+  }
+
+  public void setConta(Cadastro conta) {
+    this.conta = conta;
+  }
+
+  public Endereco getEndereco() {
+    return endereco;
+  }
+
+  public void setEndereco(Endereco endereco) {
+    this.endereco = endereco;
+  }
 
   @Override
   public String toString() {
     return "Cliente{" +
-        "nome='" + nome + '\'' +
-        ", cpf='" + cpf + '\'' +
-        ", telefone='" + telefone + '\'' +
-        ", email='" + email + '\'' +
-        ", rua='" + rua + '\'' +
-        ", numero='" + numero + '\'' +
-        ", complemento='" + complemento + '\'' +
-        ", bairro='" + bairro + '\'' +
-        ", cidade='" + cidade + '\'' +
-        ", estado='" + estado + '\'' +
-        ", profissao='" + profissao + '\'' +
-        ", renda=" + renda +
-        ", status=" + status +
-        '}';
+            "cpf='" + cpf + '\'' +
+            ", nome='" + nome + '\'' +
+            ", profissao='" + profissao + '\'' +
+            ", renda=" + renda +
+            ", conta=" + conta +
+            ", endereco=" + endereco +
+            '}';
   }
 }

@@ -59,7 +59,7 @@ public class Main {
     BigDecimal somaRendaClientesSuspensos = BigDecimal.ZERO;
     int numeroClientesSuspensos = 0;
     for (Cliente cliente : clientes) {
-      if (StatusCliente.SUSPENSO.equals(cliente.getStatus())) {
+      if (StatusCliente.SUSPENSO.equals(cliente.getConta().getStatus())) {
         numeroClientesSuspensos++;
         somaRendaClientesSuspensos = somaRendaClientesSuspensos.add(cliente.getRenda());
       }
