@@ -1,5 +1,7 @@
 package br.com.alura.srtch;
 
+import br.com.alura.srtch.dominio.Cliente;
+import br.com.alura.srtch.dominio.enuns.StatusCliente;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.bean.CsvToBean;
@@ -46,7 +48,6 @@ public class Main {
     } else {
       throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);
     }
-
     System.out.println("# Limites de dívidas dos clientes");
     for (Cliente cliente : clientes) {
       BigDecimal limiteDivida = cliente.getRenda().multiply(BigDecimal.valueOf(12));
