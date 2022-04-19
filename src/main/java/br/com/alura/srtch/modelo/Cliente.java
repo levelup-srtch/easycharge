@@ -23,12 +23,22 @@ public class Cliente {
   private BigDecimal renda;
 
   @OneToOne
-  @CsvBindByName(required = true)
-  private Cadastro conta;
+  private Cadastro cadastro;
 
   @OneToOne
-  @CsvBindByName(required = true)
   private Endereco endereco;
+
+  public Cliente() {
+  }
+
+  public Cliente(String cpf, String nome, String profissao, BigDecimal renda, Cadastro cadastro, Endereco endereco) {
+    this.cpf = cpf;
+    this.nome = nome;
+    this.profissao = profissao;
+    this.renda = renda;
+    this.cadastro = cadastro;
+    this.endereco = endereco;
+  }
 
   public String getCpf() {
     return cpf;
@@ -63,11 +73,11 @@ public class Cliente {
   }
 
   public Cadastro getConta() {
-    return conta;
+    return cadastro;
   }
 
   public void setConta(Cadastro conta) {
-    this.conta = conta;
+    this.cadastro = conta;
   }
 
   public Endereco getEndereco() {
@@ -81,12 +91,19 @@ public class Cliente {
   @Override
   public String toString() {
     return "Cliente{" +
-            "cpf='" + cpf + '\'' +
-            ", nome='" + nome + '\'' +
+            "nome='" + nome + '\'' +
+            ", cpf='" + cpf + '\'' +
+            ", telefone='" + cadastro.getTelefone() + '\'' +
+            ", email='" + cadastro.getEmail() + '\'' +
+            ", rua='" + endereco.getRua() + '\'' +
+            ", numero='" + endereco.getNumero() + '\'' +
+            ", complemento='" + endereco.getComplemento() + '\'' +
+            ", bairro='" + endereco.getBairro() + '\'' +
+            ", cidade='" + endereco.getCidade() + '\'' +
+            ", estado='" + endereco.getEstado() + '\'' +
             ", profissao='" + profissao + '\'' +
             ", renda=" + renda +
-            ", conta=" + conta +
-            ", endereco=" + endereco +
+            ", status=" + cadastro.getStatus() +
             '}';
   }
 }

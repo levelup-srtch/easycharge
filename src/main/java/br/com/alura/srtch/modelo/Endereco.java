@@ -30,6 +30,16 @@ public class Endereco {
     @CsvBindByName(required = true)
     private String estado;
 
+    public Endereco() {
+    }
+
+    public Endereco(String rua, String numero, String bairro, String cidade, String estado) {
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;
+    }
 
     public String getRua() {
         return rua;
@@ -79,4 +89,15 @@ public class Endereco {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        return "Endereco{" +
+                "rua='" + rua + '\'' +
+                ", numero='" + numero + '\'' +
+                ", complemento='" + complemento + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 }
