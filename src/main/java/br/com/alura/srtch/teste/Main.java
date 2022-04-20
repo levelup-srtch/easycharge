@@ -2,16 +2,11 @@ package br.com.alura.srtch.teste;
 
 import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.modelo.ClientesPorEstado;
+import br.com.alura.srtch.service.ArquivoCSV;
+import br.com.alura.srtch.service.ArquivoJSON;
+import br.com.alura.srtch.service.ClientesSuspensos;
 import br.com.alura.srtch.service.LimiteDeDividas;
-import br.com.alura.srtch.service.RendaClientesSuspensos;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.util.List;
 
 public class Main {
@@ -26,48 +21,33 @@ public class Main {
     List<Cliente> clientes;
 
     if (arquivo.endsWith(".csv")) {
-      try {
-        Reader reader = new FileReader(arquivo);
-        CsvToBean<Cliente> csvToBean = new CsvToBeanBuilder<Cliente>(reader)
-            .withType(Cliente.class)
-            .build();
-        clientes = csvToBean.parse();
-      } catch (IOException ex) {
-        throw new IllegalStateException(ex);
-      }
-    } else if (arquivo.endsWith(".json")) {
-      try {
-        Reader reader = new FileReader(arquivo);
-        ObjectMapper mapper = new ObjectMapper();
+      ArquivoCSV arquivoCSV = new ArquivoCSV();
+      clientes = arquivoCSV.RecebeArquivo(arquivo);
 
-        clientes = mapper.readValue(reader, new TypeReference<>() {
-        });
-      } catch (IOException ex) {
-        throw new IllegalStateException(ex);
-      }
+    } else if (arquivo.endsWith(".json")) {
+      ArquivoJSON arquivoJSON = new ArquivoJSON();
+      clientes = arquivoJSON.retornaArquivoJSON(arquivo);
     } else {
       throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);
     }
 
+    System.out.println("# Limites de dívidas dos clientes");
     LimiteDeDividas ldm = new LimiteDeDividas();
-    ldm.MostrarLimiteDeDividasDosClientes();
+    ldm.MostrarLimiteDeDividasDosClientes(clientes);
 
-    RendaClientesSuspensos rcs = new RendaClientesSuspensos();
-    rcs.somaRendaDosClientesSuspensos();
+    ClientesSuspensos rcs = new ClientesSuspensos();
+    rcs.somaRendaDosClientesSuspensos(clientes);
     rcs.mostraClientesSuspensos();
     System.out.printf("A média de renda dos clientes suspensos é de R$ %.2f\n\n", rcs.mediaRendaClientesSuspensos());
 
     ClientesPorEstado clientesPorEstado = new ClientesPorEstado();
-    for (Cliente cliente : clientes) {
-      clientesPorEstado.adicionaCliente(cliente);
-    }
+    clientesPorEstado.adicionaTodosOsClientes(clientes);
+
     System.out.println("# Clientes por estado");
     for (String estado : clientesPorEstado.keySet()) {
       List<Cliente> clientesDoEstado = clientesPorEstado.get(estado);
       System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).\n", estado, clientesDoEstado.size());
     }
 
-
   }
-
 }

@@ -5,8 +5,8 @@ import com.opencsv.bean.CsvBindByName;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "contas")
-public class Cadastro {
+@Table(name = "cadastro")
+public class Cadastro{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

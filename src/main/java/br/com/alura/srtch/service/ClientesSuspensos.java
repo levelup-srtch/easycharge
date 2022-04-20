@@ -7,13 +7,13 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
-public class RendaClientesSuspensos {
+public class ClientesSuspensos {
 
     private BigDecimal RendaClientesSuspensos;
     private int numeroClientesSuspensos;
-    private List<Cliente> clientes;
 
-    public BigDecimal somaRendaDosClientesSuspensos(){
+    public BigDecimal somaRendaDosClientesSuspensos(List<Cliente> clientes){
+
         for (Cliente cliente : clientes) {
             if (StatusCliente.SUSPENSO.equals(cliente.getConta().getStatus())) {
                 this.numeroClientesSuspensos++;
@@ -38,9 +38,5 @@ public class RendaClientesSuspensos {
 
     public int getNumeroClientesSuspensos() {
         return numeroClientesSuspensos;
-    }
-
-    public List<Cliente> getClientes() {
-        return clientes;
     }
 }
