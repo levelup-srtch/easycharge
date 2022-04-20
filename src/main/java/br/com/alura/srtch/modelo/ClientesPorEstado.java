@@ -26,12 +26,12 @@ public class ClientesPorEstado extends TreeMap<String, List<Cliente>> {
     }
   }
 
-//  public void mostraClientesPorEstado(){
-//    System.out.println("# Clientes por estado");
-//
-//    for (String estado : clientes.keySet()) {
-//      List<Cliente> clientesDoEstado = clientes.get(this.estado);
-//      System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).\n", estado, clientesDoEstado.size());
-//    }
-//  }
+  public void mostraClientesPorEstado(ClientesPorEstado clientesPorEstado){
+    System.out.println("# Clientes por estado");
+
+    for (String estado : clientesPorEstado.keySet()) {
+      List<Cliente> clientesDoEstado = clientesPorEstado.get(this.estado);
+      System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).\n", estado, clientesDoEstado.size());
+    }
+  }
 }

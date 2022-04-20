@@ -20,8 +20,7 @@ public class ArquivoJSON {
 
             this.clientes = mapper.readValue(reader, new TypeReference<>() {
             });
-        } catch (
-                IOException ex) {
+        } catch (IOException ex) {
             throw new IllegalStateException(ex);
         }
         return this.clientes;

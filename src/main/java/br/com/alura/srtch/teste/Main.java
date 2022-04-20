@@ -7,6 +7,7 @@ import br.com.alura.srtch.service.ArquivoJSON;
 import br.com.alura.srtch.service.ClientesSuspensos;
 import br.com.alura.srtch.service.LimiteDeDividas;
 
+
 import java.util.List;
 
 public class Main {
@@ -43,11 +44,7 @@ public class Main {
     ClientesPorEstado clientesPorEstado = new ClientesPorEstado();
     clientesPorEstado.adicionaTodosOsClientes(clientes);
 
-    System.out.println("# Clientes por estado");
-    for (String estado : clientesPorEstado.keySet()) {
-      List<Cliente> clientesDoEstado = clientesPorEstado.get(estado);
-      System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).\n", estado, clientesDoEstado.size());
-    }
+    clientesPorEstado.mostraClientesPorEstado(clientesPorEstado);
 
   }
 }
