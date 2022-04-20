@@ -1,6 +1,8 @@
 package br.com.alura.srtch.teste;
 
+import br.com.alura.srtch.dao.CadastroDAO;
 import br.com.alura.srtch.dao.ClienteDAO;
+import br.com.alura.srtch.dao.EnderecoDAO;
 import br.com.alura.srtch.modelo.*;
 import br.com.alura.srtch.util.JPAUtil;
 
@@ -16,12 +18,18 @@ public class TestaCadastroCliente {
         endereco.setComplemento("Condomínio Alvorada");
         Cliente cliente = new Cliente("05851040181", "Gabriel Andrade Almeida", "Programador", new BigDecimal("2000"), cadastro, endereco);
 
+        ClienteDAO clienteDAO = new ClienteDAO(em);
+        CadastroDAO cadastroDAO = new CadastroDAO(em);
+        EnderecoDAO enderecoDAO = new EnderecoDAO(em);
+
         em.getTransaction().begin();
 
-        ClientesPorEstado clientesPorEstado = new ClientesPorEstado();
-        ClienteDAO clienteDAO = new ClienteDAO(em);
+        cadastroDAO.cadastrar(cadastro);
+        enderecoDAO.cadastrar(endereco);
+        clienteDAO.cadastrar(cliente);
 
-        System.out.println(cliente);
+        em.getTransaction().commit();
+        em.close();
 
     }
 

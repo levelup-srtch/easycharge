@@ -3,6 +3,7 @@ package br.com.alura.srtch.teste;
 import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.modelo.ClientesPorEstado;
 import br.com.alura.srtch.modelo.StatusCliente;
+import br.com.alura.srtch.service.LimiteDeDividas;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.bean.CsvToBean;
@@ -51,10 +52,8 @@ public class Main {
     }
 
     System.out.println("# Limites de dívidas dos clientes");
-    for (Cliente cliente : clientes) {
-      BigDecimal limiteDivida = cliente.getRenda().multiply(BigDecimal.valueOf(12));
-      System.out.printf("- o limite máximo de dívida para %s é de R$ %.2f.\n", cliente.getNome(), limiteDivida);
-    }
+    LimiteDeDividas ldm = new LimiteDeDividas();
+    ldm.MostrarLimiteDeDividasDosClientes();
 
     BigDecimal somaRendaClientesSuspensos = BigDecimal.ZERO;
     int numeroClientesSuspensos = 0;
