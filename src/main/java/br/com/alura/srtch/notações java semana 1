@@ -1,0 +1,15 @@
+ferramenta skidman
+
+o que fazer no projeto
+como entregar
+
+intellij - ferramenta paga / comunit para desenvolver java
+
+jpa - especificação de classe para banco de dados 
+hibernate - implementação do jpa (biblioteca)
+
+vlad mihalcea - especialista em hibernate
+
+JPA - colocar @ identificando compomentes das classes
+
+DAO - ISOLAR o código de acesso a dados de uma classe
