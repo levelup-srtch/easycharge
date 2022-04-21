@@ -72,11 +72,11 @@ public class Cliente {
     this.renda = renda;
   }
 
-  public Cadastro getConta() {
+  public Cadastro getCadastro() {
     return cadastro;
   }
 
-  public void setConta(Cadastro conta) {
+  public void setCadastro(Cadastro conta) {
     this.cadastro = conta;
   }
 
