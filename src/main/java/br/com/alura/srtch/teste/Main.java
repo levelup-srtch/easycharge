@@ -43,7 +43,6 @@ public class Main {
 
     ClientesPorEstado clientesPorEstado = new ClientesPorEstado();
     clientesPorEstado.adicionaTodosOsClientes(clientes);
-
     clientesPorEstado.mostraClientesPorEstado(clientesPorEstado);
 
   }
