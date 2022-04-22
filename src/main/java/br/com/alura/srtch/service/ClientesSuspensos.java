@@ -24,8 +24,7 @@ public class ClientesSuspensos {
     }
 
     public BigDecimal mediaRendaClientesSuspensos(){
-        BigDecimal mediaRendaClientesSuspensos = this.RendaClientesSuspensos.divide(BigDecimal.valueOf(this.numeroClientesSuspensos), 2, RoundingMode.HALF_UP);
-        return mediaRendaClientesSuspensos;
+        return this.RendaClientesSuspensos.divide(BigDecimal.valueOf(this.numeroClientesSuspensos), 2, RoundingMode.HALF_UP);
     }
 
     public void mostraClientesSuspensos(){

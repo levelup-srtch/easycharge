@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 public class ClientesPorEstado extends TreeMap<String, List<Cliente>> {
 
-  String estado;
+  private String estado;
 
   public void adicionaCliente(Cliente cliente) {
     this.estado = cliente.getEndereco().getEstado();

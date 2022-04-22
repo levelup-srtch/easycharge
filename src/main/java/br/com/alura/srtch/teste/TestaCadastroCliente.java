@@ -32,7 +32,7 @@ public class TestaCadastroCliente {
 
         clienteDAO.buscarPorNome("Gabriel Andrade Almeida");
 
-        clienteDAO.buscarTodosAtivos();
+        clienteDAO.buscarTodosPorStatus(StatusCliente.ATIVO);
 
         em.getTransaction().commit();
         em.close();

@@ -5,7 +5,6 @@ import br.com.alura.srtch.modelo.ClientesPorEstado;
 import br.com.alura.srtch.service.ArquivoCSV;
 import br.com.alura.srtch.service.ArquivoJSON;
 import br.com.alura.srtch.service.ClientesSuspensos;
-import br.com.alura.srtch.service.LimiteDeDividas;
 
 
 import java.util.List;
@@ -33,8 +32,10 @@ public class Main {
     }
 
     System.out.println("# Limites de dívidas dos clientes");
-    LimiteDeDividas ldm = new LimiteDeDividas();
-    ldm.MostrarLimiteDeDividasDosClientes(clientes);
+    for(Cliente cliente : clientes){
+      cliente.setLimiteDeRenda(clientes);
+      System.out.printf("- o limite máximo de dívida para %s é de R$ %.2f.\n", cliente.getRenda(), cliente.getLimiteDivida());
+    }
 
     ClientesSuspensos rcs = new ClientesSuspensos();
     rcs.somaRendaDosClientesSuspensos(clientes);

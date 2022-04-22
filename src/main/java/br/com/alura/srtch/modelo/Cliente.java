@@ -1,16 +1,18 @@
 package br.com.alura.srtch.modelo;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvRecurse;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "clientes")
 public class Cliente {
 
   @Id
-  @CsvBindByName(column = "CPF", required = true)
+  @CsvBindByName(required = true)
   private String cpf;
 
   @CsvBindByName(required = true)
@@ -22,9 +24,13 @@ public class Cliente {
   @CsvBindByName(required = true)
   private BigDecimal renda;
 
+  private BigDecimal limiteDivida;
+
+  @CsvRecurse
   @OneToOne
   private Cadastro cadastro;
 
+  @CsvRecurse
   @OneToOne
   private Endereco endereco;
 
@@ -38,6 +44,10 @@ public class Cliente {
     this.renda = renda;
     this.cadastro = cadastro;
     this.endereco = endereco;
+  }
+
+  public void setLimiteDeRenda(List<Cliente> clientes){
+      this.limiteDivida = this.renda.multiply(BigDecimal.valueOf(12));
   }
 
   public String getCpf() {
@@ -70,6 +80,10 @@ public class Cliente {
 
   public void setRenda(BigDecimal renda) {
     this.renda = renda;
+  }
+
+  public BigDecimal getLimiteDivida() {
+    return limiteDivida;
   }
 
   public Cadastro getCadastro() {
