@@ -15,7 +15,7 @@ public class ClientesSuspensos {
     public BigDecimal somaRendaDosClientesSuspensos(List<Cliente> clientes){
 
         for (Cliente cliente : clientes) {
-            if (StatusCliente.SUSPENSO.equals(cliente.getConta().getStatus())) {
+            if (StatusCliente.SUSPENSO.equals(cliente.getCadastro().getStatus())) {
                 this.numeroClientesSuspensos++;
                 this.RendaClientesSuspensos = this.RendaClientesSuspensos.add(cliente.getRenda());
             }

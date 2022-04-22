@@ -1,6 +1,7 @@
 package br.com.alura.srtch.dao;
 
 import br.com.alura.srtch.modelo.Cliente;
+import br.com.alura.srtch.modelo.StatusCliente;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -16,6 +17,19 @@ public class ClienteDAO {
     public List<Cliente> buscarTodos() {
         String jpql = "SELECT c FROM Cliente c";
         return em.createQuery(jpql, Cliente.class).getResultList();
+    }
+
+    public List<Cliente> buscarTodosAtivos() {
+        String jpql = "SELECT c FROM Cliente c WHERE c.cadastro.status = ATIVO";
+        return em.createQuery(jpql, Cliente.class)
+                .getResultList();
+    }
+
+    public List<Cliente> buscarPorNome(String nome) {
+        String jpql = "SELECT c FROM Cliente c WHERE c.nome = :nome";
+        return em.createQuery(jpql, Cliente.class)
+                .setParameter("nome", nome)
+                .getResultList();
     }
 
     public Cliente buscarPorId(String cpf) {
