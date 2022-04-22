@@ -89,17 +89,30 @@ public class Main {
       System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).\n", estado, clientesDoEstado.size());
     }
      
+     
+    for (Cliente cliente : clientes) {
+    	ClienteDao clienteDao0 = new ClienteDao(em);
+    	em.getTransaction().begin(); 
+		clienteDao0.cadastrar(cliente);
+		em.getTransaction().commit(); 
+		//em.close();
+    }
     
-    Cliente c = clienteDao.buscarPorId(1l);
-    System.out.println(c.getNome());
-	
+    //Cliente c = clienteDao.buscarPorId(2l);
+   // System.out.println(c.getNome()); 
+    
+    clientes  = clienteDao.buscarTodos();
+    clientes.forEach(p2 -> System.out.println(p2));
+    clientes.forEach(p2 -> System.out.println(p2.getNome()));
+  
+   
 	
   }
   
   private static void cadastrarCliente() {
 	   
-	  // criar endereço primeiro
-	  
+	  // outro metodo seria criar o endereço no banco primeiro.
+	  /*
 		Cliente cliente = new Cliente(
 		 "Yasmin Ester Lara Nogueira",
 		 "040.141.961-43",
@@ -109,17 +122,15 @@ public class Main {
 		 new BigDecimal("9168"),
 		 StatusCliente.ATIVO,
 		 new Endereco("Quadra QS 20 Conjunto 2","669","ap 175","Riacho Fundo II","Brasília","DF"));
-		
-		
-		 
+				 
 		
 		EntityManager em = JPAUtil.getEntityManager();
 		ClienteDao clienteDao = new ClienteDao(em);
 		em.getTransaction().begin(); 
 		clienteDao.cadastrar(cliente);
 		em.getTransaction().commit(); 
-		em.close();
-		
+		//em.close();
+	*/	
 		
   }
 
