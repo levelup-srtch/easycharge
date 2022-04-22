@@ -16,8 +16,9 @@ public class Cadastro{
     @Column(length = 14)
     private String telefone;
 
-    @Column(length = 100)
+
     @CsvBindByName(required = true)
+    @Column(length = 100)
     private String email;
 
     @Enumerated(EnumType.STRING)

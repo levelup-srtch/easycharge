@@ -9,20 +9,20 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
-public class ArquivoJSON {
+public class ArquivoJSON implements RetornaArquivo{
 
-    private List<Cliente> clientes;
-
-    public List<Cliente> retornaArquivoJSON(String arquivo){
+    @Override
+    public List<Cliente> RecebeArquivo(String arquivo) {
+        List<Cliente> clientes;
         try {
             Reader reader = new FileReader(arquivo);
             ObjectMapper mapper = new ObjectMapper();
 
-            this.clientes = mapper.readValue(reader, new TypeReference<>() {
+            clientes = mapper.readValue(reader, new TypeReference<>() {
             });
         } catch (IOException ex) {
             throw new IllegalStateException(ex);
         }
-        return this.clientes;
+        return clientes;
     }
 }

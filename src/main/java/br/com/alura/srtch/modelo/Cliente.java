@@ -5,7 +5,6 @@ import com.opencsv.bean.CsvRecurse;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Table(name = "clientes")
@@ -46,7 +45,7 @@ public class Cliente {
     this.endereco = endereco;
   }
 
-  public void setLimiteDeRenda(List<Cliente> clientes){
+  public void setLimiteDeDivida(){
       this.limiteDivida = this.renda.multiply(BigDecimal.valueOf(12));
   }
 

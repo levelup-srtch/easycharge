@@ -19,19 +19,4 @@ public class ClientesPorEstado extends TreeMap<String, List<Cliente>> {
     clientes.add(cliente);
     put(this.estado, clientes);
   }
-
-  public void adicionaTodosOsClientes(List<Cliente> clientes){
-    for (Cliente cliente : clientes) {
-      adicionaCliente(cliente);
-    }
-  }
-
-  public void mostraClientesPorEstado(ClientesPorEstado clientesPorEstado){
-    System.out.println("# Clientes por estado");
-
-    for (String estado : clientesPorEstado.keySet()) {
-      List<Cliente> clientesDoEstado = clientesPorEstado.get(this.estado);
-      System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).\n", estado, clientesDoEstado.size());
-    }
-  }
 }

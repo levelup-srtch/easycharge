@@ -21,30 +21,36 @@ public class Main {
     List<Cliente> clientes;
 
     if (arquivo.endsWith(".csv")) {
-      ArquivoCSV arquivoCSV = new ArquivoCSV();
-      clientes = arquivoCSV.RecebeArquivo(arquivo);
-
+      clientes = new ArquivoCSV().RecebeArquivo(arquivo);
     } else if (arquivo.endsWith(".json")) {
-      ArquivoJSON arquivoJSON = new ArquivoJSON();
-      clientes = arquivoJSON.retornaArquivoJSON(arquivo);
+      clientes = new ArquivoJSON().RecebeArquivo(arquivo);
     } else {
       throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);
     }
 
     System.out.println("# Limites de dívidas dos clientes");
     for(Cliente cliente : clientes){
-      cliente.setLimiteDeRenda(clientes);
-      System.out.printf("- o limite máximo de dívida para %s é de R$ %.2f.\n", cliente.getRenda(), cliente.getLimiteDivida());
+      cliente.setLimiteDeDivida();
+      System.out.printf("- o limite máximo de dívida para %s é de R$ %.2f.%n", cliente.getRenda(), cliente.getLimiteDivida());
     }
 
     ClientesSuspensos rcs = new ClientesSuspensos();
     rcs.somaRendaDosClientesSuspensos(clientes);
-    rcs.mostraClientesSuspensos();
+
+    System.out.printf("%nHá %s clientes suspensos.%n", rcs.getNumeroClientesSuspensos());
+
     System.out.printf("A média de renda dos clientes suspensos é de R$ %.2f%n%n", rcs.mediaRendaClientesSuspensos());
 
     ClientesPorEstado clientesPorEstado = new ClientesPorEstado();
-    clientesPorEstado.adicionaTodosOsClientes(clientes);
-    clientesPorEstado.mostraClientesPorEstado(clientesPorEstado);
+    for (Cliente cliente : clientes) {
+      clientesPorEstado.adicionaCliente(cliente);
+    }
+
+    System.out.println("# Clientes por estado");
+    for (String estado : clientesPorEstado.keySet()) {
+      List<Cliente> clientesDoEstado = clientesPorEstado.get(estado);
+      System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).%n", estado, clientesDoEstado.size());
+    }
 
   }
 }
