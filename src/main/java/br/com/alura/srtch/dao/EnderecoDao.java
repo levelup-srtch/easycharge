@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.alura.srtch.*;
+import modelo.Endereco;
 
 public class EnderecoDao {
 	private EntityManager em;

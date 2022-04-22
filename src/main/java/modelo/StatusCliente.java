@@ -1,4 +1,4 @@
-package br.com.alura.srtch;
+package modelo;
 
 public enum StatusCliente {
   ATIVO, SUSPENSO;

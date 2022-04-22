@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.alura.srtch.*;
+import modelo.Cliente;
 
 public class ClienteDao {
 	private EntityManager em;

@@ -16,6 +16,9 @@ import com.opencsv.bean.CsvToBeanBuilder;
 
 import br.com.alura.srtch.dao.ClienteDao;
 import br.com.alura.srtch.dao.EnderecoDao;
+import modelo.Cliente;
+import modelo.ClientesPorEstado;
+import modelo.StatusCliente;
 
 // classe com função de ler csv, json, calcular dívidas e imprimir resultados, deve ser segregada. 
 public class Main {
@@ -25,7 +28,7 @@ public class Main {
 	  cadastrarCliente();
 	  
 	  EntityManager em = JPAUtil.getEntityManager();
-		ClienteDao clienteDao = new ClienteDao(em);
+	  ClienteDao clienteDao = new ClienteDao(em);
 	  
     if (args.length <= 0) {
       throw new IllegalArgumentException("Forneça um nome de arquivo.");

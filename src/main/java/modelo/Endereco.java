@@ -1,4 +1,4 @@
-package br.com.alura.srtch;
+package modelo;
 
 import com.opencsv.bean.CsvBindByName;
 
