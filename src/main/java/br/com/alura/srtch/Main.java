@@ -14,10 +14,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
-
 import br.com.alura.srtch.dao.ClienteDao;
+import br.com.alura.srtch.dao.EnderecoDao;
 
-// sr teste commit3
+// classe com função de ler csv, json, calcular dívidas e imprimir resultados, deve ser segregada. 
 public class Main {
 
   public static void main(String[] args) {
@@ -88,7 +88,7 @@ public class Main {
       List<Cliente> clientesDoEstado = clientesPorEstado.get(estado);
       System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).\n", estado, clientesDoEstado.size());
     }
-
+     
     
     Cliente c = clienteDao.buscarPorId(1l);
     System.out.println(c.getNome());
@@ -98,20 +98,19 @@ public class Main {
   
   private static void cadastrarCliente() {
 	   
+	  // criar endereço primeiro
+	  
 		Cliente cliente = new Cliente(
 		 "Yasmin Ester Lara Nogueira",
 		 "040.141.961-43",
 		 "(61) 98439-7036",
 		 "yasminesternogueira@munhozengenharia.com.br",
-		 "Quadra QS 20 Conjunto 2",
-		 "669",
-		 "ap 175",
-		 "Riacho Fundo II",
-		 "Brasília",
-		 "DF",
 		 "Engenheira",
 		 new BigDecimal("9168"),
-		 StatusCliente.ATIVO);
+		 StatusCliente.ATIVO,
+		 new Endereco("Quadra QS 20 Conjunto 2","669","ap 175","Riacho Fundo II","Brasília","DF"));
+		
+		
 		 
 		
 		EntityManager em = JPAUtil.getEntityManager();
