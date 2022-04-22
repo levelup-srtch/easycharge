@@ -1,10 +1,5 @@
 package br.com.alura.srtch;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -12,10 +7,26 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
+
+
+import br.com.alura.srtch.dao.ClienteDao;
+
 // sr teste commit3
 public class Main {
 
   public static void main(String[] args) {
+	  
+	  cadastrarCliente();
+	  
+	  EntityManager em = JPAUtil.getEntityManager();
+		ClienteDao clienteDao = new ClienteDao(em);
+	  
     if (args.length <= 0) {
       throw new IllegalArgumentException("Forneça um nome de arquivo.");
     }
@@ -78,7 +89,39 @@ public class Main {
       System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).\n", estado, clientesDoEstado.size());
     }
 
-
+    
+    Cliente c = clienteDao.buscarPorId(1l);
+    System.out.println(c.getNome());
+	
+	
+  }
+  
+  private static void cadastrarCliente() {
+	   
+		Cliente cliente = new Cliente(
+		 "Yasmin Ester Lara Nogueira",
+		 "040.141.961-43",
+		 "(61) 98439-7036",
+		 "yasminesternogueira@munhozengenharia.com.br",
+		 "Quadra QS 20 Conjunto 2",
+		 "669",
+		 "ap 175",
+		 "Riacho Fundo II",
+		 "Brasília",
+		 "DF",
+		 "Engenheira",
+		 new BigDecimal("9168"),
+		 StatusCliente.ATIVO);
+		 
+		
+		EntityManager em = JPAUtil.getEntityManager();
+		ClienteDao clienteDao = new ClienteDao(em);
+		em.getTransaction().begin(); 
+		clienteDao.cadastrar(cliente);
+		em.getTransaction().commit(); 
+		em.close();
+		
+		
   }
 
 }
