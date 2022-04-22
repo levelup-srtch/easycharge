@@ -1,6 +1,6 @@
 package br.com.alura.srtch.service;
 
-import br.com.alura.srtch.modelo.Cliente;
+import br.com.alura.srtch.modelo.RecebeClienteDoArquivo;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,17 +12,17 @@ import java.util.List;
 public class ArquivoJSON implements RetornaArquivo{
 
     @Override
-    public List<Cliente> RecebeArquivo(String arquivo) {
-        List<Cliente> clientes;
+    public List<RecebeClienteDoArquivo> RecebeArquivo(String arquivo) {
+        List<RecebeClienteDoArquivo> rcda;
         try {
             Reader reader = new FileReader(arquivo);
             ObjectMapper mapper = new ObjectMapper();
 
-            clientes = mapper.readValue(reader, new TypeReference<>() {
+            rcda = mapper.readValue(reader, new TypeReference<>() {
             });
         } catch (IOException ex) {
             throw new IllegalStateException(ex);
         }
-        return clientes;
+        return rcda;
     }
 }

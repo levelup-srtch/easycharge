@@ -17,7 +17,7 @@ public class ClientesSuspensos {
         for (Cliente cliente : clientes) {
             if (StatusCliente.SUSPENSO.equals(cliente.getCadastro().getStatus())) {
                 this.numeroClientesSuspensos++;
-                this.somaRendaClientesSuspensos = somaRendaClientesSuspensos.add(cliente.getRenda());
+                this.somaRendaClientesSuspensos = this.somaRendaClientesSuspensos.add(cliente.getRenda());
             }
         }
     }

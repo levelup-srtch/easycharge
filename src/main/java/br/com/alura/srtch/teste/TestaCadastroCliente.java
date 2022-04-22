@@ -22,8 +22,6 @@ public class TestaCadastroCliente {
         CadastroDAO cadastroDAO = new CadastroDAO(em);
         EnderecoDAO enderecoDAO = new EnderecoDAO(em);
 
-        System.out.println(cliente.getCadastro().getStatus());
-
         em.getTransaction().begin();
 
         cadastroDAO.cadastrar(cadastro);

@@ -12,25 +12,29 @@ public class Cliente {
 
   @Id
   @CsvBindByName(required = true)
+  @Column(nullable=false, length=14)
   private String cpf;
 
   @CsvBindByName(required = true)
+  @Column(nullable=false, length=100)
   private String nome;
 
   @CsvBindByName(required = true)
+  @Column(nullable=false, length=50)
   private String profissao;
 
   @CsvBindByName(required = true)
+  @Column(nullable=false, length=10)
   private BigDecimal renda;
 
   private BigDecimal limiteDivida;
 
-  @CsvRecurse
   @OneToOne
+  @CsvBindByName(required = true)
   private Cadastro cadastro;
 
-  @CsvRecurse
   @OneToOne
+  @CsvBindByName(required = true)
   private Endereco endereco;
 
   public Cliente() {

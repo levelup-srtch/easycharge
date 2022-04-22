@@ -13,21 +13,27 @@ public class Endereco{
     private Long idEndereco;
 
     @CsvBindByName(required = true)
+    @Column(nullable=false, length=100)
     private String rua;
 
     @CsvBindByName(required = true)
+    @Column(nullable=false, length=100)
     private String numero;
 
     @CsvBindByName
+    @Column(length=100)
     private String complemento;
 
     @CsvBindByName(required = true)
+    @Column(nullable=false, length=100)
     private String bairro;
 
     @CsvBindByName(required = true)
+    @Column(nullable=false, length=100)
     private String cidade;
 
     @CsvBindByName(required = true)
+    @Column(nullable=false, length=100)
     private String estado;
 
     public Endereco() {
