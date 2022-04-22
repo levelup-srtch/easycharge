@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 
 import br.com.alura.srtch.*;
 import modelo.Cliente;
+import modelo.StatusCliente;
 
 public class ClienteDao {
 	private EntityManager em;
@@ -43,14 +44,18 @@ public class ClienteDao {
 		return em.createQuery(jpql, Cliente.class).setParameter("nome",nome).getResultList(); // também funciona de "nome" para 1, indicando a posição 1
 	}
 	
-	public List<Cliente> buscarPorAtivo() {	
-		String jpql = "SELECT c FROM Cliente c WHERE c.status = 'Ativo'"; 
-		return em.createQuery(jpql, Cliente.class).getResultList();
+	public List<Cliente> buscarPorAtivo(StatusCliente status) {	
+		String jpql = "SELECT c FROM Cliente c WHERE c.status = :status"; 
+		return em.createQuery(jpql, Cliente.class)
+				.setParameter("status", status )
+				.getResultList();
 	}
 	
-	public List<Cliente> buscarPorSuspenso() {	
-		String jpql = "SELECT c FROM Cliente c WHERE c.status = 'Suspenso'"; 
-		return em.createQuery(jpql, Cliente.class).getResultList();
+	public List<Cliente> buscarPorSuspenso(StatusCliente status) {	
+		String jpql = "SELECT c FROM Cliente c WHERE c.status = :status"; 
+		return em.createQuery(jpql, Cliente.class)
+				.setParameter("status", status )
+				.getResultList();
 	}
 	
 }

@@ -11,12 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvRecurse;
 
 
-
+@XmlRootElement(namespace = "clientes")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -25,6 +30,7 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+  @XmlElement	
   @CsvBindByName
   @Column(name = "nome",length=255,nullable=false)
   private String nome;

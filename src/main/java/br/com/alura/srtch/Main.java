@@ -1,21 +1,13 @@
 package br.com.alura.srtch;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
 
 import br.com.alura.srtch.dao.ClienteDao;
-import br.com.alura.srtch.dao.EnderecoDao;
 import modelo.Cliente;
 import modelo.ClientesPorEstado;
 import modelo.StatusCliente;
@@ -25,7 +17,7 @@ public class Main {
 
   public static void main(String[] args) {
 	  
-	  cadastrarCliente();
+	 // cadastrarCliente();
 	  
 	  EntityManager em = JPAUtil.getEntityManager();
 	  ClienteDao clienteDao = new ClienteDao(em);
@@ -37,30 +29,15 @@ public class Main {
     String arquivo = args[0];
 
     List<Cliente> clientes;
-
-    if (arquivo.endsWith(".csv")) {
-      try {
-        Reader reader = new FileReader(arquivo);
-        CsvToBean<Cliente> csvToBean = new CsvToBeanBuilder<Cliente>(reader)
-            .withType(Cliente.class)
-            .build();
-        clientes = csvToBean.parse();
-      } catch (IOException ex) {
-        throw new IllegalStateException(ex);
+    
+    if (arquivo.matches(".*csv")) {
+        clientes = new ArquivoCSV().Ler(arquivo);
+        
+    } else if (arquivo.matches(".*csv")) {
+        clientes = new ArquivoJSON().Ler(arquivo);
+      } else {
+        throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);
       }
-    } else if (arquivo.endsWith(".json")) {
-      try {
-        Reader reader = new FileReader(arquivo);
-        ObjectMapper mapper = new ObjectMapper();
-
-        clientes = mapper.readValue(reader, new TypeReference<>() {
-        });
-      } catch (IOException ex) {
-        throw new IllegalStateException(ex);
-      }
-    } else {
-      throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);
-    }
 
     System.out.println("# Limites de dívidas dos clientes");
     for (Cliente cliente : clientes) {
@@ -105,17 +82,27 @@ public class Main {
    // System.out.println(c.getNome()); 
     
     clientes  = clienteDao.buscarTodos();
-    clientes.forEach(p2 -> System.out.println(p2));
-    clientes.forEach(p2 -> System.out.println(p2.getNome()));
-  
-   
+    clientes.forEach(c -> System.out.println(c));
+    clientes.forEach(c -> System.out.println(c.getNome()));
+
+    clientes = clienteDao.buscarPorNome("Emily Vera Marcela Silveira");
+    System.out.println("----------------BUSCA POR NOME Emily-");
+	clientes.forEach(c -> System.out.println(c.getNome()));
+    
+    clientes = clienteDao.buscarPorAtivo(StatusCliente.ATIVO);
+    System.out.println("----------------ATIVOS---------------");
+    clientes.forEach(c -> System.out.println(c.getNome()));
+    clientes = clienteDao.buscarPorAtivo(StatusCliente.SUSPENSO);
+    System.out.println("--------------SUSPENSOS--------------");
+    clientes.forEach(c -> System.out.println(c.getNome()));
 	
   }
   
+  /*
   private static void cadastrarCliente() {
 	   
 	  // outro metodo seria criar o endereço no banco primeiro.
-	  /*
+	 
 		Cliente cliente = new Cliente(
 		 "Yasmin Ester Lara Nogueira",
 		 "040.141.961-43",
@@ -135,6 +122,4 @@ public class Main {
 		//em.close();
 	*/	
 		
-  }
-
 }
