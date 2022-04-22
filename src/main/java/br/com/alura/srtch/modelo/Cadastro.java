@@ -13,11 +13,12 @@ public class Cadastro{
     private Long id;
 
     @CsvBindByName(required = true)
-    @Column(length = 14)
+    @Column(nullable=false, length=14)
     private String telefone;
 
-    @Column(length = 100)
+
     @CsvBindByName(required = true)
+    @Column(nullable=false, length=100)
     private String email;
 
     @Enumerated(EnumType.STRING)

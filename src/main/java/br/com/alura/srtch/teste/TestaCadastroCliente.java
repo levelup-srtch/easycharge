@@ -22,8 +22,6 @@ public class TestaCadastroCliente {
         CadastroDAO cadastroDAO = new CadastroDAO(em);
         EnderecoDAO enderecoDAO = new EnderecoDAO(em);
 
-        System.out.println(cliente.getCadastro().getStatus());
-
         em.getTransaction().begin();
 
         cadastroDAO.cadastrar(cadastro);
@@ -32,7 +30,7 @@ public class TestaCadastroCliente {
 
         clienteDAO.buscarPorNome("Gabriel Andrade Almeida");
 
-        clienteDAO.buscarTodosAtivos();
+        clienteDAO.buscarTodosPorStatus(StatusCliente.ATIVO);
 
         em.getTransaction().commit();
         em.close();

@@ -19,9 +19,10 @@ public class ClienteDAO {
         return em.createQuery(jpql, Cliente.class).getResultList();
     }
 
-    public List<Cliente> buscarTodosAtivos() {
-        String jpql = "SELECT c FROM Cliente c WHERE c.cadastro.status = ATIVO";
+    public List<Cliente> buscarTodosPorStatus(StatusCliente statusCliente) {
+        String jpql = "SELECT c FROM Cliente c WHERE c.cadastro.status = :status";
         return em.createQuery(jpql, Cliente.class)
+                .setParameter("status", statusCliente)
                 .getResultList();
     }
 
