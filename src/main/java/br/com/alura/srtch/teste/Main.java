@@ -1,10 +1,7 @@
 package br.com.alura.srtch.teste;
 
 import br.com.alura.srtch.modelo.*;
-import br.com.alura.srtch.service.ArquivoCSV;
-import br.com.alura.srtch.service.ArquivoJSON;
-import br.com.alura.srtch.service.ClientesSuspensos;
-import br.com.alura.srtch.service.ParseCliente;
+import br.com.alura.srtch.service.*;
 
 
 import java.util.List;
@@ -18,18 +15,9 @@ public class Main {
 
     String arquivo = args[0];
 
-    List<Cliente> clientes;
-    List<RecebeClienteDoArquivo> recebeClienteDoArquivos;
+    List<RecebeClienteDoArquivo> recebeClienteDoArquivos = new ValidacaoTipoDoArquivo().validaTipoDoArquivo(arquivo);
 
-    if (arquivo.endsWith(".csv")) {
-      recebeClienteDoArquivos = new ArquivoCSV().RecebeArquivo(arquivo);
-    } else if (arquivo.endsWith(".json")) {
-      recebeClienteDoArquivos = new ArquivoJSON().RecebeArquivo(arquivo);
-    } else {
-      throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);
-    }
-
-    clientes = new ParseCliente().transformarEmCliente(recebeClienteDoArquivos);
+    List<Cliente> clientes = new ParseCliente().transformarEmCliente(recebeClienteDoArquivos);
 
     System.out.println("# Limites de dívidas dos clientes");
     for(Cliente cliente : clientes){
