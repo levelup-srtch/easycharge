@@ -10,18 +10,18 @@ import java.util.List;
 
 public class ParseCliente {
 
+    List<Cliente> clientes = new ArrayList<>();
+
     public List<Cliente> transformarEmCliente(List<RecebeClienteDoArquivo> rcdas){
-        List<Cliente> clientes = new ArrayList<>();
         Cadastro cadastro;
         Endereco endereco;
-        for(RecebeClienteDoArquivo rcda : rcdas){
-            cadastro = new Cadastro(rcda.getTelefone(), rcda.getEmail(), rcda.getStatus());
-            endereco = new Endereco(rcda.getRua(), rcda.getNumero(), rcda.getBairro(), rcda.getCidade(), rcda.getEstado());
-            if(!rcda.getComplemento().isEmpty()){
-                endereco.setComplemento(rcda.getComplemento());
+        for(RecebeClienteDoArquivo cda : rcdas){
+            cadastro = new Cadastro(cda.getTelefone(), cda.getEmail(), cda.getStatus());
+            endereco = new Endereco(cda.getRua(), cda.getNumero(), cda.getBairro(), cda.getCidade(), cda.getEstado());
+            if(cda.getComplemento() != null){
+                endereco.setComplemento(cda.getComplemento());
             }
-            Cliente cliente = new Cliente(rcda.getCpf(), rcda.getNome(), rcda.getProfissao(), rcda.getRenda(), cadastro, endereco);
-            clientes.add(cliente);
+            this.clientes.add(new Cliente(cda.getCpf(), cda.getNome(), cda.getProfissao(), cda.getRenda(), cadastro, endereco));
         }
         return clientes;
     }
