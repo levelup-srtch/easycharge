@@ -3,6 +3,7 @@ package br.com.alura.srtch;
 import br.com.alura.srtch.DAO.ClienteDAO;
 import br.com.alura.srtch.DAO.EnderecoDAO;
 import br.com.alura.srtch.dominio.Cliente;
+import br.com.alura.srtch.servico.ClientesPorEstado;
 import br.com.alura.srtch.servico.RendaClienteSuspenso;
 import br.com.alura.srtch.servico.LeituraDeArquivos;
 import br.com.alura.srtch.util.JPAUtil;

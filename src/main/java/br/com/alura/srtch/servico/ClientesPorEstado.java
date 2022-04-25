@@ -1,4 +1,4 @@
-package br.com.alura.srtch;
+package br.com.alura.srtch.servico;
 
 import br.com.alura.srtch.dominio.Cliente;
 
