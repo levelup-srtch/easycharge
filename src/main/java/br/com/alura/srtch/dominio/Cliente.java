@@ -111,6 +111,20 @@ public class Cliente extends Endereco {
     this.endereco = endereco;
   }
 
+  public Cliente(String nome, String cpf, String telefone, String email, String profissao, BigDecimal renda, StatusCliente status, Endereco endereco) {
+    this.nome = nome;
+    this.cpf = cpf;
+    this.telefone = telefone;
+    this.email = email;
+    this.profissao = profissao;
+    this.renda = renda;
+    this.status = status;
+    this.endereco = endereco;
+  }
+
+  public Cliente() {
+  }
+
   @Override
   public String toString() {
     return "Cliente{" +
@@ -118,12 +132,12 @@ public class Cliente extends Endereco {
         ", cpf='" + cpf + '\'' +
         ", telefone='" + telefone + '\'' +
         ", email='" + email + '\'' +
-        ", rua='" +getRua() + '\'' +
-        ", numero='" + getNumero() + '\'' +
-        ", complemento='" + getComplemento() + '\'' +
-        ", bairro='" + getBairro() + '\'' +
-        ", cidade='" + getCidade() + '\'' +
-        ", estado='" + getEstado() + '\'' +
+        ", rua='" + endereco.getRua() + '\'' +
+        ", numero='" + endereco.getNumero() + '\'' +
+        ", complemento='" +endereco.getComplemento() + '\'' +
+        ", bairro='" + endereco.getBairro() + '\'' +
+        ", cidade='" + endereco.getCidade() + '\'' +
+        ", estado='" + endereco.getEstado() + '\'' +
         ", profissao='" + profissao + '\'' +
         ", renda=" + renda +
         ", status=" + status +

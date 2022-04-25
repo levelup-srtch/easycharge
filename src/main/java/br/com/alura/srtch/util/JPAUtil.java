@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JPAUtil {
-    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("easycharge");
+    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("easy-charge");
 
     public static EntityManager getEntityManager(){
         return FACTORY.createEntityManager();

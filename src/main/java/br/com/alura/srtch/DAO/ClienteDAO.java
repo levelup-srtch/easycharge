@@ -30,18 +30,18 @@ public class ClienteDAO {
         this.em.remove(cliente);
     }
 
-    public List<Cliente> buscarTodosPorTodos(Cliente cliente){
-        String sql = "SELECT a FROM Cliente a";
-        return em.createQuery(sql,Cliente.class).getResultList();
+    public List<Cliente> buscarTodos(){
+        String jpql = "SELECT c FROM Cliente c";
+        return em.createQuery(jpql,Cliente.class).getResultList();
     }
 
     public List<Cliente> buscarTodosAtivos() {
-        String sql = "SELECT a FROM Cliente a WHERE a.status = 'ATIVO'";
-        return em.createQuery(sql, Cliente.class).getResultList();
+        String jpql = "SELECT c FROM Cliente c WHERE c.status = 'ATIVO'";
+        return em.createQuery(jpql, Cliente.class).getResultList();
     }
 
     public List<Cliente> buscarTodosSuspenso() {
-        String sql = "SELECT a FROM Cliente a WHERE a.status = 'SUSPENSO'";
-        return em.createQuery(sql, Cliente.class).getResultList();
+        String jpql = "SELECT c FROM Cliente c WHERE c.status = 'SUSPENSO'";
+        return em.createQuery(jpql, Cliente.class).getResultList();
     }
 }

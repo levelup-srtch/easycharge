@@ -1,12 +1,16 @@
 package br.com.alura.srtch;
 
+import br.com.alura.srtch.DAO.ClienteDAO;
+import br.com.alura.srtch.DAO.EnderecoDAO;
 import br.com.alura.srtch.dominio.Cliente;
 import br.com.alura.srtch.dominio.enuns.StatusCliente;
+import br.com.alura.srtch.util.JPAUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import javax.persistence.EntityManager;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -77,6 +81,21 @@ public class Main {
       List<Cliente> clientesDoEstado = clientesPorEstado.get(estado);
       System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).\n", estado, clientesDoEstado.size());
     }
+
+    EntityManager em = JPAUtil.getEntityManager();
+    ClienteDAO clienteDAO = new ClienteDAO(em);
+    EnderecoDAO enderecoDAO = new EnderecoDAO(em);
+
+    em.getTransaction().begin();
+
+    for (Cliente cliente : clientes){
+      enderecoDAO.cadastrar(cliente.getEndereco());
+      clienteDAO.cadastrar(cliente);
+    }
+    clienteDAO.buscarTodos();
+
+    em.getTransaction().commit();
+    em.close();
 
 
   }

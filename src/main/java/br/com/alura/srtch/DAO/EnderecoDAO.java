@@ -24,7 +24,7 @@ public class EnderecoDAO {
         this.em.remove(endereco);
     }
     public List<Endereco> buscarTodosPorId(Endereco endereco){
-        String sql = "SELECT a FROM Cliente a";
-        return em.createQuery(sql,Endereco.class).getResultList();
+        String jpql = "SELECT c FROM Cliente c";
+        return em.createQuery(jpql,Endereco.class).getResultList();
     }
 }
