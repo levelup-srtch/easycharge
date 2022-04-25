@@ -14,7 +14,7 @@ public class DividaDAO {
     }
 
     public List<Divida> buscarTodos() {
-        String jpql = "SELECT c FROM Cobranca c";
+        String jpql = "SELECT d FROM Divida d";
         return em.createQuery(jpql, Divida.class).getResultList();
     }
 

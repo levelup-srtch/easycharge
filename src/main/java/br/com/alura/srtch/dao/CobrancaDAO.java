@@ -1,6 +1,7 @@
 package br.com.alura.srtch.dao;
 
 import br.com.alura.srtch.modelo.Cobranca;
+import br.com.alura.srtch.modelo.TipoAcordo;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -11,6 +12,19 @@ public class CobrancaDAO {
 
     public CobrancaDAO(EntityManager em) {
         this.em = em;
+    }
+
+    public List<Cobranca> buscarTodosPorTipoDeAcordo(TipoAcordo tipoAcordo) {
+        String jpql = "SELECT c FROM Cobranca c WHERE c.tipoDeAcordo = :tipoDeAcordo";
+        return em.createQuery(jpql, Cobranca.class)
+                .setParameter("tipoDeAcordo", tipoAcordo)
+                .getResultList();
+    }
+
+    public List<Cobranca> buscarTodosSemAcordo() {
+        String jpql = "SELECT c FROM Cobranca c WHERE c.tipoDeAcordo IS NULL";
+        return em.createQuery(jpql, Cobranca.class)
+                .getResultList();
     }
 
     public List<Cobranca> buscarTodos() {
