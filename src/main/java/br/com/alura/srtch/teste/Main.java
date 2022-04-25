@@ -3,13 +3,16 @@ package br.com.alura.srtch.teste;
 import br.com.alura.srtch.dao.CadastroDAO;
 import br.com.alura.srtch.dao.ClienteDAO;
 import br.com.alura.srtch.dao.EnderecoDAO;
-import br.com.alura.srtch.modelo.*;
-import br.com.alura.srtch.service.*;
+import br.com.alura.srtch.modelo.Cliente;
+import br.com.alura.srtch.modelo.ClientesPorEstado;
+import br.com.alura.srtch.modelo.RecebeClienteDoArquivo;
+import br.com.alura.srtch.modelo.StatusCliente;
+import br.com.alura.srtch.service.ClientesSuspensos;
+import br.com.alura.srtch.service.ParseCliente;
+import br.com.alura.srtch.service.ValidacaoTipoDoArquivo;
 import br.com.alura.srtch.util.JPAUtil;
 
-
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.util.List;
 
 public class Main {

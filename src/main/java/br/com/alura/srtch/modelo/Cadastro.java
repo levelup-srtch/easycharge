@@ -10,10 +10,11 @@ public class Cadastro{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(length=10)
+    private Long idCadastro;
 
     @CsvBindByName(required = true)
-    @Column(nullable=false, length=14)
+    @Column(nullable=false, length=15)
     private String telefone;
 
 
@@ -23,7 +24,7 @@ public class Cadastro{
 
     @Enumerated(EnumType.STRING)
     @CsvBindByName(required = true)
-    private StatusCliente status;
+    private StatusCliente status = StatusCliente.ATIVO;
 
     public Cadastro() {
     }

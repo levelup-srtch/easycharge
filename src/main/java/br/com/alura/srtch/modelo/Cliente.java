@@ -1,7 +1,6 @@
 package br.com.alura.srtch.modelo;
 
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvRecurse;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
