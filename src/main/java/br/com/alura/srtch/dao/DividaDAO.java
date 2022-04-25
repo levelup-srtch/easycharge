@@ -14,10 +14,12 @@ public class DividaDAO {
         this.em = em;
     }
 
-    public BigDecimal somaDasDividasDoCliente(String nomeCliente) {
-        String jpql = "SELECT SUM(d.valorDaDivida) FROM Divida d WHERE d.cliente.nome = :nomeCliente";
+    public BigDecimal somaDividasDoCliente(String cpf) {
+        String jpql = "SELECT SUM(d.valorDaDivida) FROM Divida d "
+                + "WHERE d.status = 'ABERTA' "
+                + "AND d.cliente.cpf = :cpf";
         return em.createQuery(jpql, BigDecimal.class)
-                .setParameter("nomeCliente", nomeCliente)
+                .setParameter("cpf", cpf)
                 .getSingleResult();
     }
 

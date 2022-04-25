@@ -13,8 +13,8 @@ public class Divida {
     @Column(length=10)
     private long idDivida;
 
-    @Column(nullable=false, length=10)
-    private BigDecimal valorDaDivida;
+    @Column(nullable=false, length=50)
+    private BigDecimal valorDaDivida = BigDecimal.ZERO;
 
     @Column(nullable=false, length=10)
     private LocalDate dataDeAbertura;
@@ -89,5 +89,15 @@ public class Divida {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    @Override
+    public String toString() {
+        return "Divida{" +
+                "valorDaDivida=" + valorDaDivida +
+                ", dataDeAbertura=" + dataDeAbertura +
+                ", status=" + status +
+                ", cliente=" + cliente +
+                '}';
     }
 }
