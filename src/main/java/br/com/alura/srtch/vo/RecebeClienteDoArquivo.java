@@ -1,4 +1,6 @@
-package br.com.alura.srtch.modelo;
+package br.com.alura.srtch.vo;
+
+import br.com.alura.srtch.modelo.StatusCliente;
 
 import java.math.BigDecimal;
 

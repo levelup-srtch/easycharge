@@ -1,7 +1,6 @@
 package br.com.alura.srtch.service;
 
-import br.com.alura.srtch.modelo.Cliente;
-import br.com.alura.srtch.modelo.RecebeClienteDoArquivo;
+import br.com.alura.srtch.vo.RecebeClienteDoArquivo;
 
 import java.util.List;
 

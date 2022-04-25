@@ -1,13 +1,13 @@
 package br.com.alura.srtch.modelo;
 
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvRecurse;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "cliente")
 public class Cliente {
 
   @Id
@@ -30,11 +30,11 @@ public class Cliente {
   private BigDecimal limiteDivida;
 
   @OneToOne
-  @CsvBindByName(required = true)
+  @JoinColumn(nullable = false)
   private Cadastro cadastro;
 
   @OneToOne
-  @CsvBindByName(required = true)
+  @JoinColumn(nullable = false)
   private Endereco endereco;
 
   public Cliente() {
@@ -104,6 +104,7 @@ public class Cliente {
   public void setEndereco(Endereco endereco) {
     this.endereco = endereco;
   }
+
 
   @Override
   public String toString() {
