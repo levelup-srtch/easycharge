@@ -35,7 +35,7 @@ public class Cliente extends Endereco {
   @CsvBindByName
   private StatusCliente status;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY )
   @JoinColumn(name = "id_endereco")
   private Endereco endereco;
 
