@@ -29,11 +29,11 @@ public class Cliente {
   private BigDecimal limiteDivida;
 
   @OneToOne
-  @CsvBindByName(required = true)
+  @JoinColumn(nullable = false)
   private Cadastro cadastro;
 
   @OneToOne
-  @CsvBindByName(required = true)
+  @JoinColumn(nullable = false)
   private Endereco endereco;
 
   public Cliente() {

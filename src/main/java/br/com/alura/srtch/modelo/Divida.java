@@ -28,9 +28,17 @@ public class Divida {
     @Column(length=255)
     private String descricaoDeQuitacao;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(nullable = false)
     private Cliente cliente;
 
+    public Divida() {
+    }
 
-
+    public Divida(BigDecimal valorDaDivida, LocalDate dataDeAbertura, StatusDivida status, Cliente cliente) {
+        this.valorDaDivida = valorDaDivida;
+        this.dataDeAbertura = dataDeAbertura;
+        this.status = status;
+        this.cliente = cliente;
+    }
 }
