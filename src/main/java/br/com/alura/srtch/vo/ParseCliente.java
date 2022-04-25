@@ -1,9 +1,9 @@
-package br.com.alura.srtch.service;
+package br.com.alura.srtch.vo;
 
 import br.com.alura.srtch.modelo.Cadastro;
 import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.modelo.Endereco;
-import br.com.alura.srtch.modelo.RecebeClienteDoArquivo;
+import br.com.alura.srtch.vo.RecebeClienteDoArquivo;
 
 import java.util.ArrayList;
 import java.util.List;

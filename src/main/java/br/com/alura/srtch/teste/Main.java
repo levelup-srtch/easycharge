@@ -4,11 +4,11 @@ import br.com.alura.srtch.dao.CadastroDAO;
 import br.com.alura.srtch.dao.ClienteDAO;
 import br.com.alura.srtch.dao.EnderecoDAO;
 import br.com.alura.srtch.modelo.Cliente;
-import br.com.alura.srtch.modelo.ClientesPorEstado;
-import br.com.alura.srtch.modelo.RecebeClienteDoArquivo;
+import br.com.alura.srtch.service.ClientesPorEstado;
+import br.com.alura.srtch.vo.RecebeClienteDoArquivo;
 import br.com.alura.srtch.modelo.StatusCliente;
 import br.com.alura.srtch.service.ClientesSuspensos;
-import br.com.alura.srtch.service.ParseCliente;
+import br.com.alura.srtch.vo.ParseCliente;
 import br.com.alura.srtch.service.ValidacaoTipoDoArquivo;
 import br.com.alura.srtch.util.JPAUtil;
 

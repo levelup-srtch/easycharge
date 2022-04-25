@@ -3,6 +3,7 @@ package br.com.alura.srtch.dao;
 import br.com.alura.srtch.modelo.Divida;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class DividaDAO {
@@ -11,6 +12,13 @@ public class DividaDAO {
 
     public DividaDAO(EntityManager em) {
         this.em = em;
+    }
+
+    public BigDecimal somaDasDividasDoCliente(String nomeCliente) {
+        String jpql = "SELECT SUM(d.valorDaDivida) FROM Divida d WHERE d.cliente.nome = :nomeCliente";
+        return em.createQuery(jpql, BigDecimal.class)
+                .setParameter("nomeCliente", nomeCliente)
+                .getSingleResult();
     }
 
     public List<Divida> buscarTodos() {
