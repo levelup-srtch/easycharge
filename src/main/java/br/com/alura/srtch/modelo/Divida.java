@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "divida")
 public class Divida {
 
     @Id
@@ -28,7 +29,7 @@ public class Divida {
     @Column(length=255)
     private String descricaoDeQuitacao;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(nullable = false)
     private Cliente cliente;
 
@@ -39,6 +40,54 @@ public class Divida {
         this.valorDaDivida = valorDaDivida;
         this.dataDeAbertura = dataDeAbertura;
         this.status = status;
+        this.cliente = cliente;
+    }
+
+    public BigDecimal getValorDaDivida() {
+        return valorDaDivida;
+    }
+
+    public void setValorDaDivida(BigDecimal valorDaDivida) {
+        this.valorDaDivida = valorDaDivida;
+    }
+
+    public LocalDate getDataDeAbertura() {
+        return dataDeAbertura;
+    }
+
+    public void setDataDeAbertura(LocalDate dataDeAbertura) {
+        this.dataDeAbertura = dataDeAbertura;
+    }
+
+    public LocalDate getDataDeQuitacao() {
+        return dataDeQuitacao;
+    }
+
+    public void setDataDeQuitacao(LocalDate dataDeQuitacao) {
+        this.dataDeQuitacao = dataDeQuitacao;
+    }
+
+    public StatusDivida getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusDivida status) {
+        this.status = status;
+    }
+
+    public String getDescricaoDeQuitacao() {
+        return descricaoDeQuitacao;
+    }
+
+    public void setDescricaoDeQuitacao(String descricaoDeQuitacao) {
+        this.descricaoDeQuitacao = descricaoDeQuitacao;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 }

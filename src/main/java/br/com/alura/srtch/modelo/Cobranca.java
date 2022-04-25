@@ -45,7 +45,14 @@ public class Cobranca {
     @JoinColumn(nullable = false)
     private Divida divida;
 
-
     public Cobranca() {
+    }
+
+    public Cobranca(Contato meioDeContato, String agente, TipoAgente tipoDeAgente, String comentarioDoAgente, Divida divida) {
+        this.meioDeContato = meioDeContato;
+        this.agente = agente;
+        this.tipoDeAgente = tipoDeAgente;
+        this.comentarioDoAgente = comentarioDoAgente;
+        this.divida = divida;
     }
 }

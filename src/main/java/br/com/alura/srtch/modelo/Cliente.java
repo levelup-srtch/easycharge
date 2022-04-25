@@ -4,9 +4,10 @@ import com.opencsv.bean.CsvBindByName;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "cliente")
 public class Cliente {
 
   @Id
@@ -103,6 +104,7 @@ public class Cliente {
   public void setEndereco(Endereco endereco) {
     this.endereco = endereco;
   }
+
 
   @Override
   public String toString() {
