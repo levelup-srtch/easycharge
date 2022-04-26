@@ -4,7 +4,7 @@ import br.com.alura.srtch.modelo.StatusCliente;
 
 import java.math.BigDecimal;
 
-public class RecebeClienteDoArquivo {
+public class ClienteDoArquivo {
 
     private String nome;
 
