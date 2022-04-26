@@ -5,11 +5,11 @@ import br.com.alura.srtch.dao.ClienteDAO;
 import br.com.alura.srtch.dao.EnderecoDAO;
 import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.service.ClientesPorEstado;
-import br.com.alura.srtch.vo.RecebeClienteDoArquivo;
+import br.com.alura.srtch.vo.ClienteDoArquivo;
 import br.com.alura.srtch.modelo.StatusCliente;
 import br.com.alura.srtch.service.ClientesSuspensos;
-import br.com.alura.srtch.vo.ParseCliente;
-import br.com.alura.srtch.service.ValidacaoTipoDoArquivo;
+import br.com.alura.srtch.vo.ObjetoCliente;
+import br.com.alura.srtch.service.TipoDoArquivo;
 import br.com.alura.srtch.util.JPAUtil;
 
 import javax.persistence.EntityManager;
@@ -23,9 +23,9 @@ public class Main {
 
     String arquivo = args[0];
 
-    List<RecebeClienteDoArquivo> recebeClienteDoArquivos = new ValidacaoTipoDoArquivo().validaTipoDoArquivo(arquivo);
+    List<ClienteDoArquivo> recebeClienteDoArquivos = new TipoDoArquivo().validaTipoDoArquivo(arquivo);
 
-    List<Cliente> clientes = new ParseCliente().transformarEmCliente(recebeClienteDoArquivos);
+    List<Cliente> clientes = new ObjetoCliente().transformarEmCliente(recebeClienteDoArquivos);
 
     System.out.println("# Limites de dívidas dos clientes");
     for(Cliente cliente : clientes){

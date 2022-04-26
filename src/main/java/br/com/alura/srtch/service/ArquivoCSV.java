@@ -1,6 +1,6 @@
 package br.com.alura.srtch.service;
 
-import br.com.alura.srtch.vo.RecebeClienteDoArquivo;
+import br.com.alura.srtch.vo.ClienteDoArquivo;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
@@ -9,15 +9,15 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
-public class ArquivoCSV implements RetornaArquivo{
+public class ArquivoCSV implements Arquivo {
 
     @Override
-    public List<RecebeClienteDoArquivo> RecebeArquivo(String arquivo) {
-        List<RecebeClienteDoArquivo> rcda;
+    public List<ClienteDoArquivo> arquivo(String arquivo) {
+        List<ClienteDoArquivo> rcda;
         try {
             Reader reader = new FileReader(arquivo);
-            CsvToBean<RecebeClienteDoArquivo> csvToBean = new CsvToBeanBuilder<RecebeClienteDoArquivo>(reader)
-                    .withType(RecebeClienteDoArquivo.class)
+            CsvToBean<ClienteDoArquivo> csvToBean = new CsvToBeanBuilder<ClienteDoArquivo>(reader)
+                    .withType(ClienteDoArquivo.class)
                     .build();
             rcda = csvToBean.parse();
         } catch (IOException ex) {

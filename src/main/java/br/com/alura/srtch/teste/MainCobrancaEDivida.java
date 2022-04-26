@@ -4,10 +4,10 @@ import br.com.alura.srtch.dao.*;
 import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.modelo.Divida;
 import br.com.alura.srtch.modelo.StatusDivida;
-import br.com.alura.srtch.service.ValidacaoTipoDoArquivo;
+import br.com.alura.srtch.service.TipoDoArquivo;
 import br.com.alura.srtch.util.JPAUtil;
-import br.com.alura.srtch.vo.ParseCliente;
-import br.com.alura.srtch.vo.RecebeClienteDoArquivo;
+import br.com.alura.srtch.vo.ObjetoCliente;
+import br.com.alura.srtch.vo.ClienteDoArquivo;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -22,8 +22,8 @@ public class MainCobrancaEDivida {
         String arquivo = args[0];
 
         List<Divida> dividas = new ArrayList<>();
-        List<RecebeClienteDoArquivo> recebeClienteDoArquivos = new ValidacaoTipoDoArquivo().validaTipoDoArquivo(arquivo);
-        List<Cliente> clientes = new ParseCliente().transformarEmCliente(recebeClienteDoArquivos);
+        List<ClienteDoArquivo> recebeClienteDoArquivos = new TipoDoArquivo().validaTipoDoArquivo(arquivo);
+        List<Cliente> clientes = new ObjetoCliente().transformarEmCliente(recebeClienteDoArquivos);
         EntityManager em = JPAUtil.getEntityManager();
 
         dividas.add(new Divida(new BigDecimal("1550"), StatusDivida.ABERTA, clientes.get(0)));
