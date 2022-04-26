@@ -17,7 +17,7 @@ public class Cobranca {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable=false)
-    private Contato meioDeContato;
+    private FormaDeContato meioDeContato;
 
     @Column(nullable=false, length=50)
     private String agente;
@@ -48,7 +48,7 @@ public class Cobranca {
     public Cobranca() {
     }
 
-    public Cobranca(Contato meioDeContato, String agente, TipoAgente tipoDeAgente, String comentarioDoAgente, Divida divida) {
+    public Cobranca(FormaDeContato meioDeContato, String agente, TipoAgente tipoDeAgente, String comentarioDoAgente, Divida divida) {
         this.meioDeContato = meioDeContato;
         this.agente = agente;
         this.tipoDeAgente = tipoDeAgente;

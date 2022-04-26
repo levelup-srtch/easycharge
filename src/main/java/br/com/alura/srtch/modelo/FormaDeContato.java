@@ -1,5 +1,5 @@
 package br.com.alura.srtch.modelo;
 
-public enum Contato {
+public enum FormaDeContato {
     EMAIL, TELEFONE;
 }
