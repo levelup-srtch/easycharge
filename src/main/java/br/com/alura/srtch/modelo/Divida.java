@@ -36,9 +36,9 @@ public class Divida {
     public Divida() {
     }
 
-    public Divida(BigDecimal valorDaDivida, LocalDate dataDeAbertura, StatusDivida status, Cliente cliente) {
+    public Divida(BigDecimal valorDaDivida,StatusDivida status, Cliente cliente) {
         this.valorDaDivida = valorDaDivida;
-        this.dataDeAbertura = dataDeAbertura;
+        this.dataDeAbertura = LocalDate.now();
         this.status = status;
         this.cliente = cliente;
     }

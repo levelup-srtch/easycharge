@@ -7,7 +7,6 @@ import br.com.alura.srtch.vo.RelatorioDeCobrancas;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 public class TestaCobranca {
@@ -17,7 +16,7 @@ public class TestaCobranca {
         Endereco endereco = new Endereco("21", "77", "vizenso", "jukso", "sjkak");
         Cadastro cadastro = new Cadastro("1299212918", "gg@gmaoi.com", StatusCliente.ATIVO);
         Cliente cliente = new Cliente("1291221", "OISAL", "dsafaask", new BigDecimal("7000"), cadastro, endereco);
-        Divida divida = new Divida(new BigDecimal("3000"), LocalDate.now(), StatusDivida.ABERTA, cliente);
+        Divida divida = new Divida(new BigDecimal("3000"), StatusDivida.ABERTA, cliente);
         Cobranca cobranca = new Cobranca(FormaDeContato.EMAIL, "Gabriel Almeida", TipoAgente.INTERNO, "teste", divida);
 
         EnderecoDAO enderecoDAO = new EnderecoDAO(em);
