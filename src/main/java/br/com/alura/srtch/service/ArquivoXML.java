@@ -1,11 +1,11 @@
-package br.com.alura.srtch;
+package br.com.alura.srtch.service;
 
 import java.io.File;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
-import modelo.Cliente;
+import br.com.alura.srtch.modelo.Cliente;
 
 public class ArquivoXML {
 

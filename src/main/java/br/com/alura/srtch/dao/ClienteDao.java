@@ -6,8 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.alura.srtch.*;
-import modelo.Cliente;
-import modelo.StatusCliente;
+import br.com.alura.srtch.modelo.Cliente;
+import br.com.alura.srtch.modelo.StatusCliente;
 
 public class ClienteDao {
 	private EntityManager em;

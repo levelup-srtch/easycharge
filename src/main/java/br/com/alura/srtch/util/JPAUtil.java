@@ -1,4 +1,4 @@
-package br.com.alura.srtch;
+package br.com.alura.srtch.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

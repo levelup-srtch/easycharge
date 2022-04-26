@@ -8,9 +8,12 @@ import javax.persistence.EntityManager;
 
 
 import br.com.alura.srtch.dao.ClienteDao;
-import modelo.Cliente;
-import modelo.ClientesPorEstado;
-import modelo.StatusCliente;
+import br.com.alura.srtch.modelo.Cliente;
+import br.com.alura.srtch.modelo.ClientesPorEstado;
+import br.com.alura.srtch.modelo.StatusCliente;
+import br.com.alura.srtch.service.ArquivoCSV;
+import br.com.alura.srtch.service.ArquivoJSON;
+import br.com.alura.srtch.util.JPAUtil;
 
 // classe com função de ler csv, json, calcular dívidas e imprimir resultados, deve ser segregada. 
 public class Main {

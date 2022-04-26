@@ -1,4 +1,4 @@
-package br.com.alura.srtch;
+package br.com.alura.srtch.service;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.util.List;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
-import modelo.Cliente;
+import br.com.alura.srtch.modelo.Cliente;
 
 public class ArquivoCSV {
 
