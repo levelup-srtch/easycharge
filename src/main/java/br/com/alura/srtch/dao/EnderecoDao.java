@@ -1,11 +1,8 @@
 package br.com.alura.srtch.dao;
 
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 
-import br.com.alura.srtch.*;
 import br.com.alura.srtch.modelo.Endereco;
 
 public class EnderecoDao {

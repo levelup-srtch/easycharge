@@ -2,11 +2,19 @@ package br.com.alura.srtch.modelo;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "cobranca")
 public class Cobranca {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +48,9 @@ public class Cobranca {
 	@Column(length=12,nullable=true)
 	private int numeroDeParcelas;
  	
-	@Column(length=255,nullable=false)
+	//@Column(length=255,nullable=false)
+	@OneToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@JoinColumn(name = "divida", referencedColumnName = "id")
 	private Divida divida;
 
 	

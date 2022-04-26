@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.alura.srtch.*;
 import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.modelo.StatusCliente;
 
