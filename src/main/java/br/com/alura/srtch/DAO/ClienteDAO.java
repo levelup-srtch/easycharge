@@ -17,8 +17,8 @@ public class ClienteDAO {
         this.em.persist(cliente);
     }
 
-    public Cliente buscarPorId(String cpf) {
-        return em.find(Cliente.class, cpf);
+    public Cliente buscarPorId(String id) {
+        return em.find(Cliente.class, id);
     }
 
     public void atualizar(Cliente cliente){

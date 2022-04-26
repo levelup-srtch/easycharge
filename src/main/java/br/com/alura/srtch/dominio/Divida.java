@@ -13,9 +13,10 @@ public class Divida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private BigDecimal Valor;
+    private BigDecimal valor;
     private LocalDate dataAbertura = LocalDate.now();
     private LocalDate dataQuitacao;
+    private String descricao;
 
     @ManyToOne
     private Cliente cliente;
@@ -23,11 +24,12 @@ public class Divida {
     private StatusDivida statusDivida;
 
     public Divida(BigDecimal valor, LocalDate dataAbertura, LocalDate dataQuitacao, Cliente cliente, StatusDivida statusDivida) {
-        Valor = valor;
+        this.valor = valor;
         this.dataAbertura = dataAbertura;
         this.dataQuitacao = dataQuitacao;
         this.cliente = cliente;
         this.statusDivida = statusDivida;
+        this.descricao = descricao;
     }
 
     public Divida() {
@@ -42,15 +44,15 @@ public class Divida {
     }
 
     public Divida(BigDecimal valor) {
-        Valor = valor;
+        valor = valor;
     }
 
     public BigDecimal getValor() {
-        return Valor;
+        return valor;
     }
 
     public void setValor(BigDecimal valor) {
-        Valor = valor;
+        valor = valor;
     }
 
     public LocalDate getDataAbertura() {
