@@ -1,6 +1,6 @@
-package br.com.alura.srtch.vo;
+package br.com.alura.srtch.dto;
 
-import br.com.alura.srtch.modelo.Cadastro;
+import br.com.alura.srtch.modelo.DadosPessoais;
 import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.modelo.Endereco;
 
@@ -12,10 +12,10 @@ public class ObjetoCliente {
     List<Cliente> clientes = new ArrayList<>();
 
     public List<Cliente> transformarEmCliente(List<ClienteDoArquivo> rcdas){
-        Cadastro cadastro;
+        DadosPessoais cadastro;
         Endereco endereco;
         for(ClienteDoArquivo cda : rcdas){
-            cadastro = new Cadastro(cda.getTelefone(), cda.getEmail(), cda.getStatus());
+            cadastro = new DadosPessoais(cda.getTelefone(), cda.getEmail(), cda.getStatus());
             endereco = new Endereco(cda.getRua(), cda.getNumero(), cda.getBairro(), cda.getCidade(), cda.getEstado());
             if(cda.getComplemento() != null){
                 endereco.setComplemento(cda.getComplemento());

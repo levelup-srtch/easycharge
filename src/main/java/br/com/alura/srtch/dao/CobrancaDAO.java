@@ -2,7 +2,7 @@ package br.com.alura.srtch.dao;
 
 import br.com.alura.srtch.modelo.Cobranca;
 import br.com.alura.srtch.modelo.TipoAcordo;
-import br.com.alura.srtch.vo.RelatorioDeCobrancas;
+import br.com.alura.srtch.dto.RelatorioDeCobrancas;
 
 import javax.persistence.EntityManager;
 import java.util.List;

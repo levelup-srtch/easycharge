@@ -1,4 +1,4 @@
-package br.com.alura.srtch.vo;
+package br.com.alura.srtch.dto;
 
 import br.com.alura.srtch.modelo.StatusCliente;
 

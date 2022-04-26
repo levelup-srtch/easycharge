@@ -1,47 +1,39 @@
 package br.com.alura.srtch.modelo;
 
-import com.opencsv.bean.CsvBindByName;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "cliente")
 public class Cliente {
 
   @Id
-  @CsvBindByName(required = true)
   @Column(nullable=false, length=14)
   private String cpf;
 
-  @CsvBindByName(required = true)
   @Column(nullable=false, length=100)
   private String nome;
 
-  @CsvBindByName(required = true)
   @Column(nullable=false, length=50)
   private String profissao;
 
-  @CsvBindByName(required = true)
   @Column(nullable=false, length=10)
   private BigDecimal renda;
 
   private BigDecimal limiteDivida;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(nullable = false)
-  private Cadastro cadastro;
+  private DadosPessoais cadastro;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(nullable = false)
   private Endereco endereco;
 
   public Cliente() {
   }
 
-  public Cliente(String cpf, String nome, String profissao, BigDecimal renda, Cadastro cadastro, Endereco endereco) {
+  public Cliente(String cpf, String nome, String profissao, BigDecimal renda, DadosPessoais cadastro, Endereco endereco) {
     this.cpf = cpf;
     this.nome = nome;
     this.profissao = profissao;
@@ -90,11 +82,11 @@ public class Cliente {
     return limiteDivida;
   }
 
-  public Cadastro getCadastro() {
+  public DadosPessoais getCadastro() {
     return cadastro;
   }
 
-  public void setCadastro(Cadastro conta) {
+  public void setCadastro(DadosPessoais conta) {
     this.cadastro = conta;
   }
 

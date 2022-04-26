@@ -3,7 +3,7 @@ package br.com.alura.srtch.teste;
 import br.com.alura.srtch.dao.*;
 import br.com.alura.srtch.modelo.*;
 import br.com.alura.srtch.util.JPAUtil;
-import br.com.alura.srtch.vo.RelatorioDeCobrancas;
+import br.com.alura.srtch.dto.RelatorioDeCobrancas;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -14,13 +14,13 @@ public class TestaCobranca {
         EntityManager em = JPAUtil.getEntityManager();
 
         Endereco endereco = new Endereco("21", "77", "vizenso", "jukso", "sjkak");
-        Cadastro cadastro = new Cadastro("1299212918", "gg@gmaoi.com", StatusCliente.ATIVO);
+        DadosPessoais cadastro = new DadosPessoais("1299212918", "gg@gmaoi.com", StatusCliente.ATIVO);
         Cliente cliente = new Cliente("1291221", "OISAL", "dsafaask", new BigDecimal("7000"), cadastro, endereco);
         Divida divida = new Divida(new BigDecimal("3000"), StatusDivida.ABERTA, cliente);
         Cobranca cobranca = new Cobranca(FormaDeContato.EMAIL, "Gabriel Almeida", TipoAgente.INTERNO, "teste", divida);
 
         EnderecoDAO enderecoDAO = new EnderecoDAO(em);
-        CadastroDAO cadastroDAO = new CadastroDAO(em);
+        DadosPessoaisDAO cadastroDAO = new DadosPessoaisDAO(em);
         ClienteDAO clienteDAO = new ClienteDAO(em);
         DividaDAO dividaDAO = new DividaDAO(em);
         CobrancaDAO cobrancaDAO = new CobrancaDAO(em);

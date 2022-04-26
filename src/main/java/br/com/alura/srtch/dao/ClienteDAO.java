@@ -33,6 +33,8 @@ public class ClienteDAO {
                 .getResultList();
     }
 
+
+
     public Cliente buscarPorId(String cpf) {
         return em.find(Cliente.class, cpf);
     }

@@ -1,6 +1,6 @@
 package br.com.alura.srtch.service;
 
-import br.com.alura.srtch.vo.ClienteDoArquivo;
+import br.com.alura.srtch.dto.ClienteDoArquivo;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
