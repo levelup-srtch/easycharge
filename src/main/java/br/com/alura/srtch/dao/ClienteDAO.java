@@ -4,6 +4,7 @@ import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.modelo.StatusCliente;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ClienteDAO {
@@ -40,6 +41,14 @@ public class ClienteDAO {
                 .getResultList();
     }
 
+    public BigDecimal somarValorDasDividas(String cpf) {
+        String jpql = "SELECT SUM(d.valorDaDivida) FROM Divida d "
+                + "WHERE d.status = 'ABERTA' "
+                + "AND d.cliente.dadosPessoais.cpf = :cpf";
+        return em.createQuery(jpql, BigDecimal.class)
+                .setParameter("cpf", cpf)
+                .getSingleResult();
+    }
 
     public Cliente buscarPorId(long id) {
         return em.find(Cliente.class, id);

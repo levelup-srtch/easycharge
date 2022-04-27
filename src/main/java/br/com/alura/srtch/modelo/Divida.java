@@ -116,6 +116,7 @@ public class Divida {
                 ", dataDeAbertura=" + dataDeAbertura +
                 ", status=" + status +
                 ", cliente=" + cliente +
+                ", cobrancas=" + cobrancas +
                 '}';
     }
 }

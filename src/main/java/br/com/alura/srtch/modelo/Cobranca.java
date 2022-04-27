@@ -3,6 +3,9 @@ package br.com.alura.srtch.modelo;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+import static br.com.alura.srtch.service.Parcelas.receberNumeroDeParcelas;
+import static br.com.alura.srtch.service.Parcelas.verificarNumeroDeParcelas;
+
 @Entity
 @Table(name = "cobranca")
 public class Cobranca {
@@ -56,6 +59,9 @@ public class Cobranca {
         this.tipoDeAgente = tipoDeAgente;
         this.comentarioDoAgente = comentarioDoAgente;
         this.tipoDeAcordo = tipoDeAcordo;
+        if (tipoDeAcordo.equals(TipoAcordo.PARCELAMENTO)){
+            this.numeroDeParcelas = receberNumeroDeParcelas();
+        }
         this.acordo = acordo;
         divida.adicionarCobranca(this);
     }
@@ -129,10 +135,7 @@ public class Cobranca {
     }
 
     public void setNumeroDeParcelas(Integer numeroDeParcelas) {
-        if(numeroDeParcelas < 1 && numeroDeParcelas >= 12){
-            throw new IllegalArgumentException("Número de parcelas inválido: "
-                    + numeroDeParcelas + ", tente de 1 a 12 parcelas");
-        }
+        verificarNumeroDeParcelas(numeroDeParcelas);
         this.numeroDeParcelas = numeroDeParcelas;
     }
 

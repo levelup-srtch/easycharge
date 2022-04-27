@@ -43,6 +43,10 @@ public class Cliente {
       this.limiteDivida = this.renda.multiply(BigDecimal.valueOf(12));
   }
 
+  public Long getIdCliente() {
+    return idCliente;
+  }
+
   public BigDecimal getRenda() {
     return renda;
   }
