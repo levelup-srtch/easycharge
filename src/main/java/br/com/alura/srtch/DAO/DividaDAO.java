@@ -1,6 +1,7 @@
 package br.com.alura.srtch.DAO;
 
 
+import br.com.alura.srtch.dominio.Cliente;
 import br.com.alura.srtch.dominio.Divida;
 
 import javax.persistence.EntityManager;
@@ -56,5 +57,10 @@ public class DividaDAO {
         query.where(filtros);
         return em.createQuery(query).getResultList();
 
+    }
+
+    public BigDecimal somarDividasDosClientes(Long id){
+        String jpql = "SELECT SUM(a.valor)from Divida a WHERE a.statusDivida = 'ABERTA'AND a.cliente.id = :id";
+        return (BigDecimal) em.createQuery(jpql, BigDecimal.class).getResultList();
     }
 }
