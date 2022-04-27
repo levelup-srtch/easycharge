@@ -1,5 +1,6 @@
 package br.com.alura.srtch.dao;
 
+import br.com.alura.srtch.modelo.Cobranca;
 import br.com.alura.srtch.modelo.Divida;
 
 import javax.persistence.EntityManager;
@@ -31,7 +32,13 @@ public class DividaDAO {
         this.em.remove(divida);
     }
 
-    public BigDecimal somaDividasDoCliente(String cpf) {
+    public List<Divida> buscarDividasSemCobranca() {
+        String jpql = "SELECT d FROM Divida d WHERE d.cobrancas IS EMPTY";
+        return em.createQuery(jpql, Divida.class)
+                .getResultList();
+    }
+
+    public BigDecimal somarValorDasDividasDoCliente(String cpf) {
         String jpql = "SELECT SUM(d.valorDaDivida) FROM Divida d "
                 + "WHERE d.status = 'ABERTA' "
                 + "AND d.cliente.dadosPessoais.cpf = :cpf";

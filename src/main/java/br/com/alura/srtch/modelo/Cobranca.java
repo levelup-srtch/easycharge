@@ -17,7 +17,7 @@ public class Cobranca {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable=false)
-    private FormaDeContato meioDeContato;
+    private MeioDeContato meioDeContato;
 
     @Column(nullable=false, length=50)
     private String agente;
@@ -29,11 +29,12 @@ public class Cobranca {
     @Column(nullable=false, length=500)
     private String comentarioDoAgente;
 
-    @Column(length=500)
-    private String acordo;
-
     @Enumerated(EnumType.STRING)
+    @Column(nullable=false)
     private TipoAcordo tipoDeAcordo;
+
+    @Column(length=500, nullable=false)
+    private String acordo;
 
     @Column(length=10)
     private LocalDate dataDePromessaDePagamento;
@@ -48,13 +49,15 @@ public class Cobranca {
     public Cobranca() {
     }
 
-    public Cobranca(FormaDeContato meioDeContato, String agente, TipoAgente tipoDeAgente, String comentarioDoAgente, Divida divida) {
+    public Cobranca(MeioDeContato meioDeContato, String agente, TipoAgente tipoDeAgente, String comentarioDoAgente, TipoAcordo tipoDeAcordo, String acordo, Divida divida) {
         this.dataDeRealizacao = LocalDate.now();
         this.meioDeContato = meioDeContato;
         this.agente = agente;
         this.tipoDeAgente = tipoDeAgente;
         this.comentarioDoAgente = comentarioDoAgente;
-        this.divida = divida;
+        this.tipoDeAcordo = tipoDeAcordo;
+        this.acordo = acordo;
+        divida.adicionarCobranca(this);
     }
 
     public LocalDate getDataDeRealizacao() {
@@ -65,11 +68,11 @@ public class Cobranca {
         this.dataDeRealizacao = dataDeRealizacao;
     }
 
-    public FormaDeContato getMeioDeContato() {
+    public MeioDeContato getMeioDeContato() {
         return meioDeContato;
     }
 
-    public void setMeioDeContato(FormaDeContato meioDeContato) {
+    public void setMeioDeContato(MeioDeContato meioDeContato) {
         this.meioDeContato = meioDeContato;
     }
 
@@ -126,6 +129,10 @@ public class Cobranca {
     }
 
     public void setNumeroDeParcelas(Integer numeroDeParcelas) {
+        if(numeroDeParcelas < 1 && numeroDeParcelas >= 12){
+            throw new IllegalArgumentException("Número de parcelas inválido: "
+                    + numeroDeParcelas + ", tente de 1 a 12 parcelas");
+        }
         this.numeroDeParcelas = numeroDeParcelas;
     }
 
@@ -135,5 +142,19 @@ public class Cobranca {
 
     public void setDivida(Divida divida) {
         this.divida = divida;
+    }
+
+    @Override
+    public String toString() {
+        return "Cobranca{" +
+                "dataDeRealizacao=" + dataDeRealizacao +
+                ", meioDeContato=" + meioDeContato +
+                ", agente='" + agente + '\'' +
+                ", tipoDeAgente=" + tipoDeAgente +
+                ", comentarioDoAgente='" + comentarioDoAgente + '\'' +
+                ", tipoDeAcordo=" + tipoDeAcordo +
+                ", acordo='" + acordo + '\'' +
+                ", divida=" + divida +
+                '}';
     }
 }

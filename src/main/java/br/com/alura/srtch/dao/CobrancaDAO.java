@@ -32,12 +32,6 @@ public class CobrancaDAO {
                 .getResultList();
     }
 
-    public List<Cobranca> buscarTodosSemAcordo() {
-        String jpql = "SELECT c FROM Cobranca c WHERE c.tipoDeAcordo IS NULL";
-        return em.createQuery(jpql, Cobranca.class)
-                .getResultList();
-    }
-
     public List<Cobranca> buscarTodos() {
         String jpql = "SELECT c FROM Cobranca c";
         return em.createQuery(jpql, Cobranca.class).getResultList();
