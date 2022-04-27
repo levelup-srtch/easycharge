@@ -30,7 +30,7 @@ public class DividaDAO {
         this.em.remove(divida);
     }
 
-    public Divida buscarPorId(String id){
+    public Divida buscarPorId(Long id){
         return em.find(Divida.class, id);
     }
 
@@ -38,7 +38,7 @@ public class DividaDAO {
         String jpql = "SELECT  a FROM Divida a";
         return em.createQuery(jpql, Divida.class).getResultList();
     }
-    public List <Divida> buscarPorParametos(BigDecimal valor, LocalDate dataAbertura,LocalDate dataQuitacao){
+    public List <Divida> buscarPorParametros(BigDecimal valor, LocalDate dataAbertura,LocalDate dataQuitacao){
        CriteriaBuilder builder = em.getCriteriaBuilder();
        CriteriaQuery <Divida> query = builder.createQuery(Divida.class);
        Root<Divida> from = query.from(Divida.class);
