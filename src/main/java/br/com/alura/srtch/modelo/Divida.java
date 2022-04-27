@@ -29,7 +29,7 @@ public class Divida {
     @Column(length=255)
     private String descricaoDeQuitacao;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Cliente cliente;
 
@@ -41,6 +41,10 @@ public class Divida {
         this.dataDeAbertura = LocalDate.now();
         this.status = status;
         this.cliente = cliente;
+    }
+
+    public long getIdDivida() {
+        return idDivida;
     }
 
     public BigDecimal getValorDaDivida() {

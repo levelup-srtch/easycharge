@@ -6,8 +6,8 @@ import br.com.alura.srtch.modelo.Divida;
 import br.com.alura.srtch.modelo.StatusDivida;
 import br.com.alura.srtch.service.TipoDoArquivo;
 import br.com.alura.srtch.util.JPAUtil;
-import br.com.alura.srtch.vo.ObjetoCliente;
-import br.com.alura.srtch.vo.ClienteDoArquivo;
+import br.com.alura.srtch.dto.ObjetoCliente;
+import br.com.alura.srtch.dto.ClienteDoArquivo;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -31,14 +31,14 @@ public class MainCobrancaEDivida {
         dividas.add(new Divida(new BigDecimal("150"), StatusDivida.ABERTA, clientes.get(1)));
 
         EnderecoDAO enderecoDAO = new EnderecoDAO(em);
-        CadastroDAO cadastroDAO = new CadastroDAO(em);
+        DadosPessoaisDAO cadastroDAO = new DadosPessoaisDAO(em);
         ClienteDAO clienteDAO = new ClienteDAO(em);
         DividaDAO dividaDAO = new DividaDAO(em);
 
         em.getTransaction().begin();
 
         for(Cliente cliente : clientes){
-            cadastroDAO.cadastrar(cliente.getCadastro());
+            cadastroDAO.cadastrar(cliente.getDadosPessoais());
             enderecoDAO.cadastrar(cliente.getEndereco());
             clienteDAO.cadastrar(cliente);
         }
@@ -46,6 +46,8 @@ public class MainCobrancaEDivida {
         for(Divida divida : dividas){
             dividaDAO.cadastrar(divida);
         }
+
+        System.out.println(dividaDAO.buscarDividaComCliente(dividas.get(0).getIdDivida()));
 
         em.getTransaction().commit();
         em.close();

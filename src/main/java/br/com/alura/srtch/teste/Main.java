@@ -1,18 +1,12 @@
 package br.com.alura.srtch.teste;
 
-import br.com.alura.srtch.dao.CadastroDAO;
-import br.com.alura.srtch.dao.ClienteDAO;
-import br.com.alura.srtch.dao.EnderecoDAO;
 import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.service.ClientesPorEstado;
-import br.com.alura.srtch.vo.ClienteDoArquivo;
-import br.com.alura.srtch.modelo.StatusCliente;
 import br.com.alura.srtch.service.ClientesSuspensos;
-import br.com.alura.srtch.vo.ObjetoCliente;
 import br.com.alura.srtch.service.TipoDoArquivo;
-import br.com.alura.srtch.util.JPAUtil;
+import br.com.alura.srtch.dto.ClienteDoArquivo;
+import br.com.alura.srtch.dto.ObjetoCliente;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 public class Main {
@@ -50,26 +44,6 @@ public class Main {
       List<Cliente> clientesDoEstado = clientesPorEstado.get(estado);
       System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).%n", estado, clientesDoEstado.size());
     }
-
-    EntityManager em = JPAUtil.getEntityManager();
-    ClienteDAO clienteDAO = new ClienteDAO(em);
-    CadastroDAO cadastroDAO = new CadastroDAO(em);
-    EnderecoDAO enderecoDAO = new EnderecoDAO(em);
-
-    em.getTransaction().begin();
-
-    for (Cliente cliente : clientes){
-      cadastroDAO.cadastrar(cliente.getCadastro());
-      enderecoDAO.cadastrar(cliente.getEndereco());
-      clienteDAO.cadastrar(cliente);
-    }
-
-    clienteDAO.buscarPorNome("Carlos Renato Benício Ferreira");
-
-    clienteDAO.buscarTodosPorStatus(StatusCliente.ATIVO);
-
-    em.getTransaction().commit();
-    em.close();
 
   }
 }

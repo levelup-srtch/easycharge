@@ -1,81 +1,45 @@
 package br.com.alura.srtch.modelo;
 
-import com.opencsv.bean.CsvBindByName;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "cliente")
 public class Cliente {
 
   @Id
-  @CsvBindByName(required = true)
-  @Column(nullable=false, length=14)
-  private String cpf;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(length=10)
+  private long idCliente;
 
-  @CsvBindByName(required = true)
-  @Column(nullable=false, length=100)
-  private String nome;
-
-  @CsvBindByName(required = true)
-  @Column(nullable=false, length=50)
-  private String profissao;
-
-  @CsvBindByName(required = true)
   @Column(nullable=false, length=10)
   private BigDecimal renda;
 
   private BigDecimal limiteDivida;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(nullable = false)
-  private Cadastro cadastro;
+  private DadosPessoais dadosPessoais;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(nullable = false)
   private Endereco endereco;
+
+  @Enumerated(EnumType.STRING)
+  private StatusCliente status = StatusCliente.ATIVO;
 
   public Cliente() {
   }
 
-  public Cliente(String cpf, String nome, String profissao, BigDecimal renda, Cadastro cadastro, Endereco endereco) {
-    this.cpf = cpf;
-    this.nome = nome;
-    this.profissao = profissao;
+  public Cliente(BigDecimal renda, DadosPessoais dadosPessoais, Endereco endereco, StatusCliente status) {
     this.renda = renda;
-    this.cadastro = cadastro;
+    this.dadosPessoais = dadosPessoais;
     this.endereco = endereco;
+    this.status = status;
   }
 
   public void setLimiteDeDivida(){
       this.limiteDivida = this.renda.multiply(BigDecimal.valueOf(12));
-  }
-
-  public String getCpf() {
-    return cpf;
-  }
-
-  public void setCpf(String cpf) {
-    this.cpf = cpf;
-  }
-
-  public String getNome() {
-    return nome;
-  }
-
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
-
-  public String getProfissao() {
-    return profissao;
-  }
-
-  public void setProfissao(String profissao) {
-    this.profissao = profissao;
   }
 
   public BigDecimal getRenda() {
@@ -90,12 +54,12 @@ public class Cliente {
     return limiteDivida;
   }
 
-  public Cadastro getCadastro() {
-    return cadastro;
+  public DadosPessoais getDadosPessoais() {
+    return dadosPessoais;
   }
 
-  public void setCadastro(Cadastro conta) {
-    this.cadastro = conta;
+  public void setDadosPessoais(DadosPessoais dadosPessoais) {
+    this.dadosPessoais = dadosPessoais;
   }
 
   public Endereco getEndereco() {
@@ -106,22 +70,21 @@ public class Cliente {
     this.endereco = endereco;
   }
 
+  public StatusCliente getStatus() {
+    return status;
+  }
+
+  public void setStatus(StatusCliente status) {
+    this.status = status;
+  }
+
   @Override
   public String toString() {
     return "Cliente{" +
-            "nome='" + nome + '\'' +
-            ", cpf='" + cpf + '\'' +
-            ", telefone='" + cadastro.getTelefone() + '\'' +
-            ", email='" + cadastro.getEmail() + '\'' +
-            ", rua='" + endereco.getRua() + '\'' +
-            ", numero='" + endereco.getNumero() + '\'' +
-            ", complemento='" + endereco.getComplemento() + '\'' +
-            ", bairro='" + endereco.getBairro() + '\'' +
-            ", cidade='" + endereco.getCidade() + '\'' +
-            ", estado='" + endereco.getEstado() + '\'' +
-            ", profissao='" + profissao + '\'' +
-            ", renda=" + renda +
-            ", status=" + cadastro.getStatus() +
+            "renda=" + renda +
+            ", dadosPessoais=" + dadosPessoais +
+            ", endereco=" + endereco +
+            ", status=" + status +
             '}';
   }
 }

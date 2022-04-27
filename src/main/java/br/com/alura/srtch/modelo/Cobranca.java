@@ -41,7 +41,7 @@ public class Cobranca {
     @Column(length=2)
     private Integer numeroDeParcelas;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Divida divida;
 
