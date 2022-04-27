@@ -15,6 +15,14 @@ public class CobrancaDAO {
         this.em = em;
     }
 
+
+    public Long somarNumeroDeCobrancas(Long id){
+        String jpql = "SELECT COUNT(c) FROM Cobranca c WHERE c.divida.cliente.id = :id";
+        return em.createQuery(jpql, Long.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
     public List<RelatorioDeCobrancas> cobrancasPorCliente(String cpf) {
         String jpql = "SELECT new br.com.alura.srtch.vo.RelatorioDeCobrancas ("
                 + "c.divida.cliente.dadosPessoais.cpf, "

@@ -29,7 +29,20 @@ public class MainCobrancaEDivida {
         dividas.add(new Divida(new BigDecimal("543"), StatusDivida.ABERTA, clientes.get(0)));
         dividas.add(new Divida(new BigDecimal("150"), StatusDivida.ABERTA, clientes.get(1)));
 
-        cobrancas.add(new Cobranca(MeioDeContato.EMAIL, "Joao pedro", TipoAgente.INTERNO, "Entrei em contato, mas nao respondeu", TipoAcordo.PROMESSA, "Pagara em 2 meses", dividas.get(0)));
+        cobrancas.add(new Cobranca(MeioDeContato.EMAIL, "Joao pedro",
+                TipoAgente.INTERNO, "Entrei em contato, mas nao respondeu",
+                TipoAcordo.PROMESSA, "Pagara em 2 meses", dividas.get(0)));
+
+        cobrancas.add(new Cobranca(MeioDeContato.TELEFONE, "Gabriel Almeida",
+                TipoAgente.EXTERNO, "Por ter um bom creditScore liberei mais 1 mes",
+                TipoAcordo.PROMESSA, "Pagara em mais 1 mes", dividas.get(0)));
+
+        cobrancas.add(new Cobranca(MeioDeContato.TELEFONE, "Gabriel Almeida",
+                TipoAgente.EXTERNO, "cliente quer parcelar em 13 vezes",
+                TipoAcordo.PARCELAMENTO, "desconto da casa", dividas.get(0)));
+        cobrancas.add(new Cobranca(MeioDeContato.EMAIL, "Flavia Coutinho",
+                TipoAgente.EXTERNO, "Com mais 30 de atraso enviaremos seu nome pro serasa",
+                TipoAcordo.PROMESSA, "sem acordo", dividas.get(1)));
 
         EnderecoDAO enderecoDAO = new EnderecoDAO(em);
         DadosPessoaisDAO cadastroDAO = new DadosPessoaisDAO(em);
@@ -39,7 +52,8 @@ public class MainCobrancaEDivida {
 
         em.getTransaction().begin();
 
-        for(Cliente cliente : clientes){
+        System.out.println("# Criando clientes");
+        for (Cliente cliente : clientes) {
             cadastroDAO.cadastrar(cliente.getDadosPessoais());
             enderecoDAO.cadastrar(cliente.getEndereco());
             clienteDAO.cadastrar(cliente);
@@ -47,15 +61,34 @@ public class MainCobrancaEDivida {
 
         System.out.println(clientes.size() + " Clientes criados!");
 
-        for(Divida divida : dividas){
+        System.out.println("\n# Criando Dividas");
+        for (Divida divida : dividas) {
             dividaDAO.cadastrar(divida);
         }
 
+        System.out.println("\n# Criando Cobranças");
+        for (Cobranca cobranca : cobrancas) {
+            cobrancaDAO.cadastrar(cobranca);
+        }
+
+        System.out.println("\n# Atualizando divida para quitada");
         dividaDAO.atualizar(dividas.get(1));
         dividas.get(1).setStatus(StatusDivida.QUITADA);
-        dividaDAO.remover(dividas.get(1));
+
+//        System.out.println("# Removendo divida");
+//        dividaDAO.remover(dividas.get(1));
 
         em.getTransaction().commit();
+
+        List<Divida> dividasSemCobranca = dividaDAO.buscarDividasSemCobranca();
+        System.out.println(dividasSemCobranca);
+
+        cobrancaDAO.buscarTodosPorTipoDeAcordo(TipoAcordo.PROMESSA);
+
+        Long numeroDeCobrancas = cobrancaDAO.somarNumeroDeCobrancas(clientes.get(0).getIdCliente());
+        System.out.println(numeroDeCobrancas);
         em.close();
+
+
     }
 }

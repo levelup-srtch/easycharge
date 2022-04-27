@@ -38,15 +38,6 @@ public class DividaDAO {
                 .getResultList();
     }
 
-    public BigDecimal somarValorDasDividasDoCliente(String cpf) {
-        String jpql = "SELECT SUM(d.valorDaDivida) FROM Divida d "
-                + "WHERE d.status = 'ABERTA' "
-                + "AND d.cliente.dadosPessoais.cpf = :cpf";
-        return em.createQuery(jpql, BigDecimal.class)
-                .setParameter("cpf", cpf)
-                .getSingleResult();
-    }
-
     public List<Divida> buscarTodos() {
         String jpql = "SELECT d FROM Divida d";
         return em.createQuery(jpql, Divida.class).getResultList();
