@@ -17,9 +17,9 @@ public class CobrancaDAO {
 
     public List<RelatorioDeCobrancas> cobrancasPorCliente(String cpf) {
         String jpql = "SELECT new br.com.alura.srtch.vo.RelatorioDeCobrancas ("
-                + "c.divida.cliente.cpf, "
+                + "c.divida.cliente.dadosPessoais.cpf, "
                 + "COUNT(c)) "
-                + "FROM Cobranca c WHERE c.divida.cliente.cpf = :cpf";
+                + "FROM Cobranca c WHERE c.divida.cliente.dadosPessoais.cpf = :cpf";
         return em.createQuery(jpql, RelatorioDeCobrancas.class)
                 .setParameter("cpf", cpf)
                 .getResultList();

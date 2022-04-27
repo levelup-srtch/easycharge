@@ -38,7 +38,7 @@ public class MainCobrancaEDivida {
         em.getTransaction().begin();
 
         for(Cliente cliente : clientes){
-            cadastroDAO.cadastrar(cliente.getCadastro());
+            cadastroDAO.cadastrar(cliente.getDadosPessoais());
             enderecoDAO.cadastrar(cliente.getEndereco());
             clienteDAO.cadastrar(cliente);
         }

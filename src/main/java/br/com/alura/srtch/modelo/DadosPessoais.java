@@ -3,13 +3,18 @@ package br.com.alura.srtch.modelo;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cadastro")
+@Table(name = "dadosPessoais")
 public class DadosPessoais {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(length=10)
-    private Long idCadastro;
+    @Column(nullable=false, length=14)
+    private String cpf;
+
+    @Column(nullable=false, length=100)
+    private String nome;
+
+    @Column(nullable=false, length=50)
+    private String profissao;
 
     @Column(nullable=false, length=15)
     private String telefone;
@@ -17,16 +22,40 @@ public class DadosPessoais {
     @Column(nullable=false, length=100)
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    private StatusCliente status = StatusCliente.ATIVO;
 
     public DadosPessoais() {
     }
 
-    public DadosPessoais(String telefone, String email, StatusCliente status) {
+    public DadosPessoais(String cpf, String nome, String profissao, String telefone, String email) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.profissao = profissao;
         this.telefone = telefone;
         this.email = email;
-        this.status = status;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
     }
 
     public String getTelefone() {
@@ -45,20 +74,14 @@ public class DadosPessoais {
         this.email = email;
     }
 
-    public StatusCliente getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusCliente status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
-        return "Cadastro{" +
-                "telefone='" + telefone + '\'' +
+        return "DadosPessoais{" +
+                "cpf='" + cpf + '\'' +
+                ", nome='" + nome + '\'' +
+                ", profissao='" + profissao + '\'' +
+                ", telefone='" + telefone + '\'' +
                 ", email='" + email + '\'' +
-                ", status=" + status +
                 '}';
     }
 }

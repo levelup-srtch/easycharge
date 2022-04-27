@@ -34,7 +34,7 @@ public class DividaDAO {
     public BigDecimal somaDividasDoCliente(String cpf) {
         String jpql = "SELECT SUM(d.valorDaDivida) FROM Divida d "
                 + "WHERE d.status = 'ABERTA' "
-                + "AND d.cliente.cpf = :cpf";
+                + "AND d.cliente.dadosPessoais.cpf = :cpf";
         return em.createQuery(jpql, BigDecimal.class)
                 .setParameter("cpf", cpf)
                 .getSingleResult();
@@ -48,7 +48,7 @@ public class DividaDAO {
     public Divida buscarDividaComCliente(Long id){
         return em.createQuery("SELECT d FROM Divida d " +
                         "JOIN FETCH d.cliente c " +
-                        "JOIN FETCH c.cadastro " +
+                        "JOIN FETCH c.dadosPessoais " +
                         "JOIN FETCH c.endereco " +
                         "WHERE d.idDivida = :id", Divida.class)
                 .setParameter("id", id)

@@ -20,23 +20,29 @@ public class ClienteDAO {
     }
 
     public List<Cliente> buscarTodosPorStatus(StatusCliente statusCliente) {
-        String jpql = "SELECT c FROM Cliente c WHERE c.cadastro.status = :status";
+        String jpql = "SELECT c FROM Cliente c WHERE c.status = :status";
         return em.createQuery(jpql, Cliente.class)
                 .setParameter("status", statusCliente)
                 .getResultList();
     }
 
     public List<Cliente> buscarPorNome(String nome) {
-        String jpql = "SELECT c FROM Cliente c WHERE c.nome = :nome";
+        String jpql = "SELECT c FROM Cliente c WHERE c.dadosPessoais.nome = :nome";
         return em.createQuery(jpql, Cliente.class)
                 .setParameter("nome", nome)
                 .getResultList();
     }
 
+    public List<Cliente> buscarPorCpf(String cpf) {
+        String jpql = "SELECT c FROM Cliente c WHERE c.dadosPessoais.cpf = :cpf";
+        return em.createQuery(jpql, Cliente.class)
+                .setParameter("cpf", cpf)
+                .getResultList();
+    }
 
 
-    public Cliente buscarPorId(String cpf) {
-        return em.find(Cliente.class, cpf);
+    public Cliente buscarPorId(long id) {
+        return em.find(Cliente.class, id);
     }
 
     public void cadastrar(Cliente cliente){

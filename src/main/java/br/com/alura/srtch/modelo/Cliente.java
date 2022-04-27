@@ -8,14 +8,9 @@ import java.math.BigDecimal;
 public class Cliente {
 
   @Id
-  @Column(nullable=false, length=14)
-  private String cpf;
-
-  @Column(nullable=false, length=100)
-  private String nome;
-
-  @Column(nullable=false, length=50)
-  private String profissao;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(length=10)
+  private long idCliente;
 
   @Column(nullable=false, length=10)
   private BigDecimal renda;
@@ -24,50 +19,27 @@ public class Cliente {
 
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(nullable = false)
-  private DadosPessoais cadastro;
+  private DadosPessoais dadosPessoais;
 
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(nullable = false)
   private Endereco endereco;
 
+  @Enumerated(EnumType.STRING)
+  private StatusCliente status = StatusCliente.ATIVO;
+
   public Cliente() {
   }
 
-  public Cliente(String cpf, String nome, String profissao, BigDecimal renda, DadosPessoais cadastro, Endereco endereco) {
-    this.cpf = cpf;
-    this.nome = nome;
-    this.profissao = profissao;
+  public Cliente(BigDecimal renda, DadosPessoais dadosPessoais, Endereco endereco, StatusCliente status) {
     this.renda = renda;
-    this.cadastro = cadastro;
+    this.dadosPessoais = dadosPessoais;
     this.endereco = endereco;
+    this.status = status;
   }
 
   public void setLimiteDeDivida(){
       this.limiteDivida = this.renda.multiply(BigDecimal.valueOf(12));
-  }
-
-  public String getCpf() {
-    return cpf;
-  }
-
-  public void setCpf(String cpf) {
-    this.cpf = cpf;
-  }
-
-  public String getNome() {
-    return nome;
-  }
-
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
-
-  public String getProfissao() {
-    return profissao;
-  }
-
-  public void setProfissao(String profissao) {
-    this.profissao = profissao;
   }
 
   public BigDecimal getRenda() {
@@ -82,12 +54,12 @@ public class Cliente {
     return limiteDivida;
   }
 
-  public DadosPessoais getCadastro() {
-    return cadastro;
+  public DadosPessoais getDadosPessoais() {
+    return dadosPessoais;
   }
 
-  public void setCadastro(DadosPessoais conta) {
-    this.cadastro = conta;
+  public void setDadosPessoais(DadosPessoais dadosPessoais) {
+    this.dadosPessoais = dadosPessoais;
   }
 
   public Endereco getEndereco() {
@@ -98,22 +70,21 @@ public class Cliente {
     this.endereco = endereco;
   }
 
+  public StatusCliente getStatus() {
+    return status;
+  }
+
+  public void setStatus(StatusCliente status) {
+    this.status = status;
+  }
+
   @Override
   public String toString() {
     return "Cliente{" +
-            "nome='" + nome + '\'' +
-            ", cpf='" + cpf + '\'' +
-            ", telefone='" + cadastro.getTelefone() + '\'' +
-            ", email='" + cadastro.getEmail() + '\'' +
-            ", rua='" + endereco.getRua() + '\'' +
-            ", numero='" + endereco.getNumero() + '\'' +
-            ", complemento='" + endereco.getComplemento() + '\'' +
-            ", bairro='" + endereco.getBairro() + '\'' +
-            ", cidade='" + endereco.getCidade() + '\'' +
-            ", estado='" + endereco.getEstado() + '\'' +
-            ", profissao='" + profissao + '\'' +
-            ", renda=" + renda +
-            ", status=" + cadastro.getStatus() +
+            "renda=" + renda +
+            ", dadosPessoais=" + dadosPessoais +
+            ", endereco=" + endereco +
+            ", status=" + status +
             '}';
   }
 }

@@ -14,7 +14,7 @@ public class DadosPessoaisDAO {
     }
 
     public List<DadosPessoais> buscarTodos() {
-        String jpql = "SELECT c FROM Cadastro c";
+        String jpql = "SELECT c FROM DadosPessoais c";
         return em.createQuery(jpql, DadosPessoais.class).getResultList();
     }
 
