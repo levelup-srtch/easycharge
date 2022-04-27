@@ -28,11 +28,11 @@ public class Main {
     }
 
     ClientesSuspensos rcs = new ClientesSuspensos();
-    rcs.somaRendaDosClientesSuspensos(clientes);
+    rcs.somarRenda(clientes);
 
-    System.out.printf("%nHá %s clientes suspensos.%n", rcs.getNumeroClientesSuspensos());
+    System.out.printf("%nHá %s clientes suspensos.%n", rcs.getNumeroDeClientes());
 
-    System.out.printf("A média de renda dos clientes suspensos é de R$ %.2f%n%n", rcs.mediaRendaClientesSuspensos());
+    System.out.printf("A média de renda dos clientes suspensos é de R$ %.2f%n%n", rcs.mediaDaRenda());
 
     ClientesPorEstado clientesPorEstado = new ClientesPorEstado();
     for (Cliente cliente : clientes) {

@@ -10,7 +10,7 @@ public class Cliente {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(length=10)
-  private long idCliente;
+  private Long idCliente;
 
   @Column(nullable=false, length=10)
   private BigDecimal renda;
@@ -26,6 +26,7 @@ public class Cliente {
   private Endereco endereco;
 
   @Enumerated(EnumType.STRING)
+  @JoinColumn(nullable = false)
   private StatusCliente status = StatusCliente.ATIVO;
 
   public Cliente() {

@@ -18,8 +18,8 @@ public class DadosPessoaisDAO {
         return em.createQuery(jpql, DadosPessoais.class).getResultList();
     }
 
-    public DadosPessoais buscarPorId(Long id) {
-        return em.find(DadosPessoais.class, id);
+    public DadosPessoais buscarPorId(String cpf) {
+        return em.find(DadosPessoais.class, cpf);
     }
 
     public void cadastrar(DadosPessoais cadastro){

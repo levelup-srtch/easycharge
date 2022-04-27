@@ -3,6 +3,8 @@ package br.com.alura.srtch.modelo;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "divida")
@@ -33,6 +35,9 @@ public class Divida {
     @JoinColumn(nullable = false)
     private Cliente cliente;
 
+    @OneToMany(mappedBy = "divida")
+    private List<Cobranca> cobrancas = new ArrayList<>();
+
     public Divida() {
     }
 
@@ -41,6 +46,11 @@ public class Divida {
         this.dataDeAbertura = LocalDate.now();
         this.status = status;
         this.cliente = cliente;
+    }
+
+    public void adicionarCobranca(Cobranca cobranca){
+        cobranca.setDivida(this);
+        this.cobrancas.add(cobranca);
     }
 
     public long getIdDivida() {
@@ -93,6 +103,10 @@ public class Divida {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public List<Cobranca> getCobrancas() {
+        return cobrancas;
     }
 
     @Override

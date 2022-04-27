@@ -10,23 +10,23 @@ import java.util.List;
 
 public class ClientesSuspensos {
 
-    private BigDecimal somaRendaClientesSuspensos = new BigDecimal(BigInteger.ZERO);
-    private int numeroClientesSuspensos;
+    private BigDecimal somaDaRenda = new BigDecimal(BigInteger.ZERO);
+    private int numeroDeClientes;
 
-    public void somaRendaDosClientesSuspensos(List<Cliente> clientes){
+    public void somarRenda(List<Cliente> clientes){
         for (Cliente cliente : clientes) {
             if (StatusCliente.SUSPENSO.equals(cliente.getStatus())) {
-                this.numeroClientesSuspensos++;
-                this.somaRendaClientesSuspensos = this.somaRendaClientesSuspensos.add(cliente.getRenda());
+                this.numeroDeClientes++;
+                this.somaDaRenda = this.somaDaRenda.add(cliente.getRenda());
             }
         }
     }
 
-    public BigDecimal mediaRendaClientesSuspensos(){
-        return somaRendaClientesSuspensos.divide(BigDecimal.valueOf(this.numeroClientesSuspensos), 2, RoundingMode.HALF_UP);
+    public BigDecimal mediaDaRenda(){
+        return somaDaRenda.divide(BigDecimal.valueOf(this.numeroDeClientes), 2, RoundingMode.HALF_UP);
     }
 
-    public int getNumeroClientesSuspensos() {
-        return numeroClientesSuspensos;
+    public int getNumeroDeClientes() {
+        return numeroDeClientes;
     }
 }
