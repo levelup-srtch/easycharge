@@ -18,9 +18,10 @@ public class Divida {
     private LocalDate dataQuitacao;
     private String descricao;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cliente cliente;
 
+    @Enumerated(EnumType.STRING)
     private StatusDivida statusDivida;
 
     public Divida(BigDecimal valor, LocalDate dataAbertura, LocalDate dataQuitacao, Cliente cliente, StatusDivida statusDivida) {

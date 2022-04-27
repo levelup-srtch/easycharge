@@ -54,6 +54,7 @@ public class DividaDAO {
             builder.and(filtros,builder.equal(from.get("dataQuitacao"), dataQuitacao));
         }
         query.where(filtros);
+        return em.createQuery(query).getResultList();
 
     }
 }
