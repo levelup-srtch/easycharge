@@ -73,17 +73,20 @@ public class MainCobrancaEDivida {
 
         System.out.println("\n# Atualizando divida para quitada");
         dividaDAO.atualizar(dividas.get(1));
-        dividas.get(1).setStatus(StatusDivida.QUITADA);3
+        dividas.get(1).setStatus(StatusDivida.QUITADA);
 
 //        System.out.println("# Removendo divida");
 //        dividaDAO.remover(dividas.get(1));
 
         em.getTransaction().commit();
-        System.out.println(dividaDAO.buscarDividasSemCobranca());
 
-        System.out.println(cobrancaDAO.buscarTodosPorTipoDeAcordo(TipoAcordo.PARCELAMENTO));
+        List<Divida> dividasSemCobranca = dividaDAO.buscarDividasSemCobranca();
+        System.out.println(dividasSemCobranca);
 
-        cobrancaDAO.somarNumeroDeCobrancas(clientes.get(0).getIdCliente());
+        cobrancaDAO.buscarTodosPorTipoDeAcordo(TipoAcordo.PROMESSA);
+
+        Long numeroDeCobrancas = cobrancaDAO.somarNumeroDeCobrancas(clientes.get(0).getIdCliente());
+        System.out.println(numeroDeCobrancas);
         em.close();
 
 
