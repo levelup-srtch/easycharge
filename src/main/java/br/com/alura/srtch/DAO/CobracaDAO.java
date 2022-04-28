@@ -4,8 +4,6 @@ import br.com.alura.srtch.dominio.Cobranca;
 import br.com.alura.srtch.dominio.enuns.TipoDeAcordo;
 
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public class CobracaDAO {
@@ -28,17 +26,27 @@ public class CobracaDAO {
     public Cobranca buscarPorId(Long id){
         return em.find(Cobranca.class,id);
     }
+
     public List<Cobranca> buscarPorAcordos(TipoDeAcordo tipoDeAcordo){
         String jpql = "SELECT a FROM Cobranca a WHERE a.tipoDeAcordo = :tipoDeAcordo";
         return em.createQuery(jpql, Cobranca.class)
                 .setParameter("tipoDeAcordo",tipoDeAcordo).getResultList();
     }
+
     public List <Cobranca> buscarSemAcordo(){
         String jpql = "SELECT a FROM Cobranca a WHERE a.tipoDeAcordo IS NULL";
         return em.createQuery(jpql,Cobranca.class).getResultList();
     }
+
     public List<Cobranca> buscarTodos(){
         String jpql = "SELECT a FROM Cobranca a";
         return em.createQuery(jpql,Cobranca.class).getResultList();
     }
+
+    public List<Long> QuantidadeDeCobrancas(Long id){
+        String jpql = "SELECT COUNT(a) FROM Cobranca a WHERE a.divida.cliente.id = :id";
+        return em.createQuery(jpql,Long.class).setParameter("id",id).getResultList();
+    }
+
+//    public List <>
 }

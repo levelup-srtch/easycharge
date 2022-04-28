@@ -3,6 +3,7 @@ package br.com.alura.srtch.DAO;
 import br.com.alura.srtch.dominio.Cliente;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ClienteDAO {
@@ -43,5 +44,10 @@ public class ClienteDAO {
     public List<Cliente> buscarTodosSuspenso() {
         String jpql = "SELECT c FROM Cliente c WHERE c.status = 'SUSPENSO'";
         return em.createQuery(jpql, Cliente.class).getResultList();
+    }
+
+    public BigDecimal somarDividasDosClientes(Long id){
+        String jpql = "SELECT SUM(a.valor)from Divida a WHERE a.statusDivida = 'ABERTA'AND a.cliente.id = :id";
+        return (BigDecimal) em.createQuery(jpql, BigDecimal.class).getResultList();
     }
 }
