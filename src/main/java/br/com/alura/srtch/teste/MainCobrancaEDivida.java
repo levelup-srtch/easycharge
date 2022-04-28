@@ -4,7 +4,7 @@ import br.com.alura.srtch.dao.*;
 import br.com.alura.srtch.modelo.*;
 import br.com.alura.srtch.service.TipoDoArquivo;
 import br.com.alura.srtch.util.JPAUtil;
-import br.com.alura.srtch.dto.ObjetoCliente;
+import br.com.alura.srtch.dto.ClienteMapper;
 import br.com.alura.srtch.dto.ClienteDoArquivo;
 
 import javax.persistence.EntityManager;
@@ -22,7 +22,7 @@ public class MainCobrancaEDivida {
         List<Divida> dividas = new ArrayList<>();
         List<Cobranca> cobrancas = new ArrayList<>();
         List<ClienteDoArquivo> recebeClienteDoArquivos = new TipoDoArquivo().validaTipoDoArquivo(arquivo);
-        List<Cliente> clientes = new ObjetoCliente().transformarEmCliente(recebeClienteDoArquivos);
+        List<Cliente> clientes = new ClienteMapper().transformarEmCliente(recebeClienteDoArquivos);
         EntityManager em = JPAUtil.getEntityManager();
 
         dividas.add(new Divida(new BigDecimal("1550"), StatusDivida.ABERTA, clientes.get(0)));
@@ -75,18 +75,16 @@ public class MainCobrancaEDivida {
         dividaDAO.atualizar(dividas.get(1));
         dividas.get(1).setStatus(StatusDivida.QUITADA);
 
-//        System.out.println("# Removendo divida");
-//        dividaDAO.remover(dividas.get(1));
+        System.out.println("# Removendo divida");
+        dividaDAO.remover(dividas.get(1).getIdDivida());
 
         em.getTransaction().commit();
 
-        List<Divida> dividasSemCobranca = dividaDAO.buscarDividasSemCobranca();
-        System.out.println(dividasSemCobranca);
+        System.out.println(dividaDAO.buscarDividasSemCobranca());
 
-        cobrancaDAO.buscarTodosPorTipoDeAcordo(TipoAcordo.PROMESSA);
+        System.out.println(cobrancaDAO.buscarTodosPorTipoDeAcordo(TipoAcordo.PROMESSA));
 
-        Long numeroDeCobrancas = cobrancaDAO.somarNumeroDeCobrancas(clientes.get(0).getIdCliente());
-        System.out.println(numeroDeCobrancas);
+        System.out.println(cobrancaDAO.somarNumeroDeCobrancas(clientes.get(0).getIdCliente()));
         em.close();
 
 

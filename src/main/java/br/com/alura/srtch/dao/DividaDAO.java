@@ -4,7 +4,6 @@ import br.com.alura.srtch.modelo.Cobranca;
 import br.com.alura.srtch.modelo.Divida;
 
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.util.List;
 
 public class DividaDAO {
@@ -27,9 +26,17 @@ public class DividaDAO {
         this.em.merge(divida);
     }
 
-    public void remover(Divida divida) {
-        divida = em.merge(divida);
+    public void remover(Long id) {
+        removerCobrancas(id);
+        Divida divida = em.find(Divida.class, id);
         this.em.remove(divida);
+    }
+
+    private void removerCobrancas(Long id){
+        CobrancaDAO cobrancaDAO = new CobrancaDAO(em);
+        for(Cobranca cobranca : cobrancaDAO.buscarCobrancasDaDivida(id)){
+            cobrancaDAO.remover(cobranca);
+        }
     }
 
     public List<Divida> buscarDividasSemCobranca() {

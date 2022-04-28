@@ -5,7 +5,7 @@ import br.com.alura.srtch.service.ClientesPorEstado;
 import br.com.alura.srtch.service.ClientesSuspensos;
 import br.com.alura.srtch.service.TipoDoArquivo;
 import br.com.alura.srtch.dto.ClienteDoArquivo;
-import br.com.alura.srtch.dto.ObjetoCliente;
+import br.com.alura.srtch.dto.ClienteMapper;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class Main {
 
     List<ClienteDoArquivo> recebeClienteDoArquivos = new TipoDoArquivo().validaTipoDoArquivo(arquivo);
 
-    List<Cliente> clientes = new ObjetoCliente().transformarEmCliente(recebeClienteDoArquivos);
+    List<Cliente> clientes = new ClienteMapper().transformarEmCliente(recebeClienteDoArquivos);
 
     System.out.println("# Limites de dívidas dos clientes");
     for(Cliente cliente : clientes){

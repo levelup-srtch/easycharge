@@ -15,6 +15,12 @@ public class CobrancaDAO {
         this.em = em;
     }
 
+    public List<Cobranca> buscarCobrancasDaDivida(Long id) {
+        String jpql = "SELECT c FROM Cobranca c WHERE c.divida.idDivida = :id";
+        return em.createQuery(jpql, Cobranca.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
 
     public Long somarNumeroDeCobrancas(Long id){
         String jpql = "SELECT COUNT(c) FROM Cobranca c WHERE c.divida.cliente.id = :id";

@@ -7,7 +7,7 @@ import br.com.alura.srtch.modelo.Endereco;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObjetoCliente {
+public class ClienteMapper {
 
     List<Cliente> clientes = new ArrayList<>();
 
