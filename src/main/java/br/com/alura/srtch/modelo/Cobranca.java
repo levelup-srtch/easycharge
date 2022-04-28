@@ -63,7 +63,7 @@ public class Cobranca {
             this.numeroDeParcelas = receberNumeroDeParcelas();
         }
         this.acordo = acordo;
-        divida.adicionarCobranca(this);
+        this.divida = divida;
     }
 
     public LocalDate getDataDeRealizacao() {

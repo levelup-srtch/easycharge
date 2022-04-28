@@ -7,14 +7,14 @@ import br.com.alura.srtch.modelo.Endereco;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObjetoCliente {
+public class ClienteMapper {
 
     List<Cliente> clientes = new ArrayList<>();
 
-    public List<Cliente> transformarEmCliente(List<ClienteDoArquivo> clientesDoArquivo){
+    public List<Cliente> transformarEmCliente(List<ClienteDTO> clientesDoArquivo){
         DadosPessoais dadosPessoais;
         Endereco endereco;
-        for(ClienteDoArquivo cda : clientesDoArquivo){
+        for(ClienteDTO cda : clientesDoArquivo){
             dadosPessoais = new DadosPessoais(cda.getCpf(), cda.getNome(), cda.getProfissao(), cda.getTelefone(), cda.getEmail());
             endereco = new Endereco(cda.getRua(), cda.getNumero(), cda.getBairro(), cda.getCidade(), cda.getEstado());
             if(cda.getComplemento() != null){

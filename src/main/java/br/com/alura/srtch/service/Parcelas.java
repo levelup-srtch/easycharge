@@ -1,17 +1,16 @@
 package br.com.alura.srtch.service;
 
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class Parcelas {
 
-    private static Integer numeroDeParcelas;
+    private static final Integer numeroDeParcelas = 6;
 
     public static Integer receberNumeroDeParcelas(){
-    Scanner input = new Scanner(System.in);
+//    Scanner input = new Scanner(System.in);
     try{
-        System.out.println("Digite o número de parcelas que deseja pagar (De 1 a 12 meses): ");
-        numeroDeParcelas = input.nextInt();
+//        System.out.println("Digite o número de parcelas que deseja pagar (De 1 a 12 meses): ");
+//        numeroDeParcelas = input.nextInt();
         verificarNumeroDeParcelas(numeroDeParcelas);
     }catch(InputMismatchException e){
         e.printStackTrace();

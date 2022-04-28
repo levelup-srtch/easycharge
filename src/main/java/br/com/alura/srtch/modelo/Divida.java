@@ -35,8 +35,8 @@ public class Divida {
     @JoinColumn(nullable = false)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "divida")
-    private List<Cobranca> cobrancas = new ArrayList<>();
+    @OneToMany(mappedBy = "divida", cascade = CascadeType.ALL)
+    private final List<Cobranca> cobrancas = new ArrayList<>();
 
     public Divida() {
     }

@@ -1,6 +1,6 @@
 package br.com.alura.srtch.service;
 
-import br.com.alura.srtch.dto.ClienteDoArquivo;
+import br.com.alura.srtch.dto.ClienteDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,8 +12,8 @@ import java.util.List;
 public class ArquivoJSON implements Arquivo {
 
     @Override
-    public List<ClienteDoArquivo> arquivo(String arquivo) {
-        List<ClienteDoArquivo> rcda;
+    public List<ClienteDTO> arquivo(String arquivo) {
+        List<ClienteDTO> rcda;
         try {
             Reader reader = new FileReader(arquivo);
             ObjectMapper mapper = new ObjectMapper();
