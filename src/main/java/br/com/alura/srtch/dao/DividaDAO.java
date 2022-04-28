@@ -1,5 +1,6 @@
 package br.com.alura.srtch.dao;
 
+import br.com.alura.srtch.dto.RelatorioDeDividasDTO;
 import br.com.alura.srtch.modelo.Cobranca;
 import br.com.alura.srtch.modelo.Divida;
 
@@ -59,4 +60,17 @@ public class DividaDAO {
                 .setParameter("id", id)
                 .getSingleResult();
     }
+
+    public List<RelatorioDeDividasDTO> totalDeDividasECobrancas(){
+        String jpql = "SELECT new br.com.alura.srtch.dto.RelatorioDeDividasDTO("
+                + "cliente.dadosPessoais.nome, "
+                + "SUM(d.valorDaDivida), "
+                + "d.cobrancas.size()) "
+                + "FROM Divida d "
+                + "JOIN d.cliente cliente "
+                + "GROUP BY cliente.dadosPessoais.nome";
+        return em.createQuery(jpql, RelatorioDeDividasDTO.class)
+                .getResultList();
+    }
+
 }

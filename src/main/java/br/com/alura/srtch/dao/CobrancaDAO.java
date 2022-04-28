@@ -2,7 +2,7 @@ package br.com.alura.srtch.dao;
 
 import br.com.alura.srtch.modelo.Cobranca;
 import br.com.alura.srtch.modelo.TipoAcordo;
-import br.com.alura.srtch.dto.RelatorioDeCobrancas;
+import br.com.alura.srtch.dto.RelatorioDeCobrancasDTO;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -29,14 +29,14 @@ public class CobrancaDAO {
                 .getSingleResult();
     }
 
-    public List<RelatorioDeCobrancas> cobrancasPorCliente(String cpf) {
-        String jpql = "SELECT new br.com.alura.srtch.vo.RelatorioDeCobrancas ("
+    public RelatorioDeCobrancasDTO cobrancasPorCliente(String cpf) {
+        String jpql = "SELECT new br.com.alura.srtch.dto.RelatorioDeCobrancasDTO ("
                 + "c.divida.cliente.dadosPessoais.cpf, "
                 + "COUNT(c)) "
                 + "FROM Cobranca c WHERE c.divida.cliente.dadosPessoais.cpf = :cpf";
-        return em.createQuery(jpql, RelatorioDeCobrancas.class)
+        return em.createQuery(jpql, RelatorioDeCobrancasDTO.class)
                 .setParameter("cpf", cpf)
-                .getResultList();
+                .getSingleResult();
     }
 
     public List<Cobranca> buscarTodosPorTipoDeAcordo(TipoAcordo tipoAcordo) {

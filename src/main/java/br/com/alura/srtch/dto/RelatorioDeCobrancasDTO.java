@@ -1,11 +1,11 @@
 package br.com.alura.srtch.dto;
 
-public class RelatorioDeCobrancas {
+public class RelatorioDeCobrancasDTO {
 
-    private final String cpf;
-    private final Long quantidadeDeCobrancas;
+    private String cpf;
+    private Long quantidadeDeCobrancas;
 
-    public RelatorioDeCobrancas(String cpf, Long quantidadeDeCobrancas) {
+    public RelatorioDeCobrancasDTO(String cpf, Long quantidadeDeCobrancas) {
         this.cpf = cpf;
         this.quantidadeDeCobrancas = quantidadeDeCobrancas;
     }

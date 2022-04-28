@@ -1,11 +1,12 @@
 package br.com.alura.srtch.teste;
 
 import br.com.alura.srtch.dao.*;
+import br.com.alura.srtch.dto.RelatorioDeDividasDTO;
 import br.com.alura.srtch.modelo.*;
 import br.com.alura.srtch.service.TipoDoArquivo;
 import br.com.alura.srtch.util.JPAUtil;
 import br.com.alura.srtch.dto.ClienteMapper;
-import br.com.alura.srtch.dto.ClienteDoArquivo;
+import br.com.alura.srtch.dto.ClienteDTO;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -21,7 +22,7 @@ public class MainCobrancaEDivida {
 
         List<Divida> dividas = new ArrayList<>();
         List<Cobranca> cobrancas = new ArrayList<>();
-        List<ClienteDoArquivo> recebeClienteDoArquivos = new TipoDoArquivo().validaTipoDoArquivo(arquivo);
+        List<ClienteDTO> recebeClienteDoArquivos = new TipoDoArquivo().validaTipoDoArquivo(arquivo);
         List<Cliente> clientes = new ClienteMapper().transformarEmCliente(recebeClienteDoArquivos);
         EntityManager em = JPAUtil.getEntityManager();
 
@@ -85,6 +86,10 @@ public class MainCobrancaEDivida {
         System.out.println(cobrancaDAO.buscarTodosPorTipoDeAcordo(TipoAcordo.PROMESSA));
 
         System.out.println(cobrancaDAO.somarNumeroDeCobrancas(clientes.get(0).getIdCliente()));
+
+        List<RelatorioDeDividasDTO> relatorioDeDividas = dividaDAO.totalDeDividasECobrancas();
+        System.out.println(relatorioDeDividas);
+
         em.close();
 
 

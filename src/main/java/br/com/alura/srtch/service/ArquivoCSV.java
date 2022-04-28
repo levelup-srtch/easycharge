@@ -1,6 +1,6 @@
 package br.com.alura.srtch.service;
 
-import br.com.alura.srtch.dto.ClienteDoArquivo;
+import br.com.alura.srtch.dto.ClienteDTO;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
@@ -12,12 +12,12 @@ import java.util.List;
 public class ArquivoCSV implements Arquivo {
 
     @Override
-    public List<ClienteDoArquivo> arquivo(String arquivo) {
-        List<ClienteDoArquivo> rcda;
+    public List<ClienteDTO> arquivo(String arquivo) {
+        List<ClienteDTO> rcda;
         try {
             Reader reader = new FileReader(arquivo);
-            CsvToBean<ClienteDoArquivo> csvToBean = new CsvToBeanBuilder<ClienteDoArquivo>(reader)
-                    .withType(ClienteDoArquivo.class)
+            CsvToBean<ClienteDTO> csvToBean = new CsvToBeanBuilder<ClienteDTO>(reader)
+                    .withType(ClienteDTO.class)
                     .build();
             rcda = csvToBean.parse();
         } catch (IOException ex) {
