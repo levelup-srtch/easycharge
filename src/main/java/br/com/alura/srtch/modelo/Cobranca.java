@@ -48,11 +48,12 @@ public class Cobranca {
 	@Column(length=12,nullable=true)
 	private int numeroDeParcelas;
  	
-	//@Column(length=255,nullable=false)
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name = "divida", referencedColumnName = "id")
-	private Divida divida;
+	@ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(nullable = false)
+	 private Divida divida;
 
+	
+	 
 	
 	
 	public Cobranca() {

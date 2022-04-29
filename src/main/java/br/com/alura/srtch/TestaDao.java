@@ -1,7 +1,9 @@
 package br.com.alura.srtch;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -53,42 +55,68 @@ public class TestaDao {
 		  Date novaData = new Date();
 		  BigDecimal valor  = new BigDecimal(100);
 		  BigDecimal valor2  = new BigDecimal(50);
-		  Divida divida = new Divida(valor,novaData, novaData,StatusDivida.ATIVA, "NADA", cliente);
-		  Divida divida2 = new Divida(valor2,novaData, novaData,StatusDivida.ATIVA, "CADE A COBRANCA", cliente);
-		  Cobranca cobranca = new Cobranca(novaData, MeioDeContato.TELEFONE, "JOÃO", TipoDeAgente.INTERNO, "teste", "vou pagar", TipoDeAcordo.PROMESSA, novaData, 10, divida);
-		  Cobranca cobranca2 = new Cobranca(novaData, MeioDeContato.TELEFONE, "Bernardo", TipoDeAgente.INTERNO, "teste", "é talvez eu pague", TipoDeAcordo.PROMESSA, novaData, 10, divida);
+		  List<Divida> dividas = new ArrayList<>();
+		  List<Cobranca> cobrancas = new ArrayList<>();
+		  
+		  dividas.add(new Divida(valor,novaData, novaData,StatusDivida.ATIVA, "NADA", cliente));
+		  dividas.add(new Divida(valor2,novaData, novaData,StatusDivida.ATIVA, "CADE A COBRANCA", cliente));
+		  
+		  dividas.add(new Divida(valor2,novaData, novaData,StatusDivida.ATIVA, "HMMM???", cliente2));
+		 // Divida divida = 
+		  //Divida divida2 = 
+		  
+		  
+		  cobrancas.add(new Cobranca(novaData, MeioDeContato.TELEFONE, "JOÃO", TipoDeAgente.INTERNO, "teste", "vou pagar", TipoDeAcordo.PROMESSA, novaData, 0,dividas.get(0)));
+		  cobrancas.add(new Cobranca(novaData, MeioDeContato.TELEFONE, "Hugo", TipoDeAgente.INTERNO, "teste", "vou pagar", TipoDeAcordo.PROMESSA, novaData, 0,dividas.get(0)));
+		  cobrancas.add(new Cobranca(novaData, MeioDeContato.TELEFONE, "Caio", TipoDeAgente.INTERNO, "teste", "vou pagar", TipoDeAcordo.PARCELAMENTO, novaData, 10,dividas.get(1)));
+		  
+		  
+		  cobrancas.add(new Cobranca(novaData, MeioDeContato.TELEFONE, "Bernardo", TipoDeAgente.INTERNO, "teste", "é talvez eu pague", TipoDeAcordo.PROMESSA, novaData, 0, dividas.get(2)));
+		 // Cobranca cobranca = new Cobranca(novaData, MeioDeContato.TELEFONE, "JOÃO", TipoDeAgente.INTERNO, "teste", "vou pagar", TipoDeAcordo.PROMESSA, novaData, 10,dividas.get(0));
+		  //Cobranca cobranca2 = new Cobranca(novaData, MeioDeContato.TELEFONE, "Bernardo", TipoDeAgente.INTERNO, "teste", "é talvez eu pague", TipoDeAcordo.PROMESSA, novaData, 10, dividas.get(1));
 
 		  	em.getTransaction().begin(); 
 			clienteDao.cadastrar(cliente);
 			clienteDao.cadastrar(cliente2);
-			dividaDao.cadastrar(divida);
-			dividaDao.cadastrar(divida2);
-			cobrancaDao.cadastrar(cobranca); 
-			cobrancaDao.cadastrar(cobranca2); 
+			
+			  for (Divida divida : dividas) {
+		            dividaDao.cadastrar(divida);
+		        }
+			//dividaDao.cadastrar(dividas);
+			//dividaDao.cadastrar(divida2);
+			  
+			  for (Cobranca cobranca : cobrancas) {
+		            cobrancaDao.cadastrar(cobranca);
+		        }
+			  
+			  
+			//cobrancaDao.cadastrar(cobranca); 
+			//cobrancaDao.cadastrar(cobranca2); 
 			//em.getTransaction().commit(); 
 			
 			
 			em.flush();
 			
-			divida.setStatus(StatusDivida.QUITADA);
-			dividaDao.atualizar(divida2);
+			
+			//divida.setStatus(StatusDivida.QUITADA);
+			//dividaDao.atualizar(divida2);
 			
 			System.out.println(dividaDao.buscarPorId(1l));	
 			
-			em.clear();
-			dividaDao.remover(divida);
+			//em.clear();
+			//dividaDao.remover(dividas.get(0));
 			
-			em.flush();
+			//em.flush();
 			
 			em.getTransaction().commit(); 
 			System.out.println(dividaDao.buscarTodos());
 			
 			
-			//System.out.println(dividaDao.buscarTodos());
-			//System.out.println(dividaDao.buscarPorDividaSemCobranca()); 
-			//System.out.println(dividaDao.buscaTotalDividaCliente(cliente));
-			//System.out.println(cobrancaDao.buscaTotalCobrancaCliente(1l));;
-		
+			System.out.println(dividaDao.buscarTodos());
+			System.out.println(dividaDao.buscarPorDividaSemCobranca()); 
+			System.out.println(dividaDao.buscaTotalDividaCliente(cliente));
+			System.out.println(cobrancaDao.buscaTotalCobrancaCliente(0l));;
+			System.out.println(cobrancaDao.buscarPorAcordo(TipoDeAcordo.PARCELAMENTO));
 	}
 
 }

@@ -45,14 +45,12 @@ public class Divida {
 	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "cliente", referencedColumnName = "id")
 	//@Column(length=255,nullable=false)
-	
-	@OneToMany(mappedBy = "divida", cascade = CascadeType.ALL)
-    private final List<Cobranca> cobrancas = new ArrayList<>();
-	
 	private Cliente cliente;
 	
-
- 	
+	@OneToMany(mappedBy = "divida", cascade = CascadeType.ALL)
+	private final List<Cobranca> cobrancas = new ArrayList<>();
+	
+	
  	
  	
 	public Divida() {
@@ -70,6 +68,11 @@ public class Divida {
 		this.descricaoDeQuitacao = descricaoDeQuitacao;
 		this.cliente = cliente;
 	}
+	
+	 public long getIdDivida() {
+	        return id;
+	    }
+	
 	public BigDecimal getValorDaDivida() {
 		return valorDaDivida;
 	}
@@ -107,8 +110,14 @@ public class Divida {
 		this.cliente = cliente;
 	}
 	
+	 public void adicionarCobranca(Cobranca cobranca){
+	        cobranca.setDivida(this);
+	        this.cobrancas.add(cobranca);
+	 }
 
-
+	 public List<Cobranca> getCobrancas() {
+	        return cobrancas;
+	    }
 	  
 		  
 
