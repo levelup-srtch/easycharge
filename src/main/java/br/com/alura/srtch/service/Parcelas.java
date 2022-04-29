@@ -1,7 +1,5 @@
 package br.com.alura.srtch.service;
 
-import java.util.InputMismatchException;
-
 public class Parcelas {
 
     private static final Integer numeroDeParcelas = 6;
@@ -12,8 +10,9 @@ public class Parcelas {
 //        System.out.println("Digite o número de parcelas que deseja pagar (De 1 a 12 meses): ");
 //        numeroDeParcelas = input.nextInt();
         verificarNumeroDeParcelas(numeroDeParcelas);
-    }catch(InputMismatchException e){
+    }catch(Exception e){
         e.printStackTrace();
+        e.getCause();
     }
     return numeroDeParcelas;
 }

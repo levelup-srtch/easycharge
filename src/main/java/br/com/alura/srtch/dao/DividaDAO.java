@@ -1,11 +1,12 @@
 package br.com.alura.srtch.dao;
 
 import br.com.alura.srtch.dto.RelatorioDeDividasDTO;
-import br.com.alura.srtch.modelo.Cobranca;
 import br.com.alura.srtch.modelo.Divida;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+
+import static br.com.alura.srtch.service.CobrancasDaDivida.removerCobrancas;
 
 public class DividaDAO {
 
@@ -28,16 +29,9 @@ public class DividaDAO {
     }
 
     public void remover(Long id) {
-        removerCobrancas(id);
+        removerCobrancas(id, em);
         Divida divida = em.find(Divida.class, id);
         this.em.remove(divida);
-    }
-
-    private void removerCobrancas(Long id){
-        CobrancaDAO cobrancaDAO = new CobrancaDAO(em);
-        for(Cobranca cobranca : cobrancaDAO.buscarCobrancasDaDivida(id)){
-            cobrancaDAO.remover(cobranca);
-        }
     }
 
     public List<Divida> buscarDividasSemCobranca() {

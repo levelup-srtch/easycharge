@@ -1,6 +1,5 @@
 package br.com.alura.srtch.dao;
 
-import br.com.alura.srtch.dto.RelatorioDeDividasDTO;
 import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.modelo.StatusCliente;
 
