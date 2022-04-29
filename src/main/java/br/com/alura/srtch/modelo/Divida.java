@@ -1,5 +1,6 @@
 package br.com.alura.srtch.modelo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -23,7 +24,7 @@ public class Divida {
 	private Long id;
 	
 	@Column(length=100,nullable=false)
-	private double valorDaDivida;
+	private BigDecimal valorDaDivida;
 	 
 	@Column(length=50,nullable=false) 
 	private Date dataDeAbertura;
@@ -50,7 +51,7 @@ public class Divida {
 		
 	}
 	
-	public Divida(double valorDaDivida, Date dataDeAbertura, Date dataDeQuitacao, StatusDivida status,
+	public Divida(BigDecimal valorDaDivida, Date dataDeAbertura, Date dataDeQuitacao, StatusDivida status,
 			String descricaoDeQuitacao, Cliente cliente) {
 		
 		this.valorDaDivida = valorDaDivida;
@@ -60,10 +61,10 @@ public class Divida {
 		this.descricaoDeQuitacao = descricaoDeQuitacao;
 		this.cliente = cliente;
 	}
-	public double getValorDaDivida() {
+	public BigDecimal getValorDaDivida() {
 		return valorDaDivida;
 	}
-	public void setValorDaDivida(double valorDaDivida) {
+	public void setValorDaDivida(BigDecimal valorDaDivida) {
 		this.valorDaDivida = valorDaDivida;
 	}
 	public Date getDataDeAbertura() {
@@ -96,6 +97,8 @@ public class Divida {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
+	
 	
 	  @Override
 	public String toString() {

@@ -1,10 +1,5 @@
 package br.com.alura.srtch.modelo;
 
-import com.opencsv.bean.CsvBindByName;
-
-
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.opencsv.bean.CsvBindByName;
+
 @Entity
+ // se usar esse parametro @Embeddable não se utiliza o @entity, geralmente usado quando atributos da classe que nao tem tabela estão em outra classe, exemplo classe dados pessoais
 @Table(name = "endereco")
 public class Endereco {
 

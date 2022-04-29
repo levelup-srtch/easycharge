@@ -46,5 +46,8 @@ public class CobrancaDao {
 				.getResultList();
 	}
 	
+//	public int BuscaTotalCobrancaCliente(Long id) {
+		
+	//}
 
 }
