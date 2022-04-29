@@ -50,7 +50,7 @@ public class DividaDAO {
                         "JOIN FETCH d.cliente c " +
                         "JOIN FETCH c.dadosPessoais " +
                         "JOIN FETCH c.endereco " +
-                        "WHERE d.idDivida = :id", Divida.class)
+                        "WHERE d.id = :id", Divida.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }
