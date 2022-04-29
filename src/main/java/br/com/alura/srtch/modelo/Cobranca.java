@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,12 +26,14 @@ public class Cobranca {
 	@Column(length=50,nullable=false) 
 	private Date dataDeRealizacao;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(length=100,nullable=false)
 	private MeioDeContato meioDeContato;
 	
 	@Column(length=100,nullable=false)
 	private String agente;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(length=100,nullable=false)
 	private TipoDeAgente tipoDeAgente;
 	
@@ -39,6 +43,7 @@ public class Cobranca {
 	@Column(length=500,nullable=false)
 	private String acordo;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(length=20,nullable=false)
 	private TipoDeAcordo tipoDeAcordo;
 	

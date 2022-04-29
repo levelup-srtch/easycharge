@@ -101,15 +101,19 @@ public class TestaDao {
 			
 			//divida.setStatus(StatusDivida.QUITADA);
 			//dividaDao.atualizar(divida2);
+			em.getTransaction().commit(); 
 			
 			System.out.println(dividaDao.buscarPorId(1l));	
 			
-			//em.clear();
-			//dividaDao.remover(dividas.get(0));   verificar
 			
-			//em.flush();
+			em.getTransaction().begin(); 
+			
+			//dividaDao.remover(dividas.get(0));  //  verificar
 			
 			em.getTransaction().commit(); 
+			//em.flush();
+			
+			//em.getTransaction().commit(); 
 			System.out.println(dividaDao.buscarTodos());
 			
 			
@@ -119,7 +123,9 @@ public class TestaDao {
 			System.out.println(cobrancaDao.buscarPorAcordo(TipoDeAcordo.PARCELAMENTO));
 			System.out.println(cobrancaDao.buscaTotalCobrancaCliente(0l)); // verificar
 			
-			System.out.println(clienteDao.relatorioDeCliente());
+			List<RelatorioClienteVO> relatorio = clienteDao.relatorioDeCliente();
+			//List<Di> relatorio = clienteDao.RelatorioClienteVO(Cliente nome Cliente);
+			relatorio.forEach(System.out::println);
 	}
 
 }

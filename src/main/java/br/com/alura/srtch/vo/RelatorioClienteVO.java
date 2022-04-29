@@ -32,7 +32,13 @@ public class RelatorioClienteVO {
 	
 	}
 
-
+	public RelatorioClienteVO(String nomeCliente, BigDecimal totalDividaCliente) {
+		
+		this.nomeCliente = nomeCliente;
+		this.totalDividaCliente = totalDividaCliente;
+	}
+	
+	
 	public String getNomeCliente() {
 		return nomeCliente;
 	}
