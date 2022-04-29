@@ -5,9 +5,9 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import br.com.alura.srtch.modelo.Cliente;
-import br.com.alura.srtch.modelo.Cobranca;
 import br.com.alura.srtch.modelo.Divida;
 
 public class DividaDao {
@@ -31,6 +31,16 @@ public class DividaDao {
 		this.em.remove(divida);
 	}
 	
+	
+	public void removePorId (Divida divida) {
+		Query query = em.createQuery("delete from Cobranca c where c.divida = :id");
+		query.setParameter("id", divida ).executeUpdate();
+		remover(divida);
+		
+	}
+	
+
+
 	public Divida buscarPorId(Long id) {
 		return em.find(Divida.class, id);
 	}

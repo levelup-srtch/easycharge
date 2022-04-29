@@ -56,13 +56,14 @@ public class TestaDao {
 		  Date novaData = new Date();
 		  BigDecimal valor  = new BigDecimal(100);
 		  BigDecimal valor2  = new BigDecimal(50);
+		  BigDecimal valor3  = new BigDecimal(30);
 		  List<Divida> dividas = new ArrayList<>();
 		  List<Cobranca> cobrancas = new ArrayList<>();
 		  
 		  dividas.add(new Divida(valor,novaData, novaData,StatusDivida.ATIVA, "NADA", cliente));
 		  dividas.add(new Divida(valor2,novaData, novaData,StatusDivida.ATIVA, "CADE A COBRANCA", cliente));
 		  
-		  dividas.add(new Divida(valor2,novaData, novaData,StatusDivida.ATIVA, "HMMM???", cliente2));
+		  dividas.add(new Divida(valor3,novaData, novaData,StatusDivida.ATIVA, "HMMM???", cliente2));
 		 // Divida divida = 
 		  //Divida divida2 = 
 		  
@@ -83,6 +84,8 @@ public class TestaDao {
 			  for (Divida divida : dividas) {
 		            dividaDao.cadastrar(divida);
 		        }
+			  
+			  
 			//dividaDao.cadastrar(dividas);
 			//dividaDao.cadastrar(divida2);
 			  
@@ -108,7 +111,7 @@ public class TestaDao {
 			
 			em.getTransaction().begin(); 
 			
-			//dividaDao.remover(dividas.get(0));  //  verificar
+			dividaDao.removePorId(dividas.get(0));  //  verificar
 			
 			em.getTransaction().commit(); 
 			//em.flush();
@@ -126,6 +129,9 @@ public class TestaDao {
 			List<RelatorioClienteVO> relatorio = clienteDao.relatorioDeCliente();
 			//List<Di> relatorio = clienteDao.RelatorioClienteVO(Cliente nome Cliente);
 			relatorio.forEach(System.out::println);
+			
+			System.out.println(dividaDao.buscarTodos());
+			
 	}
 
 }
