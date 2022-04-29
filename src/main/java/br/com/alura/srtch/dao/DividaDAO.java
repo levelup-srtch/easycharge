@@ -1,12 +1,11 @@
 package br.com.alura.srtch.dao;
 
-import br.com.alura.srtch.dto.RelatorioDeDividasDTO;
 import br.com.alura.srtch.modelo.Divida;
+import br.com.alura.srtch.service.CobrancasDaDivida;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
-
-import static br.com.alura.srtch.service.CobrancasDaDivida.removerCobrancas;
 
 public class DividaDAO {
 
@@ -29,7 +28,7 @@ public class DividaDAO {
     }
 
     public void remover(Long id) {
-        removerCobrancas(id, em);
+        CobrancasDaDivida.remover(id, em);
         Divida divida = em.find(Divida.class, id);
         this.em.remove(divida);
     }
@@ -55,16 +54,13 @@ public class DividaDAO {
                 .getSingleResult();
     }
 
-    public List<RelatorioDeDividasDTO> totalDeDividasECobrancas(){
-        String jpql = "SELECT new br.com.alura.srtch.dto.RelatorioDeDividasDTO("
-                + "cliente.dadosPessoais.nome, "
-                + "SUM(d.valorDaDivida), "
-                + "d.cobrancas.size()) "
-                + "FROM Divida d "
-                + "JOIN d.cliente cliente "
-                + "GROUP BY cliente.dadosPessoais.nome";
-        return em.createQuery(jpql, RelatorioDeDividasDTO.class)
-                .getResultList();
+    public BigDecimal somarValorDasDividasDoCliente(String cpf) {
+        String jpql = "SELECT SUM(d.valor) FROM Divida d "
+                + "WHERE d.status = 'ABERTA' "
+                + "AND d.cliente.dadosPessoais.cpf = :cpf";
+        return em.createQuery(jpql, BigDecimal.class)
+                .setParameter("cpf", cpf)
+                .getSingleResult();
     }
 
 }

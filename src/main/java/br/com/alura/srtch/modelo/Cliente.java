@@ -10,17 +10,19 @@ public class Cliente {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(length=10)
-  private Long idCliente;
+  private Long id;
 
   @Column(nullable=false, length=10)
   private BigDecimal renda;
 
   private BigDecimal limiteDivida;
 
+  //todo colocar embedded
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(nullable = false)
   private DadosPessoais dadosPessoais;
 
+  //todo colocar embedded
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(nullable = false)
   private Endereco endereco;
@@ -43,8 +45,8 @@ public class Cliente {
       this.limiteDivida = this.renda.multiply(BigDecimal.valueOf(12));
   }
 
-  public Long getIdCliente() {
-    return idCliente;
+  public Long getId() {
+    return id;
   }
 
   public BigDecimal getRenda() {

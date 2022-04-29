@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 
 public class CobrancasDaDivida {
 
-    public static void removerCobrancas(Long id, EntityManager em){
+    public static void remover(Long id, EntityManager em){
         CobrancaDAO cobrancaDAO = new CobrancaDAO(em);
         for(Cobranca cobranca : cobrancaDAO.buscarCobrancasDaDivida(id)){
             cobrancaDAO.remover(cobranca);

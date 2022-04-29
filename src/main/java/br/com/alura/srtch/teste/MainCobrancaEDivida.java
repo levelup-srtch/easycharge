@@ -1,7 +1,7 @@
 package br.com.alura.srtch.teste;
 
 import br.com.alura.srtch.dao.*;
-import br.com.alura.srtch.dto.RelatorioDeDividasDTO;
+import br.com.alura.srtch.dto.RelatorioDoClienteDTO;
 import br.com.alura.srtch.modelo.*;
 import br.com.alura.srtch.service.TipoDoArquivo;
 import br.com.alura.srtch.util.JPAUtil;
@@ -86,13 +86,12 @@ public class MainCobrancaEDivida {
 
         System.out.println(cobrancaDAO.buscarTodosPorTipoDeAcordo(TipoAcordo.PROMESSA));
 
-        System.out.println(cobrancaDAO.somarNumeroDeCobrancas(clientes.get(0).getIdCliente()));
+        System.out.println(cobrancaDAO.somarNumeroDeCobrancas(clientes.get(0).getId()));
 
-        List<RelatorioDeDividasDTO> relatorioDeDividas = dividaDAO.totalDeDividasECobrancas();
-        System.out.println(relatorioDeDividas);
+        List<RelatorioDoClienteDTO> relatorioDosClientes = clienteDAO.relatorioDoCliente();
+        relatorioDosClientes.forEach(System.out::println);
 
         em.close();
-
 
     }
 }
