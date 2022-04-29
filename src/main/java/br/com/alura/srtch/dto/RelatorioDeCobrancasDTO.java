@@ -2,8 +2,8 @@ package br.com.alura.srtch.dto;
 
 public class RelatorioDeCobrancasDTO {
 
-    private String cpf;
-    private Long quantidadeDeCobrancas;
+    private final String cpf;
+    private final Long quantidadeDeCobrancas;
 
     public RelatorioDeCobrancasDTO(String cpf, Long quantidadeDeCobrancas) {
         this.cpf = cpf;
@@ -12,9 +12,9 @@ public class RelatorioDeCobrancasDTO {
 
     @Override
     public String toString() {
-        return "RelatorioDeCobrancas[" + "cpfCliente='" + cpf +
-                ", quantidadeDeCobranças=" + quantidadeDeCobrancas +
-                "]";
+        return "Relatorio De Cobrancas [" + "CPF do Cliente: " + cpf +
+                ", Quantidade de cobranças: " + quantidadeDeCobrancas +
+                "]\n";
     }
 
     public String getCpf() {

@@ -16,7 +16,7 @@ public class CobrancaDAO {
     }
 
     public List<Cobranca> buscarCobrancasDaDivida(Long id) {
-        String jpql = "SELECT c FROM Cobranca c WHERE c.divida.idDivida = :id";
+        String jpql = "SELECT c FROM Cobranca c WHERE c.divida.id = :id";
         return em.createQuery(jpql, Cobranca.class)
                 .setParameter("id", id)
                 .getResultList();

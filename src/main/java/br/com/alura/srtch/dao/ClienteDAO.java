@@ -1,10 +1,10 @@
 package br.com.alura.srtch.dao;
 
+import br.com.alura.srtch.dto.RelatorioDoClienteDTO;
 import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.modelo.StatusCliente;
 
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.util.List;
 
 public class ClienteDAO {
@@ -41,13 +41,30 @@ public class ClienteDAO {
                 .getResultList();
     }
 
-    public BigDecimal somarValorDasDividas(String cpf) {
-        String jpql = "SELECT SUM(d.valorDaDivida) FROM Divida d "
-                + "WHERE d.status = 'ABERTA' "
-                + "AND d.cliente.dadosPessoais.cpf = :cpf";
-        return em.createQuery(jpql, BigDecimal.class)
-                .setParameter("cpf", cpf)
-                .getSingleResult();
+//    public List<RelatorioDoClienteDTO> relatorioDocliente(){
+//        String jpql = "SELECT new br.com.alura.srtch.dto.RelatorioDoClienteDTO("
+//                + "cliente.dadosPessoais.nome, "
+//                + "SUM(d.valor), "
+//                + "d.cobrancas.size()) "
+//                + "FROM Divida d "
+//                + "JOIN d.cliente cliente "
+//                + "GROUP BY cliente.dadosPessoais.nome";
+//        return em.createQuery(jpql, RelatorioDoClienteDTO.class)
+//                .getResultList();
+//    }
+
+    public List<RelatorioDoClienteDTO> relatorioDoCliente(){
+        String jpql = "SELECT new br.com.alura.srtch.dto.RelatorioDoClienteDTO ("
+                + "c.dadosPessoais.nome, "
+                + "SUM(d.valor), "
+                + "COUNT(cobranca)) "
+                + "FROM Cobranca cobranca "
+                + "JOIN cobranca.divida d "
+                + "JOIN d.cliente c "
+                + "GROUP BY c.dadosPessoais.nome";
+        return em.createQuery(jpql, RelatorioDoClienteDTO.class)
+                .getResultList();
+
     }
 
     public Cliente buscarPorId(long id) {
