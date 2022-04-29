@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 
 import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.modelo.StatusCliente;
+import br.com.alura.srtch.vo.RelatorioClienteVO;
 
 public class ClienteDao {
 	private EntityManager em;
@@ -56,5 +57,19 @@ public class ClienteDao {
 				.setParameter("status", status )
 				.getResultList();
 	}
+
 	
+	public List<RelatorioClienteVO> relatorioDeCliente() {
+		String jpql = "SELECT new br.com.alura.srtch.vo.RelatorioClienteVO("
+				+ "cliente.nome, "
+				//+ "SUM(divida.valorTotalDivida), "
+				//+ "COUNT(cobranca.id) "
+				+ "FROM Cliente cliente ";
+				//+ "JOIN divida.cobranca cobranca "
+				//+ "JOIN cobranca.divida divida "
+				//+ "GROUP BY cliente.nome ";
+				//+ "ORDER BY item.quantidade DESC";
+		return em.createQuery(jpql, RelatorioClienteVO.class)
+				.getResultList();
+	}
 }

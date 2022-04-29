@@ -20,6 +20,7 @@ import br.com.alura.srtch.modelo.StatusDivida;
 import br.com.alura.srtch.modelo.TipoDeAcordo;
 import br.com.alura.srtch.modelo.TipoDeAgente;
 import br.com.alura.srtch.util.JPAUtil;
+import br.com.alura.srtch.vo.RelatorioClienteVO;
 
 public class TestaDao {
 
@@ -104,7 +105,7 @@ public class TestaDao {
 			System.out.println(dividaDao.buscarPorId(1l));	
 			
 			//em.clear();
-			//dividaDao.remover(dividas.get(0));
+			//dividaDao.remover(dividas.get(0));   verificar
 			
 			//em.flush();
 			
@@ -115,8 +116,10 @@ public class TestaDao {
 			System.out.println(dividaDao.buscarTodos());
 			System.out.println(dividaDao.buscarPorDividaSemCobranca()); 
 			System.out.println(dividaDao.buscaTotalDividaCliente(cliente));
-			System.out.println(cobrancaDao.buscaTotalCobrancaCliente(0l));;
 			System.out.println(cobrancaDao.buscarPorAcordo(TipoDeAcordo.PARCELAMENTO));
+			System.out.println(cobrancaDao.buscaTotalCobrancaCliente(0l)); // verificar
+			
+			System.out.println(clienteDao.relatorioDeCliente());
 	}
 
 }
