@@ -1,7 +1,5 @@
 package br.com.alura.srtch.modelo;
 
-import com.opencsv.bean.CsvBindByName;
-
 import javax.persistence.*;
 
 @Entity

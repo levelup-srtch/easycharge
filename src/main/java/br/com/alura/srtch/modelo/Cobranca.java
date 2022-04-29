@@ -13,9 +13,9 @@ public class Cobranca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length=10)
-    private long idCobranca;
+    private long id;
 
-    @Column(nullable=false, length=10)
+    @Column(nullable=false)
     private LocalDate dataDeRealizacao;
 
     @Enumerated(EnumType.STRING)
@@ -39,10 +39,8 @@ public class Cobranca {
     @Column(length=500, nullable=false)
     private String acordo;
 
-    @Column(length=10)
     private LocalDate dataDePromessaDePagamento;
 
-    @Column(length=2)
     private Integer numeroDeParcelas;
 
     @ManyToOne(fetch = FetchType.LAZY)

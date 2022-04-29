@@ -73,13 +73,14 @@ public class MainCobrancaEDivida {
         }
 
         System.out.println("\n# Atualizando divida para quitada");
-        dividaDAO.atualizar(dividas.get(1));
         dividas.get(1).setStatus(StatusDivida.QUITADA);
 
         System.out.println("# Removendo divida");
-        dividaDAO.remover(dividas.get(1).getIdDivida());
+        dividaDAO.remover(dividas.get(1).getId());
 
         em.getTransaction().commit();
+
+        System.out.println(dividaDAO.buscarTodos());
 
         System.out.println(dividaDAO.buscarDividasSemCobranca());
 

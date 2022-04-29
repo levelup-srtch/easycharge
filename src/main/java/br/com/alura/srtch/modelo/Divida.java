@@ -13,15 +13,14 @@ public class Divida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length=10)
-    private long idDivida;
+    private long id;
 
-    @Column(nullable=false, length=50)
-    private BigDecimal valorDaDivida = BigDecimal.ZERO;
+    @Column(nullable=false)
+    private BigDecimal valor = BigDecimal.ZERO;
 
-    @Column(nullable=false, length=10)
+    @Column(nullable=false)
     private LocalDate dataDeAbertura;
 
-    @Column(length=10)
     private LocalDate dataDeQuitacao;
 
     @Enumerated(EnumType.STRING)
@@ -42,7 +41,7 @@ public class Divida {
     }
 
     public Divida(BigDecimal valorDaDivida,StatusDivida status, Cliente cliente) {
-        this.valorDaDivida = valorDaDivida;
+        this.valor = valorDaDivida;
         this.dataDeAbertura = LocalDate.now();
         this.status = status;
         this.cliente = cliente;
@@ -53,16 +52,16 @@ public class Divida {
         this.cobrancas.add(cobranca);
     }
 
-    public long getIdDivida() {
-        return idDivida;
+    public long getId() {
+        return id;
     }
 
-    public BigDecimal getValorDaDivida() {
-        return valorDaDivida;
+    public BigDecimal getValor() {
+        return valor;
     }
 
-    public void setValorDaDivida(BigDecimal valorDaDivida) {
-        this.valorDaDivida = valorDaDivida;
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
     }
 
     public LocalDate getDataDeAbertura() {
@@ -112,7 +111,7 @@ public class Divida {
     @Override
     public String toString() {
         return "Divida{" +
-                "valorDaDivida=" + valorDaDivida +
+                "valorDaDivida=" + valor +
                 ", dataDeAbertura=" + dataDeAbertura +
                 ", status=" + status +
                 ", cliente=" + cliente +
