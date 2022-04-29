@@ -49,7 +49,7 @@ public class Cobranca {
 	private int numeroDeParcelas;
  	
 	//@Column(length=255,nullable=false)
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "divida", referencedColumnName = "id")
 	private Divida divida;
 

@@ -1,7 +1,9 @@
 package br.com.alura.srtch.modelo;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -39,10 +42,16 @@ public class Divida {
 	private String descricaoDeQuitacao;
  	
 
-	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "cliente", referencedColumnName = "id")
 	//@Column(length=255,nullable=false)
+	
+	@OneToMany(mappedBy = "divida", cascade = CascadeType.ALL)
+    private final List<Cobranca> cobrancas = new ArrayList<>();
+	
 	private Cliente cliente;
+	
+
  	
  	
  	
@@ -98,9 +107,12 @@ public class Divida {
 		this.cliente = cliente;
 	}
 	
-	
-	
-	  @Override
+
+
+	  
+		  
+
+	@Override
 	public String toString() {
 		return "Divida [getValorDaDivida()=" + getValorDaDivida() + ", getDataDeAbertura()=" + getDataDeAbertura()
 				+ ", getDataDeQuitacao()=" + getDataDeQuitacao() + ", getStatus()=" + getStatus()

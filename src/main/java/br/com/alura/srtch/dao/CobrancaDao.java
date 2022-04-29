@@ -46,8 +46,12 @@ public class CobrancaDao {
 				.getResultList();
 	}
 	
-//	public int BuscaTotalCobrancaCliente(Long id) {
 		
-	//}
+	 public Long buscaTotalCobrancaCliente(Long id){
+	        String jpql = "SELECT COUNT(c.divida) FROM Cobranca c WHERE c.divida.cliente.id = :id";
+	        return em.createQuery(jpql, Long.class)
+	                .setParameter("id", id)
+	                .getSingleResult();
+	}
 
 }

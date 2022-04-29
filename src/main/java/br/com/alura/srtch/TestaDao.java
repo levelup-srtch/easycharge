@@ -39,22 +39,56 @@ public class TestaDao {
 					 StatusCliente.ATIVO,
 					 new Endereco("Quadra QS 20 Conjunto 2","669","ap 175","Riacho Fundo II","Brasília","DF"));
 		  
+		  Cliente cliente2 = new Cliente(
+					 "Teston Teste Testemundo",
+					 "321158789",
+					 "(61) 656466-85648",
+					 "dino@sauro.com.br",
+					 "Pedreiro",
+					 new BigDecimal("854"),
+					 StatusCliente.ATIVO,
+					 new Endereco("Beco  4","545","ap 02","Vila Oculta da Folha","Pais do Fogo","QG")); 
+		  
+		  
 		  Date novaData = new Date();
 		  BigDecimal valor  = new BigDecimal(100);
 		  BigDecimal valor2  = new BigDecimal(50);
 		  Divida divida = new Divida(valor,novaData, novaData,StatusDivida.ATIVA, "NADA", cliente);
-		  Divida divida2 = new Divida(valor2,novaData, novaData,StatusDivida.ATIVA, "NADA", cliente);
+		  Divida divida2 = new Divida(valor2,novaData, novaData,StatusDivida.ATIVA, "CADE A COBRANCA", cliente);
 		  Cobranca cobranca = new Cobranca(novaData, MeioDeContato.TELEFONE, "JOÃO", TipoDeAgente.INTERNO, "teste", "vou pagar", TipoDeAcordo.PROMESSA, novaData, 10, divida);
-		  
+		  Cobranca cobranca2 = new Cobranca(novaData, MeioDeContato.TELEFONE, "Bernardo", TipoDeAgente.INTERNO, "teste", "é talvez eu pague", TipoDeAcordo.PROMESSA, novaData, 10, divida);
+
 		  	em.getTransaction().begin(); 
 			clienteDao.cadastrar(cliente);
+			clienteDao.cadastrar(cliente2);
 			dividaDao.cadastrar(divida);
 			dividaDao.cadastrar(divida2);
 			cobrancaDao.cadastrar(cobranca); 
-			em.getTransaction().commit(); 
-			//em.close();
+			cobrancaDao.cadastrar(cobranca2); 
+			//em.getTransaction().commit(); 
 			
-			 System.out.println(dividaDao.buscaTotalDividaCliente(cliente));;
+			
+			em.flush();
+			
+			divida.setStatus(StatusDivida.QUITADA);
+			dividaDao.atualizar(divida2);
+			
+			System.out.println(dividaDao.buscarPorId(1l));	
+			
+			em.clear();
+			dividaDao.remover(divida);
+			
+			em.flush();
+			
+			em.getTransaction().commit(); 
+			System.out.println(dividaDao.buscarTodos());
+			
+			
+			//System.out.println(dividaDao.buscarTodos());
+			//System.out.println(dividaDao.buscarPorDividaSemCobranca()); 
+			//System.out.println(dividaDao.buscaTotalDividaCliente(cliente));
+			//System.out.println(cobrancaDao.buscaTotalCobrancaCliente(1l));;
+		
 	}
 
 }

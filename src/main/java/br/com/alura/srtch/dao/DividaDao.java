@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.alura.srtch.modelo.Cliente;
+import br.com.alura.srtch.modelo.Cobranca;
 import br.com.alura.srtch.modelo.Divida;
 
 public class DividaDao {
@@ -35,13 +36,13 @@ public class DividaDao {
 	}
 	
 	public List<Divida> buscarTodos() {	
-		String jpql = "SELECT d FROM divida d";
+		String jpql = "SELECT d FROM Divida d";
 		return em.createQuery(jpql, Divida.class).getResultList();
 	}
 	
 	
 	public List<Divida> buscarPorDividaSemCobranca() {	
-		String jpql = "SELECT d FROM divida d WHERE d.cobranca is null"; 
+		String jpql = "SELECT d FROM Divida d where d.id not in (select c.divida from Cobranca c)"; 
 		return em.createQuery(jpql, Divida.class)
 				.getResultList();
 	}
