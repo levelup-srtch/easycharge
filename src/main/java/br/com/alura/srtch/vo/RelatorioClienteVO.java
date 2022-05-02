@@ -63,8 +63,8 @@ public class RelatorioClienteVO {
 
 	@Override
 	public String toString() {
-		return "RelatorioClienteVO [nomeCliente=" + nomeCliente + ", totalDividaCliente=" + totalDividaCliente
-				+ ", totalCobrancaCliente=" + totalCobrancaCliente + "]";
+		return "RelatorioClienteVO [Nome Cliente = " + nomeCliente + ", Total Divida Cliente = " + totalDividaCliente
+				+ ", Total Cobranca Cliente = " + totalCobrancaCliente + "]";
 	}
 
 	

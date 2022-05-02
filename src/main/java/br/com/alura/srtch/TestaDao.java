@@ -54,8 +54,8 @@ public class TestaDao {
 		  
 		  
 		  Date novaData = new Date();
-		  BigDecimal valor  = new BigDecimal(100);
-		  BigDecimal valor2  = new BigDecimal(50);
+		  BigDecimal valor  = new BigDecimal(1000);
+		  BigDecimal valor2  = new BigDecimal(70);
 		  BigDecimal valor3  = new BigDecimal(30);
 		  List<Divida> dividas = new ArrayList<>();
 		  List<Cobranca> cobrancas = new ArrayList<>();
@@ -69,7 +69,7 @@ public class TestaDao {
 		  
 		  
 		  cobrancas.add(new Cobranca(novaData, MeioDeContato.TELEFONE, "JOÃO", TipoDeAgente.INTERNO, "teste", "vou pagar", TipoDeAcordo.PROMESSA, novaData, 0,dividas.get(0)));
-		  cobrancas.add(new Cobranca(novaData, MeioDeContato.TELEFONE, "Hugo", TipoDeAgente.INTERNO, "teste", "vou pagar", TipoDeAcordo.PROMESSA, novaData, 0,dividas.get(0)));
+		  cobrancas.add(new Cobranca(novaData, MeioDeContato.TELEFONE, "Hugo", TipoDeAgente.INTERNO, "teste", "vou pagar", TipoDeAcordo.PROMESSA, novaData, 0,dividas.get(1)));
 		  cobrancas.add(new Cobranca(novaData, MeioDeContato.TELEFONE, "Caio", TipoDeAgente.INTERNO, "teste", "vou pagar", TipoDeAcordo.PARCELAMENTO, novaData, 10,dividas.get(1)));
 		  
 		  
@@ -99,24 +99,26 @@ public class TestaDao {
 			//em.getTransaction().commit(); 
 			
 			
-			em.flush();
+			//em.flush();
 			
 			
 			//divida.setStatus(StatusDivida.QUITADA);
 			//dividaDao.atualizar(divida2);
 			em.getTransaction().commit(); 
 			
-			System.out.println(dividaDao.buscarPorId(1l));	
+			//System.out.println(dividaDao.buscarPorId(1l));	
 			
 			
-			em.getTransaction().begin(); 
+			//em.getTransaction().begin(); 
 			
-			dividaDao.removePorId(dividas.get(0));  //  verificar
-			
-			em.getTransaction().commit(); 
-			//em.flush();
+			//dividaDao.removePorId(dividas.get(0));  //  
 			
 			//em.getTransaction().commit(); 
+			//em.flush();
+			
+			//em.getTransaction().commit();
+			
+			/*
 			System.out.println(dividaDao.buscarTodos());
 			
 			
@@ -124,13 +126,13 @@ public class TestaDao {
 			System.out.println(dividaDao.buscarPorDividaSemCobranca()); 
 			System.out.println(dividaDao.buscaTotalDividaCliente(cliente));
 			System.out.println(cobrancaDao.buscarPorAcordo(TipoDeAcordo.PARCELAMENTO));
-			System.out.println(cobrancaDao.buscaTotalCobrancaCliente(0l)); // verificar
+			*/
+			System.out.println(cobrancaDao.buscaTotalCobrancaCliente(2l)); // verificar
 			
 			List<RelatorioClienteVO> relatorio = clienteDao.relatorioDeCliente();
-			//List<Di> relatorio = clienteDao.RelatorioClienteVO(Cliente nome Cliente);
 			relatorio.forEach(System.out::println);
 			
-			System.out.println(dividaDao.buscarTodos());
+			//System.out.println(dividaDao.buscarTodos());
 			
 	}
 

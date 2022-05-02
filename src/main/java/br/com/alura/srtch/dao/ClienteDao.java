@@ -61,12 +61,12 @@ public class ClienteDao {
 	
 	public List<RelatorioClienteVO> relatorioDeCliente() {
 		String jpql = "SELECT new br.com.alura.srtch.vo.RelatorioClienteVO("
-				+ "cliente.nome) "
-				//+ "SUM(divida.valorTotalDivida)) "
-				//+ "COUNT(cobranca.id) "
-				+ "FROM Cliente cliente "
-				//+ "JOIN Divida.cliente cliente "
-				//+ "JOIN cobranca.divida divida "
+				+ "cliente.nome,  "
+				+ "SUM(divida.valorDaDivida), "
+				+ "COUNT(cobranca.id)) "
+				+ "FROM Divida divida "
+				+ "JOIN divida.cliente cliente "
+				+ "JOIN divida.cobrancas cobranca "
 				+ "GROUP BY cliente.nome ";
 				//+ "ORDER BY item.quantidade DESC";
 		return em.createQuery(jpql, RelatorioClienteVO.class)
