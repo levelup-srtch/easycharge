@@ -17,14 +17,10 @@ public class Cliente {
 
   private BigDecimal limiteDivida;
 
-  //todo colocar embedded
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(nullable = false)
+  @Embedded
   private DadosPessoais dadosPessoais;
 
-  //todo colocar embedded
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(nullable = false)
+  @Embedded
   private Endereco endereco;
 
   @Enumerated(EnumType.STRING)

@@ -2,8 +2,7 @@ package br.com.alura.srtch.modelo;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "endereco")
+@Embeddable
 public class Endereco{
 
     @Id
