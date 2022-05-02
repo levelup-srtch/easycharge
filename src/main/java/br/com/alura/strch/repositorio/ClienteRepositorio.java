@@ -2,6 +2,7 @@ package br.com.alura.strch.repositorio;
 
 import br.com.alura.strch.dominio.Cliente;
 
+import br.com.alura.strch.dominio.enuns.StatusCliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
