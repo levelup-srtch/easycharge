@@ -1,4 +1,4 @@
-package br.com.alura.srtch.modelo;
+package br.com.alura.srtch.model;
 
 public enum TipoAcordo {
     PROMESSA, PARCELAMENTO;

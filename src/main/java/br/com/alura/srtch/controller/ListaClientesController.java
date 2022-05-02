@@ -1,9 +1,9 @@
 package br.com.alura.srtch.controller;
 
-import br.com.alura.srtch.modelo.Cliente;
-import br.com.alura.srtch.modelo.DadosPessoais;
-import br.com.alura.srtch.modelo.Endereco;
-import br.com.alura.srtch.modelo.StatusCliente;
+import br.com.alura.srtch.model.Cliente;
+import br.com.alura.srtch.model.DadosPessoais;
+import br.com.alura.srtch.model.Endereco;
+import br.com.alura.srtch.model.StatusCliente;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
