@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "clientes")
-public class Cliente implements Serializable {
+public class ClienteDTO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -128,7 +128,7 @@ public class Cliente implements Serializable {
         this.endereco = endereco;
     }
 
-    public Cliente(String nome, String cpf, String telefone, String email, String profissao, BigDecimal renda, StatusCliente status, Endereco endereco) {
+    public ClienteDTO(String nome, String cpf, String telefone, String email, String profissao, BigDecimal renda, StatusCliente status, Endereco endereco) {
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
@@ -139,7 +139,7 @@ public class Cliente implements Serializable {
         this.endereco = endereco;
     }
 
-    public Cliente() {
+    public ClienteDTO() {
     }
 
     @Override
