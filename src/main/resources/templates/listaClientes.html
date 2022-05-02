@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home | EasyCharge</title>
+    </head>
+    <body>
+        <div th:each="cliente : ${clientes}">
+            <div>Nome: <span th:text="${cliente.dadosPessoais.nome}">nome</span></div>
+            <div>CPF: <span th:text="${cliente.dadosPessoais.cpf}">cpf</span></div>
+            <div>Telefone: <span th:text="${cliente.dadosPessoais.telefone}">telefone</span></div>
+            <div>Local: <span th:text="${cliente.endereco.cidade}">Cidade</span>/<span th:text="${cliente.endereco.estado}">Estado</span></div>
+            <div>Renda: <span th:text="${cliente.renda}">2000</span></div>
+            <div>Status <span th:text="${cliente.status}">04/05/2022</span></div>
+        </div>
+    </body>
+</html>

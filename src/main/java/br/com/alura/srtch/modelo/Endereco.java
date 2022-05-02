@@ -5,10 +5,6 @@ import javax.persistence.*;
 @Embeddable
 public class Endereco{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEndereco;
-
     @Column(nullable=false, length=100)
     private String rua;
 
