@@ -1,6 +1,6 @@
 package br.com.alura.srtch.controller;
 
-import br.com.alura.srtch.dao.ClienteRepository;
+import br.com.alura.srtch.repository.ClienteRepository;
 import br.com.alura.srtch.model.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

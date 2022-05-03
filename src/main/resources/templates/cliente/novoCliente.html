@@ -33,30 +33,26 @@
     <form class="row g-3" action="/cliente/cadastrar" method="POST">
       <div class="col-md-4">
         <label class="form-label" for="nome">Nome Completo</label>
-        <input type="text" class="form-control" id="nome" placeholder="Nome Sobrenome" required>
+        <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome Sobrenome" required>
       </div>
       <div class="col-md-4">
         <label class="form-label" for="cpf">CPF</label>
-        <input type="text" class="form-control" id="cpf" placeholder="000.000.000-00" required>
+        <input name="cpf" type="text" class="form-control" id="cpf" placeholder="000.000.000-00" required>
       </div>
 
       <div class="col-md-4">
         <label class="form-label" for="telefone">Telefone</label>
-        <input type="tel" class="form-control" id="telefone" placeholder="(00)90000-0000" required>
+        <input name="telefone" type="tel" class="form-control" id="telefone" placeholder="(00)90000-0000" required>
       </div>
       <div class="col-md-4">
         <label for="email" class="form-label">E-Mail</label>
         <div class="input-group">
           <span class="input-group-text" id="inputGroupPrepend">@</span>
-          <input type="email" class="form-control" id="email" placeholder="email@email.com"
+          <input name="email" type="email" class="form-control" id="email" placeholder="email@email.com"
             aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
 
-      <div class="col-md-4">
-        <label class="form-label" for="telefone">Telefone</label>
-        <input type="tel" class="form-control" id="telefone" placeholder="(00)90000-0000" required>
-      </div>
       <div class="col-md-2">
         <label class="form-label" for="rua">Rua</label>
         <input type="text" class="form-control" id="rua" placeholder="r. das palmeiras" required>

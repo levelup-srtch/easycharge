@@ -1,4 +1,4 @@
-package br.com.alura.srtch.dao;
+package br.com.alura.srtch.repository;
 
 import br.com.alura.srtch.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
