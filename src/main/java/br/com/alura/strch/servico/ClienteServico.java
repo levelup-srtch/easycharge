@@ -1,7 +1,6 @@
 package br.com.alura.strch.servico;
 
 import br.com.alura.strch.dominio.Cliente;
-import br.com.alura.strch.dominio.enuns.StatusCliente;
 import br.com.alura.strch.repositorio.ClienteRepositorio;
 import br.com.alura.strch.servico.DTO.ClienteDTO;
 import br.com.alura.strch.servico.DTO.SelectDTO;
@@ -28,12 +27,15 @@ public class ClienteServico implements Serializable {
         Cliente cliente = clienteRepositorio.findById(id).orElseThrow(ObjectnotFoundException::new);
         return clienteMapper.toDTO(cliente);
     }
+
     public List <ClienteDTO> buscarTodos(){
         return clienteMapper.toDTO(clienteRepositorio.findAll());
     }
+
     public List<SelectDTO> buscarTodosSelect(){
         return clienteSelecMapper.toDTO(clienteRepositorio.findAll());
     }
+
     public boolean validarCPF(ClienteDTO clienteDTO){
         if(!clienteRepositorio.existsByCpf(clienteDTO.getCpf())){
             return true;

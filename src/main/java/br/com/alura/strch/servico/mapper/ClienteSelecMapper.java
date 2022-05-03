@@ -5,7 +5,7 @@ import br.com.alura.strch.servico.DTO.SelectDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ClienteSelecMapper extends EntityMepper<SelectDTO, Cliente>{
 
     SelectDTO toDTO (Cliente cliente);

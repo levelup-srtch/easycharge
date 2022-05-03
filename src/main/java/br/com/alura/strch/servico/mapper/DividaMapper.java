@@ -4,6 +4,6 @@ import br.com.alura.strch.dominio.Divida;
 import br.com.alura.strch.servico.DTO.DividaDTO;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface DividaMapper extends EntityMepper<DividaDTO, Divida> {
 }

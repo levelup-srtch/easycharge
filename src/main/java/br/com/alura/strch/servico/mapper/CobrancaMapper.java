@@ -4,6 +4,6 @@ import br.com.alura.strch.dominio.Cobranca;
 import br.com.alura.strch.servico.DTO.CobrancaDTO;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CobrancaMapper extends EntityMepper<CobrancaDTO, Cobranca>{
 }
