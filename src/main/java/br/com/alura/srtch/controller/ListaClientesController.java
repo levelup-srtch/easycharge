@@ -22,6 +22,6 @@ public class ListaClientesController {
 
         model.addAttribute("clientes", clientes);
 
-        return "cliente/listaClientes";
+        return "listaClientes";
     }
 }
