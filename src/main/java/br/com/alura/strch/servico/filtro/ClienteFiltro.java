@@ -34,7 +34,7 @@ public class ClienteFiltro implements  EntityFiltro<Cliente>{
     private List<Predicate> getPredicates(Root<Cliente> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder){
 
         List<Predicate> predicates = new ArrayList<>();
-        criteriaQuery.orderBy(criteriaBuilder.desc(root.get(Cliente_.id)));
+        criteriaQuery.orderBy(criteriaBuilder.desc(root.get(Cliente_.ID)));
 
         if (nome != null){
             predicates.add(criteriaBuilder.like(root.get(Cliente_.NOME),"%" + nome + "%"));

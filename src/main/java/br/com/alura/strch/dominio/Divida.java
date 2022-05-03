@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Table(name = "dividas")
 public class Divida implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
