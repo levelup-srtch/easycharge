@@ -7,8 +7,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.alura.srtch.modelo.Cliente;
-import br.com.alura.srtch.modelo.Divida;
+import br.com.alura.srtch.easycharge.modelo.Cliente;
+import br.com.alura.srtch.easycharge.modelo.Divida;
 
 public class DividaDao {
 	private EntityManager em;

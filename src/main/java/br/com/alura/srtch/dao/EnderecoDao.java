@@ -3,7 +3,7 @@ package br.com.alura.srtch.dao;
 
 import javax.persistence.EntityManager;
 
-import br.com.alura.srtch.modelo.Endereco;
+import br.com.alura.srtch.easycharge.modelo.Endereco;
 
 public class EnderecoDao {
 	private EntityManager em;

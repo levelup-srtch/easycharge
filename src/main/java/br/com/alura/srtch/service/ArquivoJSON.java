@@ -8,7 +8,7 @@ import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.alura.srtch.modelo.Cliente;
+import br.com.alura.srtch.easycharge.modelo.Cliente;
 
 public class ArquivoJSON {
 

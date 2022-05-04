@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.alura.srtch.modelo.Cobranca;
-import br.com.alura.srtch.modelo.TipoDeAcordo;
+import br.com.alura.srtch.easycharge.modelo.Cobranca;
+import br.com.alura.srtch.easycharge.modelo.TipoDeAcordo;
 
 public class CobrancaDao {
 	private EntityManager em;

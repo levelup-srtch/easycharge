@@ -10,7 +10,6 @@ public class EasyChargeApplication {
 		  SpringApplication.run(EasyChargeApplication.class, args);
 		
 		
-		
 	}
 
 	

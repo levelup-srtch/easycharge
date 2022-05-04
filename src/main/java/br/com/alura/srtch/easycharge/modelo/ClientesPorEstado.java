@@ -1,4 +1,4 @@
-package br.com.alura.srtch.modelo;
+package br.com.alura.srtch.easycharge.modelo;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,9 +8,9 @@ import javax.persistence.EntityManager;
 
 
 import br.com.alura.srtch.dao.ClienteDao;
-import br.com.alura.srtch.modelo.Cliente;
-import br.com.alura.srtch.modelo.ClientesPorEstado;
-import br.com.alura.srtch.modelo.StatusCliente;
+import br.com.alura.srtch.easycharge.modelo.Cliente;
+import br.com.alura.srtch.easycharge.modelo.ClientesPorEstado;
+import br.com.alura.srtch.easycharge.modelo.StatusCliente;
 import br.com.alura.srtch.service.ArquivoJSON;
 import br.com.alura.srtch.util.JPAUtil;
 

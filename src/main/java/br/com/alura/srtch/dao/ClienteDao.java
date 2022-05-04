@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import br.com.alura.srtch.modelo.Cliente;
-import br.com.alura.srtch.modelo.StatusCliente;
+import br.com.alura.srtch.easycharge.modelo.Cliente;
+import br.com.alura.srtch.easycharge.modelo.StatusCliente;
 import br.com.alura.srtch.vo.RelatorioClienteVO;
 
 public class ClienteDao {

@@ -1,4 +1,4 @@
-package br.com.alura.srtch.modelo;
+package br.com.alura.srtch.easycharge.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -5,7 +5,7 @@ import java.io.File;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
-import br.com.alura.srtch.modelo.Cliente;
+import br.com.alura.srtch.easycharge.modelo.Cliente;
 
 public class ArquivoXML {
 
