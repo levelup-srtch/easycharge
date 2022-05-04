@@ -7,7 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EasyChargeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EasyChargeApplication.class, args);
+		  SpringApplication.run(EasyChargeApplication.class, args);
+		
+		
+		
 	}
 
 	
