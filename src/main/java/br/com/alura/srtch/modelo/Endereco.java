@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.opencsv.bean.CsvBindByName;
 
 @Entity
  // se usar esse parametro @Embeddable não se utiliza o @entity, geralmente usado quando atributos da classe que nao tem tabela estão em outra classe, exemplo classe dados pessoais
@@ -20,27 +19,27 @@ public class Endereco {
 	private Long id_endereco;
 	
 
-  @CsvBindByName
+  
   @Column(name = "rua",length=255,nullable=false)
   private String rua;
 
-  @CsvBindByName
+  
   @Column(name = "numero",length=30,nullable=false)
   private String numero;
 
-  @CsvBindByName
+  
   @Column(name = "complemento",length=255,nullable=false)
   private String complemento;
 
-  @CsvBindByName
+  
   @Column(name = "bairro",length=100,nullable=false)
   private String bairro;
 
-  @CsvBindByName
+  
   @Column(name = "cidade",length=200,nullable=false)
   private String cidade;
 
-  @CsvBindByName
+  
   @Column(name = "estado",length=60,nullable=false)
   private String estado;
 

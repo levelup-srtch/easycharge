@@ -11,7 +11,6 @@ import br.com.alura.srtch.dao.ClienteDao;
 import br.com.alura.srtch.modelo.Cliente;
 import br.com.alura.srtch.modelo.ClientesPorEstado;
 import br.com.alura.srtch.modelo.StatusCliente;
-import br.com.alura.srtch.service.ArquivoCSV;
 import br.com.alura.srtch.service.ArquivoJSON;
 import br.com.alura.srtch.util.JPAUtil;
 
@@ -33,10 +32,7 @@ public class Main {
 
     List<Cliente> clientes;
     
-    if (arquivo.matches(".*csv")) {
-        clientes = new ArquivoCSV().Ler(arquivo);
-        
-    } else if (arquivo.matches(".*csv")) {
+   if (arquivo.matches(".*json")) {
         clientes = new ArquivoJSON().Ler(arquivo);
       } else {
         throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);

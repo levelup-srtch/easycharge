@@ -18,8 +18,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvRecurse;
 
 
 @XmlRootElement(namespace = "clientes")
@@ -33,36 +31,34 @@ public class Cliente {
 	private Long id;
 	
   @XmlElement	
-  @CsvBindByName
   @Column(name = "nome",length=255,nullable=false)
   private String nome;
 
-  @CsvBindByName
+
   @Column(name = "cpf",length=20,nullable=false)
   private String cpf;
 
-  @CsvBindByName
   @Column(name = "telefone",length=50,nullable=false)
   private String telefone;
 
-  @CsvBindByName
+
   @Column(name = "email",length=100,nullable=false)
   private String email;
 
-  @CsvBindByName
+
   @Column(name = "profissao",length=100,nullable=false)
   private String profissao;
 
-  @CsvBindByName
+
   @Column(name = "renda",length=200,nullable=false)
   private BigDecimal renda;
 
-  @CsvBindByName
+
   @Enumerated(EnumType.STRING)
   @Column(name = "status",length=20,nullable=false)
   private StatusCliente status;
 
-  @CsvRecurse
+
   @OneToOne(cascade = CascadeType.PERSIST)
   @JoinColumn(name = "endereco", referencedColumnName = "id_endereco")
   private Endereco endereco;
