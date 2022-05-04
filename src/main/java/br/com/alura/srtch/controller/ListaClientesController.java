@@ -15,13 +15,13 @@ public class ListaClientesController {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @GetMapping("/listaClientes")
+    @GetMapping("clientes")
     public String home(Model model){
 
         List<Cliente> clientes = clienteRepository.findAll();
 
         model.addAttribute("clientes", clientes);
 
-        return "listaClientes";
+        return "clientes";
     }
 }
