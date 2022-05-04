@@ -1,9 +1,6 @@
 package br.com.alura.strch.servico.filtro;
 
-import br.com.alura.strch.dominio.Cliente;
-import br.com.alura.strch.dominio.Cliente_;
-import br.com.alura.strch.dominio.Divida;
-import br.com.alura.strch.dominio.Divida_;
+import br.com.alura.strch.dominio.*;
 import br.com.alura.strch.dominio.enuns.StatusDivida;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,6 +37,9 @@ public class DividaFiltro implements EntityFiltro<Divida>{
         List<Predicate> predicates = new ArrayList<>();
         criteriaQuery.orderBy(criteriaBuilder.desc(root.get(Divida_.ID)));
 
+        if (id != null) {
+            predicates.add(criteriaBuilder.equal(root.get(Divida_.ID),id));
+        }
         if (valor != null){
             predicates.add(criteriaBuilder.like(root.get(Divida_.VALOR),"%" + valor +"%"));
         }

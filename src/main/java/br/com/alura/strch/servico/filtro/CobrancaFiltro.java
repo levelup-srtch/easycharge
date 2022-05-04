@@ -29,7 +29,7 @@ public class CobrancaFiltro implements EntityFiltro<Cobranca>{
 
     @Override
     public Specification<Cobranca> filter(){
-        return ((root, query, criteriaBuilder) -> criteriaBuilder.and(getPredicates(root,query,criteriaBuilder).toArray(new Predicate[0])));
+        return (root, query, criteriaBuilder) -> criteriaBuilder.and(getPredicates(root,query,criteriaBuilder).toArray(new Predicate[0]));
     }
     private List<Predicate> getPredicates(Root<Cobranca>root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder){
 

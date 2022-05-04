@@ -1,6 +1,8 @@
 package br.com.alura.strch.servico.DTO;
 
-import br.com.alura.strch.dominio.Endereco;
+
+
+
 import br.com.alura.strch.dominio.enuns.StatusCliente;
 import com.opencsv.bean.CsvBindByName;
 import org.hibernate.validator.constraints.br.CPF;
@@ -52,9 +54,15 @@ public class ClienteDTO implements Serializable {
     @CsvBindByName
     private StatusCliente status;
 
-    @OneToOne(fetch = FetchType.LAZY )
-    @JoinColumn(name = "id_endereco")
-    private Endereco endereco;
+    private SelectDTO endereco;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -112,23 +120,16 @@ public class ClienteDTO implements Serializable {
         this.status = status;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Endereco getEndereco() {
+    public SelectDTO getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public void setEndereco(SelectDTO endereco) {
         this.endereco = endereco;
     }
 
-    public ClienteDTO(String nome, String cpf, String telefone, String email, String profissao, BigDecimal renda, StatusCliente status, Endereco endereco) {
+    public ClienteDTO(Long id, String nome, String cpf, String telefone, String email, String profissao, BigDecimal renda, StatusCliente status, SelectDTO endereco) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
@@ -142,23 +143,23 @@ public class ClienteDTO implements Serializable {
     public ClienteDTO() {
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "nome='" + nome + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", email='" + email + '\'' +
-                ", rua='" + endereco.getRua() + '\'' +
-                ", numero='" + endereco.getNumero() + '\'' +
-                ", complemento='" +endereco.getComplemento() + '\'' +
-                ", bairro='" + endereco.getBairro() + '\'' +
-                ", cidade='" + endereco.getCidade() + '\'' +
-                ", estado='" + endereco.getEstado() + '\'' +
-                ", profissao='" + profissao + '\'' +
-                ", renda=" + renda +
-                ", status=" + status +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Cliente{" +
+//                "nome='" + nome + '\'' +
+//                ", cpf='" + cpf + '\'' +
+//                ", telefone='" + telefone + '\'' +
+//                ", email='" + email + '\'' +
+//                ", rua='" + endereco.getRua() + '\'' +
+//                ", numero='" + endereco.getNumero() + '\'' +
+//                ", complemento='" +endereco.getComplemento() + '\'' +
+//                ", bairro='" + endereco.getBairro() + '\'' +
+//                ", cidade='" + endereco.getCidade() + '\'' +
+//                ", estado='" + endereco.getEstado() + '\'' +
+//                ", profissao='" + profissao + '\'' +
+//                ", renda=" + renda +
+//                ", status=" + status +
+//                '}';
+//    }
 }
 

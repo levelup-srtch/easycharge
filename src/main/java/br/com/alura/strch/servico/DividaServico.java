@@ -3,7 +3,6 @@ package br.com.alura.strch.servico;
 import br.com.alura.strch.dominio.Divida;
 import br.com.alura.strch.repositorio.DividaRepositorio;
 import br.com.alura.strch.servico.DTO.DividaDTO;
-import br.com.alura.strch.servico.DTO.SelectDTO;
 import br.com.alura.strch.servico.excecao.ObjectnotFoundException;
 import br.com.alura.strch.servico.filtro.DividaFiltro;
 import br.com.alura.strch.servico.mapper.DividaMapper;

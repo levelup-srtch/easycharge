@@ -1,5 +1,6 @@
 package br.com.alura.strch.dominio;
 
+
 import br.com.alura.strch.dominio.enuns.StatusCliente;
 import com.opencsv.bean.CsvBindByName;
 
