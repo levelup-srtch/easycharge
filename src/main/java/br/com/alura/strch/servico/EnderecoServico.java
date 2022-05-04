@@ -28,7 +28,6 @@ public class EnderecoServico implements Serializable {
         Endereco endereco = enderecoRepositori.findById(id).orElseThrow(()-> new ObjectnotFoundException("Endereço não encontrado" + id));
         return enderecoMapper.toDTO(endereco);
     }
-
     public List<EnderecoDTO> busrcarTodos(){
         return enderecoMapper.toDTO(enderecoRepositori.findAll());
     }
