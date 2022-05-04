@@ -56,11 +56,11 @@
               <td><span th:text="${cliente.dadosPessoais.telefone}">telefone</td>
               <td><span th:text="${cliente.endereco.cidade}">Cidade</span>/<span
                   th:text="${cliente.endereco.estado}">Estado</td>
-              <td><span th:text="${cliente.renda}">renda do cliente</td>
+              <td><span th:text="${'R$ '+ #numbers.formatDecimal(cliente.renda,3, 'POINT', 2, 'COMMA')}">renda do cliente</td>
               <td><span th:text="${cliente.status}" th:name="${status}">status do cliente</td>
               <td>
                 <a class="btn btn-secondary" role="button"
-                  th:href="@{/clientes/alterarStatus/{id}(id=${cliente.id})}">Alterar Status</a>
+                  th:href="@{/clientes/alterarStatus/{id}(id=${cliente.id})}">Alterar</a>
               </td>
               <td>
                 <a class="btn btn-danger" role="button"
