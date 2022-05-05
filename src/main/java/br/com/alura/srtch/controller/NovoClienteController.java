@@ -27,10 +27,7 @@ public class NovoClienteController {
     }
 
     @PostMapping("cadastrar")
-    public String cadastrar(@Valid ClienteDTO clienteDTO, BindingResult result){
-        if (result.hasErrors()){
-            return "cliente/novoCliente";
-        }
+    public String cadastrar(@Valid ClienteDTO clienteDTO){
 
         Cliente cliente = new ClienteMapper().cadastrar(clienteDTO);
         clienteRepository.save(cliente);
