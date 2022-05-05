@@ -30,11 +30,6 @@ public class ListaClientesController {
         return "clientes";
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public String onError(){
-        return REDIRECT_CLIENTES;
-    }
-
     @GetMapping("/alterarStatus/{id}")
     public String alterarStatus(@PathVariable Long id, Model model) {
         Cliente cliente = clienteRepository.getById(id);
@@ -56,6 +51,11 @@ public class ListaClientesController {
 
         model.addAttribute("cliente", cliente);
 
+        return REDIRECT_CLIENTES;
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String onError(){
         return REDIRECT_CLIENTES;
     }
 
