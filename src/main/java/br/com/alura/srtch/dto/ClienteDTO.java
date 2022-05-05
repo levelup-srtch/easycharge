@@ -1,5 +1,6 @@
 package br.com.alura.srtch.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -41,6 +42,7 @@ public class ClienteDTO {
     private String profissao;
 
     @NotNull
+    @Min(1)
     private BigDecimal renda;
 
     private String status;

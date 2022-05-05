@@ -7,6 +7,7 @@ import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,13 +25,18 @@ public class NovoClienteController {
 
     private static final String REDIRECT_CLIENTES = "redirect:/clientes";
 
+    private static final String FORM_CLIENTE = "cliente/novoCliente";
+
     @GetMapping("/novoCliente")
     public String novoCliente(ClienteDTO clienteDTO){
-        return "cliente/novoCliente";
+        return FORM_CLIENTE;
     }
 
     @PostMapping("/cadastrar")
-    public String cadastrar(@Valid ClienteDTO clienteDTO){
+    public String cadastrar(@Valid ClienteDTO clienteDTO, BindingResult result){
+        if(result.hasErrors()){
+            return FORM_CLIENTE;
+        }
 
         Cliente cliente = new ClienteMapper().cadastrar(clienteDTO);
         clienteRepository.save(cliente);
@@ -38,6 +44,7 @@ public class NovoClienteController {
         return REDIRECT_CLIENTES;
     }
 
+    //todo para adicionar os clientes do arquivo json
     public void cadastrarDTO(@Valid List<ClienteDTO> clienteDTOList){
         List<Cliente> clientes = new ClienteMapper().cadastrar(clienteDTOList);
         clientes.forEach(cliente -> clienteRepository.save(cliente));
