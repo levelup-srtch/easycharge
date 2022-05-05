@@ -43,29 +43,29 @@
 
     <h1 class="text-center mt-5 mb-4">Cadastrar Cliente</h1>
 
-    <form class="row g-3" action="/cliente/cadastrar" method="post">
+    <form th:object="${clienteDTO}" class="row g-3" action="/cliente/cadastrar" method="post">
       <div class="col-md-12 pt-2">
         <h4>Dados Pessoais:</h4>
       </div>
       <div class="col-md-4">
         <label class="form-label" for="nome">Nome Completo</label>
-        <input name="nome" id="nome" type="text" class="form-control" placeholder="Nome Sobrenome" required>
+        <input th:field="*{nome}" type="text" class="form-control" placeholder="Nome Sobrenome" required>
       </div>
       <div class="col-md-4">
         <label class="form-label" for="cpf">CPF</label>
-        <input name="cpf" id="cpf" type="text" class="form-control" placeholder="___.___.___-__"
+        <input th:field="*{cpf}" type="text" class="form-control" placeholder="Apenas os números"
           onblur="formataCPF(this)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required>
       </div>
 
       <div class="col-md-4">
         <label class="form-label" for="telefone">Telefone</label>
-        <input name="telefone" id="telefone" type="tel" class="form-control" placeholder="(__)9____-____" required>
+        <input th:field="*{telefone}" type="tel" class="form-control" placeholder="(__)9____-____" required>
       </div>
       <div class="col-md-4">
         <label for="email" class="form-label">E-mail</label>
         <div class="input-group">
           <span class="input-group-text" id="inputGroupPrepend">@</span>
-          <input name="email" id="email" type="email" class="form-control" placeholder="email@email.com"
+          <input th:field="*{email}" type="email" class="form-control" placeholder="email@email.com"
             aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
@@ -76,28 +76,28 @@
 
       <div class="col-md-2">
         <label class="form-label" for="rua">Rua</label>
-        <input name="rua" id="rua" type="text" class="form-control" placeholder="r. das palmeiras" required>
+        <input th:field="*{rua}" type="text" class="form-control" placeholder="r. das palmeiras" required>
       </div>
       <div class="col-md-2">
         <label class="form-label" for="numero">Número</label>
-        <input name="numero" id="numero" type="text" class="form-control" placeholder="00" required>
+        <input th:field="*{numero}" type="text" class="form-control" placeholder="00" required>
       </div>
       <div class="col-md-4">
         <label class="form-label" for="complemento">Complemento</label>
-        <input name="complemento" id="complemento" type="text" class="form-control" placeholder="Bloco A">
+        <input th:field="*{complemento}" type="text" class="form-control" placeholder="Bloco A">
       </div>
 
       <div class="col-md-4">
         <label class="form-label" for="bairro">Bairro</label>
-        <input name="bairro" id="bairro" type="text" class="form-control" placeholder="Zona Norte" required>
+        <input th:field="*{bairro}" type="text" class="form-control" placeholder="Zona Norte" required>
       </div>
       <div class="col-md-4">
         <label class="form-label" for="cidade">Cidade</label>
-        <input name="cidade" id="cidade" type="text" class="form-control" placeholder="São Paulo" required>
+        <input th:field="*{cidade}" type="text" class="form-control" placeholder="São Paulo" required>
       </div>
       <div class="col-md-4">
         <label for="estado" class="form-label">UF Estado</label>
-        <select name="estado" id="estado" class="form-select" required>
+        <select th:field="*{estado}" class="form-select" required>
           <option selected disabled value="">Selecione...</option>
           <option value="AC">AC</option>
           <option value="AL">AL</option>
@@ -134,19 +134,19 @@
       </div>
       <div class="col-md-4">
         <label class="form-label" for="profissao">Profissão</label>
-        <input name="profissao" id="profissao" type="text" class="form-control" placeholder="Engenheiro" required>
+        <input th:field="*{profissao}" type="text" class="form-control" placeholder="Engenheiro" required>
       </div>
       <div class="col-md-4">
         <label class="form-label" for="renda">Renda</label>
         <div class="input-group">
           <span class="input-group-text" id="inputGroupPrepend">R$</span>
-          <input name="renda" id="renda" type="text" class="form-control"placeholder="5000.00"
-            aria-describedby="inputGroupPrepend" required pattern="[0-9]+$">
+          <input th:field="*{renda}" type="number" min="1" step="any" class="form-control"
+            placeholder="Valor maior que 0" aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
       <div class="col-md-4">
         <label for="status" class="form-label">Status</label>
-        <select name="status" id="status" class="form-select" required>
+        <select th:field="*{status}" class="form-select" required>
           <option selected value="ATIVO">Ativo</option>
           <option value="SUSPENSO">Suspenso</option>
         </select>

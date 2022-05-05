@@ -81,6 +81,7 @@ public class Cliente {
     this.status = status;
   }
 
+
   @Override
   public String toString() {
     return "Cliente{" +

@@ -4,6 +4,7 @@ import br.com.alura.srtch.model.StatusCliente;
 import br.com.alura.srtch.repository.ClienteRepository;
 import br.com.alura.srtch.model.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class ListaClientesController {
     @GetMapping
     public String listarCliente(Model model){
 
-        List<Cliente> clientes = clienteRepository.findAll();
+        List<Cliente> clientes = clienteRepository.findAll(Sort.by(Sort.Direction.ASC, "status").and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
 
         model.addAttribute("clientes", clientes);
 
@@ -49,10 +50,13 @@ public class ListaClientesController {
     }
 
     @GetMapping("/remover/{id}")
-    public String removerCliente(@PathVariable Long id){
+    public String removerCliente(@PathVariable Long id, Model model){
         Cliente cliente = clienteRepository.getById(id);
         clienteRepository.delete(cliente);
 
+        model.addAttribute("cliente", cliente);
+
         return REDIRECT_CLIENTES;
     }
+
 }

@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Embeddable
 public class DadosPessoais {
 
-    @Column(nullable=false, unique = true, length=15)
+    @Column(nullable=false, unique=true, length=15)
     private String cpf;
 
     @Column(nullable=false, length=100)

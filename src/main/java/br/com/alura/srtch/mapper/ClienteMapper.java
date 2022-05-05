@@ -44,4 +44,26 @@ public class ClienteMapper {
         }
         return new Cliente(clienteDTO.getRenda(), dadosPessoais, endereco, statusCliente);
     }
+
+    public Cliente alterar(Cliente cliente, ClienteDTO clienteDTO){
+        DadosPessoais dadosPessoais = new DadosPessoais(clienteDTO.getCpf(), clienteDTO.getNome(),
+                clienteDTO.getProfissao(), clienteDTO.getTelefone(), clienteDTO.getEmail());
+
+        Endereco endereco = new Endereco(clienteDTO.getRua(), clienteDTO.getNumero(), clienteDTO.getBairro(),
+                clienteDTO.getCidade(), clienteDTO.getEstado());
+        if(clienteDTO.getComplemento() != null){
+            endereco.setComplemento(clienteDTO.getComplemento());
+        }
+
+        cliente.setRenda(clienteDTO.getRenda());
+        cliente.setDadosPessoais(dadosPessoais);
+        cliente.setEndereco(endereco);
+        if(clienteDTO.getStatus().equals("ATIVO")){
+            cliente.setStatus(StatusCliente.ATIVO);
+        }else {
+            cliente.setStatus(StatusCliente.SUSPENSO);
+        }
+
+        return cliente;
+    }
 }

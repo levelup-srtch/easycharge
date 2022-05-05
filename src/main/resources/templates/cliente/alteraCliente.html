@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Cadastro | Cliente</title>
+  <title>Altera | Cliente</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <script>
@@ -41,32 +41,35 @@
 
   <main id="#" class="container">
 
-    <h1 class="text-center mt-5 mb-4">Cadastrar Cliente</h1>
+    <h1 class="text-center mt-5 mb-4">Alterar Cliente</h1>
 
-    <form th:object="${clienteDTO}" class="row g-3" action="/cliente/cadastrar" method="post">
+    <form class="row g-3" action="/cliente/atualizar" method="post">
+      <input type="hidden" th:name="id" th:value="${cliente.id}">
       <div class="col-md-12 pt-2">
         <h4>Dados Pessoais:</h4>
       </div>
       <div class="col-md-4">
         <label class="form-label" for="nome">Nome Completo</label>
-        <input th:fild="*{nome}" type="text" class="form-control" placeholder="Nome Sobrenome" required>
+        <input th:name="nome" id="nome" th:value="${cliente.dadosPessoais.nome}" type="text"
+          class="form-control" placeholder="Nome Sobrenome" required>
       </div>
       <div class="col-md-4">
         <label class="form-label" for="cpf">CPF</label>
-        <input th:fild="*{cpf}"type="text" class="form-control" placeholder="___.___.___-__"
-          onblur="formataCPF(this)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required>
+        <input th:name="cpf" id="cpf" th:value="${cliente.dadosPessoais.cpf}" type="text" class="form-control"
+          placeholder="___.___.___-__" onblur="formataCPF(this)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required>
       </div>
 
       <div class="col-md-4">
         <label class="form-label" for="telefone">Telefone</label>
-        <input th:fild="*{telefone}" type="tel" class="form-control" placeholder="(__)9____-____" required>
+        <input th:name="telefone" id="telefone" th:value="${cliente.dadosPessoais.telefone}" type="tel"
+          class="form-control" placeholder="(__)9____-____" required>
       </div>
       <div class="col-md-4">
         <label for="email" class="form-label">E-mail</label>
         <div class="input-group">
           <span class="input-group-text" id="inputGroupPrepend">@</span>
-          <input th:fild="*{email}" type="email" class="form-control" placeholder="email@email.com"
-            aria-describedby="inputGroupPrepend" required>
+          <input th:name="email" id="email" th:value="${cliente.dadosPessoais.email}" type="email"
+            class="form-control" placeholder="email@email.com" aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
 
@@ -76,29 +79,35 @@
 
       <div class="col-md-2">
         <label class="form-label" for="rua">Rua</label>
-        <input th:fild="*{rua}" type="text" class="form-control" placeholder="r. das palmeiras" required>
+        <input th:name="rua" id="rua" th:value="${cliente.endereco.rua}" type="text" class="form-control"
+          placeholder="r. das palmeiras" required>
       </div>
       <div class="col-md-2">
         <label class="form-label" for="numero">Número</label>
-        <input  th:fild="*{numero}" type="text" class="form-control" placeholder="00" required>
+        <input th:name="numero" id="numero" th:value="${cliente.endereco.numero}" type="text" class="form-control"
+          placeholder="00" required>
       </div>
       <div class="col-md-4">
         <label class="form-label" for="complemento">Complemento</label>
-        <input th:fild="*{complemento}" type="text" class="form-control" placeholder="Bloco A">
+        <input th:name="complemento" id="complemento" th:value="${cliente.endereco.complemento}" type="text"
+          class="form-control" placeholder="Bloco A">
       </div>
 
       <div class="col-md-4">
         <label class="form-label" for="bairro">Bairro</label>
-        <input th:fild="*{bairro}" type="text" class="form-control" placeholder="Zona Norte" required>
+        <input th:name="bairro" id="bairro" th:value="${cliente.endereco.bairro}" type="text" class="form-control"
+          placeholder="Zona Norte" required>
       </div>
       <div class="col-md-4">
         <label class="form-label" for="cidade">Cidade</label>
-        <input th:fild="*{cidade}" type="text" class="form-control" placeholder="São Paulo" required>
+        <input th:name="cidade" id="cidade" th:value="${cliente.endereco.cidade}" type="text" class="form-control"
+          placeholder="São Paulo" required>
       </div>
       <div class="col-md-4">
         <label for="estado" class="form-label">UF Estado</label>
-        <select  th:fild="*{estado}" class="form-select" required>
-          <option selected disabled value="">Selecione...</option>
+        <select th:name="estado" id="estado" class="form-select" required>
+          <option disabled value="">Selecione...</option>
+          <option selected th:text="${cliente.endereco.estado}" th:value="${cliente.endereco.estado}"></option>
           <option value="AC">AC</option>
           <option value="AL">AL</option>
           <option value="AP">AP</option>
@@ -134,27 +143,34 @@
       </div>
       <div class="col-md-4">
         <label class="form-label" for="profissao">Profissão</label>
-        <input th:fild="*{profissao}" type="text" class="form-control" placeholder="Engenheiro" required>
+        <input th:name="profissao" id="profissao" th:value="${cliente.dadosPessoais.profissao}" type="text"
+          class="form-control" placeholder="Engenheiro" required>
       </div>
       <div class="col-md-4">
         <label class="form-label" for="renda">Renda</label>
         <div class="input-group">
           <span class="input-group-text" id="inputGroupPrepend">R$</span>
-          <input th:fild="*{nome}" type="text" class="form-control"placeholder="5000.00"
-            aria-describedby="inputGroupPrepend" required pattern="[1-9]+$">
+          <input th:name="renda" id="renda" th:value="${cliente.renda}" type="number" min="1" step="any" class="form-control"
+            placeholder="Valor maior que 0" aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
       <div class="col-md-4">
         <label for="status" class="form-label">Status</label>
-        <select th:fild="*{status}" class="form-select" required>
-          <option selected value="ATIVO">Ativo</option>
+        <select th:name="status" id="status" class="form-select" required>
+          <option selected th:text="${cliente.status}" th:value="${cliente.status}"></option>
+          <option value="ATIVO">Ativo</option>
           <option value="SUSPENSO">Suspenso</option>
         </select>
       </div>
 
       <div class="col-12">
-        <div class="d-grid gap-2 col-6 mx-auto mt-3 pt-3 pb-5">
-          <button class="btn btn-primary" type="submit">Cadastrar</button>
+        <div class="d-grid gap-2 col-6 mx-auto mt-4 pt-3 pb-3">
+          <button class="btn btn-primary fs-5" type="submit">Alterar</button>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="text-center fs-5 mb-5">
+          <a href="/clientes" class="link-dark">Cancelar</a>
         </div>
       </div>
     </form>
