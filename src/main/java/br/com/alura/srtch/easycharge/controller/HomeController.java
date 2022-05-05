@@ -1,18 +1,14 @@
 package br.com.alura.srtch.easycharge.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import br.com.alura.srtch.easycharge.modelo.Cliente;
-import br.com.alura.srtch.easycharge.repository.ClienteRepository;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
-	
+
+	/*
 	@Autowired
 	private ClienteRepository clienterepository;
 	
@@ -22,4 +18,17 @@ public class HomeController {
 		model.addAttribute("clientes", clientes);
 		return "home"; 
 	}
+		*/
+	// @GetMapping("/home")
+	@RequestMapping(value={"", "/", "welcome","home"})
+	
+	@GetMapping("/home")
+	
+	//@ResponseBody
+	public String home() {
+		return "home";
+	
+	}
+	
+
 }

@@ -8,7 +8,7 @@
 			<div class="card" th:each="cliente : ${clientes}">
 				<div class="card-header" th:text="${cliente.nome}">Nome do Cliente</div>
 			</div>
-		</div>   
+		</div>   --->
 		<h3>Lista De Clientes</h3>
 		<div th:each="cliente : ${clientes}">
 		<br> 
@@ -19,7 +19,6 @@
 		<div>Renda: R$<span th:text="${cliente.renda}">  </span> </div>
 		<div>Status: <span th:text="${cliente.status}">  </span> </div>
 		</div>
-	--->
-		<h1> Bem Vindo!</h1>
+	
 	</body>
 </html>
