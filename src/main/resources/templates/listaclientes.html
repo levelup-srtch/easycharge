@@ -1,24 +1,29 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">	</head>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	</head>
 	<body>
-	<!---
 		<div class="container">
-			<div class="card" th:each="cliente : ${clientes}">
-				<div class="card-header" th:text="${cliente.nome}">Nome do Cliente</div>
+			<div class="container">
+			<h1> Lista de Clientes</h1>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link" href="/listaclientes"> Clientes </a>
+				</div>
+				<a href="/formulario"> <button type="button" class="btn btn-success">Novo Cliente </button> </a>
+			</nav>
 			</div>
-		</div>   --->
-		<h3>Lista De Clientes</h3>
-		<div th:each="cliente : ${clientes}">
-		<br> 
-		<div>Cliente:  <span th:text="${cliente.nome}"> </span> </div>
-		<div>CPF: <span th:text="${cliente.cpf}">  </span> </div>
-		<div>Telefone: <span th:text="${cliente.telefone}">  </span> </div>
-		<div>Local: <span th:text="${cliente.endereco.cidade + '/' + cliente.endereco.estado}">Static content </span></div>
-		<div>Renda: R$<span th:text="${cliente.renda}">  </span> </div>
-		<div>Status: <span th:text="${cliente.status}">  </span> </div>
+			
+			<div th:each="cliente : ${clientes}">
+			<br> 
+			<div>Cliente:  <span th:text="${cliente.nome}"> </span> </div>
+			<div>CPF: <span th:text="${cliente.cpf}">  </span> </div>
+			<div>Telefone: <span th:text="${cliente.telefone}">  </span> </div>
+			<div>Local: <span th:text="${cliente.endereco.cidade + '/' + cliente.endereco.estado}">Static content </span></div>
+			<div>Renda: R$<span th:text="${cliente.renda}">  </span> </div>
+			<div>Status: <span th:text="${cliente.status}">  </span> </div>
+			</div>
 		</div>
-	
 	</body>
 </html>
