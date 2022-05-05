@@ -6,7 +6,7 @@ import org.hibernate.sql.Select;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {})
 public interface CobrancaSelectMapper extends EntityMepper<SelectDTO, Cobranca>{
 
    SelectDTO toDTO (Cobranca cobranca);

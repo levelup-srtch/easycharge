@@ -37,8 +37,8 @@ public class Cliente implements Serializable {
   @CsvBindByName
   private StatusCliente status;
 
-  @OneToOne(fetch = FetchType.LAZY )
-  @JoinColumn(name = "id_endereco")
+  @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+  @JoinColumn(name = "id_endereco", referencedColumnName = "id")
   private Endereco endereco;
 
   public String getNome() {

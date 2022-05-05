@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EnderecoRepositori extends JpaRepository <Endereco, Long>, JpaSpecificationExecutor<Endereco> {
 
+
 }

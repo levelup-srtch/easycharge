@@ -26,7 +26,7 @@ public class Divida implements Serializable {
     @Enumerated(EnumType.STRING)
     private StatusDivida statusDivida;
 
-    public Divida(BigDecimal valor, LocalDate dataAbertura, Cliente cliente, StatusDivida statusDivida) {
+    public Divida(BigDecimal valor, LocalDate dataAbertura, Cliente cliente, StatusDivida statusDivida, String descricao) {
         this.valor = valor;
         this.dataAbertura = dataAbertura;
         this.cliente = cliente;

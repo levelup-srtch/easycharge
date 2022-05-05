@@ -3,10 +3,11 @@ package br.com.alura.strch.dominio;
 import com.opencsv.bean.CsvBindByName;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "enderecos")
-public class Endereco {
+public class Endereco implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +30,9 @@ public class Endereco {
 
     @CsvBindByName
     private String estado;
+
+    @OneToOne(mappedBy = "endereco")
+    private Cliente cliente;
 
     public String getRua() {
         return rua;
