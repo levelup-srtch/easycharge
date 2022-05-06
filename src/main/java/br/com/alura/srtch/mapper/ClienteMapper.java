@@ -45,7 +45,7 @@ public class ClienteMapper {
         return new Cliente(clienteDTO.getRenda(), dadosPessoais, endereco, statusCliente);
     }
 
-    public Cliente alterar(Cliente cliente, ClienteDTO clienteDTO){
+    public void alterar(Cliente cliente, ClienteDTO clienteDTO){
         DadosPessoais dadosPessoais = new DadosPessoais(clienteDTO.getCpf(), clienteDTO.getNome(),
                 clienteDTO.getProfissao(), clienteDTO.getTelefone(), clienteDTO.getEmail());
 
@@ -63,7 +63,5 @@ public class ClienteMapper {
         }else {
             cliente.setStatus(StatusCliente.SUSPENSO);
         }
-
-        return cliente;
     }
 }

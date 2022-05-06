@@ -37,6 +37,14 @@ public class Cliente {
     this.status = status;
   }
 
+  public void alteraStatus(){
+    if(this.status.equals(StatusCliente.SUSPENSO)){
+      status = StatusCliente.ATIVO;
+    }else{
+      status = StatusCliente.SUSPENSO;
+    }
+  }
+
   public void setLimiteDeDivida(){
       this.limiteDivida = this.renda.multiply(BigDecimal.valueOf(12));
   }
