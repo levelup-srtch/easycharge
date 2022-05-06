@@ -69,5 +69,4 @@ public class NovoClienteController {
         clienteRepository.save(cliente);
         return "redirect:/clientes";
     }
-
 }
