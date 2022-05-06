@@ -149,6 +149,10 @@ public class Cliente {
 	public Endereco getEndereco() {
 		return endereco;
 	}
+	
+	 public void setEndereco(Endereco endereco) {
+		    this.endereco = endereco;
+		  }
 
 	/*
 	public void setEndereco(Endereco endereco) {
