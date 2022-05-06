@@ -2,8 +2,12 @@ package br.com.alura.srtch.easycharge.dto;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import br.com.alura.srtch.easycharge.modelo.Cliente;
 import br.com.alura.srtch.easycharge.modelo.Endereco;
+import br.com.alura.srtch.easycharge.modelo.StatusCliente;
 
 public class RequisicaoNovoCliente {
 	   private Long id;
@@ -19,60 +23,73 @@ public class RequisicaoNovoCliente {
 	   private String estado;
 	   private String profissao;
 	   private BigDecimal renda;
-	   private String status;
+	   private StatusCliente  status;
 
-
+	   @NotBlank
 	   public String getNome() {
 	        return nome;
 	    }
-
+	   
+	   @NotBlank
 	   public String getCpf() {
 	        return cpf;
 	    }
-
+	   
+	   @NotBlank
 	   public String getTelefone() {
 	        return telefone;
 	    }
-
+	   
+	   @NotBlank
 	   public String getEmail() {
 	        return email;
 	    }
-
+	   
+	   @NotBlank
 	   public String getRua() {
 	        return rua;
 	    }
-
+	   
+	   @NotBlank
 	   public String getNumero() {
 	        return numero;
 	    }
-
+	   
+	 
 	   public String getComplemento() {
 	        return complemento;
 	    }
-
+	   
+	   @NotBlank
 	   public String getBairro() {
 	        return bairro;
 	    }
-
+	   
+	   @NotBlank
 	   public String getCidade() {
 	        return cidade;
 	    }
-
+	   
+	   @NotBlank
 	   public String getEstado() {
 	        return estado;
 	    }
 
+	   @NotBlank
 	   public String getProfissao() {
 	        return profissao;
 	    }
 
+	   @NotNull
 	   public BigDecimal getRenda() {
 	        return renda;
 	    }
 
-	   public String getStatus() {
+	   @NotNull
+	   public StatusCliente getStatus() {
 	        return status;
 	    }
+	   
 
 	   public void setNome(String nome) {
 	        this.nome = nome;
@@ -130,20 +147,22 @@ public class RequisicaoNovoCliente {
 	        this.renda = renda;
 	    }
 
-	   public void setStatus(String status) {
-	        this.status = status;
-	    }
+	   public void setStatus(StatusCliente status) {
+		    this.status = status;
+		  }
 
 	public Cliente toCliente() {
 		Cliente cliente = new Cliente();
-		Endereco endereco = new Endereco();
 		cliente.setNome(nome);
 		cliente.setCpf(cpf);
 		cliente.setTelefone(telefone);
 		cliente.setEmail(email);
-		cliente.setEndereco(endereco);
+		cliente.setEndereco(new Endereco(rua, numero, complemento, bairro, cidade, estado));
+		cliente.setProfissao(profissao);
+		cliente.setRenda(renda);
+		cliente.setStatus(status);
 		
-		return null;
+		return cliente;
 	}
 	
 }
