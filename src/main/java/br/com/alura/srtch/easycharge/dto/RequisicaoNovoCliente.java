@@ -2,55 +2,72 @@ package br.com.alura.srtch.easycharge.dto;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import br.com.alura.srtch.easycharge.modelo.Cliente;
 import br.com.alura.srtch.easycharge.modelo.Endereco;
 import br.com.alura.srtch.easycharge.modelo.StatusCliente;
 
 public class RequisicaoNovoCliente {
+	  
 	   private Long id;
+	   @NotBlank
 	   private String nome;
+	   @NotBlank
 	   private String cpf;
+	   @NotBlank
 	   private String telefone;
-	   private String email; 
+	   @NotBlank
+	   private String email;
+	   @NotBlank
 	   private String rua;
+	   @NotBlank
 	   private String numero;
-	   private String complemento;	  
-	   private String bairro;    
+	   private String complemento;
+	   @NotBlank
+	   private String bairro;
+	   @NotBlank
 	   private String cidade;
+	   @NotBlank
 	   private String estado;
+	   @NotBlank
 	   private String profissao;
+	   @NotNull
+	   @Min (1)
 	   private BigDecimal renda;
+	  // @Pattern(regexp = "^ATIVO$|^SUSPENSO$")
 	   private StatusCliente  status;
 
-	   @NotBlank
+	   //aula 5 bin validation nos atributos
+	   
 	   public String getNome() {
 	        return nome;
 	    }
 	   
-	   @NotBlank
+	   
 	   public String getCpf() {
 	        return cpf;
 	    }
 	   
-	   @NotBlank
+	   
 	   public String getTelefone() {
 	        return telefone;
 	    }
 	   
-	   @NotBlank
+	   
 	   public String getEmail() {
 	        return email;
 	    }
 	   
-	   @NotBlank
+	   
 	   public String getRua() {
 	        return rua;
 	    }
 	   
-	   @NotBlank
+	   
 	   public String getNumero() {
 	        return numero;
 	    }
@@ -60,32 +77,32 @@ public class RequisicaoNovoCliente {
 	        return complemento;
 	    }
 	   
-	   @NotBlank
+	   
 	   public String getBairro() {
 	        return bairro;
 	    }
 	   
-	   @NotBlank
+	   
 	   public String getCidade() {
 	        return cidade;
 	    }
 	   
-	   @NotBlank
+	   
 	   public String getEstado() {
 	        return estado;
 	    }
 
-	   @NotBlank
+	   
 	   public String getProfissao() {
 	        return profissao;
 	    }
 
-	   @NotNull
+	   
 	   public BigDecimal getRenda() {
 	        return renda;
 	    }
 
-	   @NotNull
+	   
 	   public StatusCliente getStatus() {
 	        return status;
 	    }

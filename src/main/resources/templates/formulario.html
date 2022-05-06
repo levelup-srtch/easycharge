@@ -11,60 +11,62 @@
 				<div class="navbar-nav">
 					<a class="nav-item nav-link" href="/listaclientes"> Clientes </a>
 				</div>
-				<a href="/formulario"> <button type="button" class="btn btn-success">Novo Cliente</button> </a>
+				<a href="/cliente/formulario"> <button type="button" class="btn btn-success">Novo Cliente</button> </a>
 			</nav>
-			<form action ="/novo" method="POST">
-				<div>
+			<form th:object="${requisicaoNovoCliente}" action ="/cliente/novo" method="POST">
+			
 				<div>
 					<label for="nome">Nome do Cliente</label>
-					<input name="nome" placeholder="nome do cliente"/>
+					<input th:field="*{nome}" placeholder="nome do cliente"/>
 				</div>
 				<div>	
 					<label for="cpf">CPF</label>
-					<input name="cpf" placeholder="cpf"/>
+					<input th:field="*{cpf}" placeholder="cpf"/>
 				</div>
 				<div>
 					<label for="telefone">Telefone</label>
-					<input name="telefone" placeholder="telefone"/>
+					<input th:field="*{telefone}" placeholder="telefone"/>
 				</div>
 				<div>
 					<label for="email">E-mail</label>
-					<input name="email" placeholder="email"/>
+					<input th:field="*{email}" placeholder="email"/>
 				</div>
 				<div>
 					<label for="rua">Rua</label>
-					<input name="rua" placeholder="rua"/>
+					<input th:field="*{rua}" placeholder="rua"/>
 				</div>
 				<div>	
 					<label for="numero">Número</label>
-					<input name="numero" placeholder="numero"/>
+					<input th:field="*{numero}" placeholder="numero"/>
 				</div>
 				<div>
 					<label for="complemento">Complemento </label>
-					<input name="complemento" placeholder="complemento"/>
+					<input th:field="*{complemento}" placeholder="complemento"/>
 				</div>
 				<div>
 					<label for="bairro">Bairro</label>
-					<input name="bairro" placeholder="bairro"/>
+					<input th:field="*{bairro}" placeholder="bairro"/>
 				</div>
 				<div>	
 					<label for="cidade">Cidade</label>
-					<input name="cidade" placeholder="cidade"/>
+					<input th:field="*{cidade}" placeholder="cidade"/>
 				</div>
 				<div>	
 					<label for="estado">Estado</label>
-					<input name="estado" placeholder="estado"/>
+					<input th:field="*{estado}" placeholder="estado"/>
 				</div>
 				<div>	
 					<label for="profissao">Profissão</label>
-					<input name="profissao" placeholder="profissao"/>
+					<input th:field="*{profissao}" placeholder="profissao"/>
 				</div>
 				<div>	
 					<label for="renda">Renda</label>
-					<input name="renda" placeholder="renda"/>
+					<input th:field="*{renda}" placeholder="renda"/>
+					<small>Maior que 1</small>
 				<div>	
 					<label for="status">Status</label>
-					<input name="status" placeholder="status"/>
+					<input th:field="*{status}" placeholder="status" /> 
+					<small>ATIVO ou SUSPENSO</small>
 				</div>					
 				</div>
 				<button type="submit">Cadastrar</button>
