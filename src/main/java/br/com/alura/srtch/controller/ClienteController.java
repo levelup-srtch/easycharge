@@ -5,27 +5,58 @@ import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/cliente")
-public class NovoClienteController {
+public class ClienteController {
 
     @Autowired
     private ClienteRepository clienteRepository;
 
     private static final String REDIRECT_CLIENTES = "redirect:/clientes";
 
-    private static final String FORM_CLIENTE = "cliente/novoCliente";
+    private static final String FORM_CLIENTE = "novoCliente";
+
+    @GetMapping("/clientes")
+    public String listarCliente(Model model){
+
+        List<Cliente> clientes = clienteRepository.findAll(Sort.by(Sort.Direction.ASC, "status").and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
+
+        model.addAttribute("clientes", clientes);
+
+        return "clientes";
+    }
+
+    @Transactional
+    @GetMapping("/alterarStatus/{id}")
+    public String alterarStatus(@PathVariable Long id) {
+        Cliente cliente = clienteRepository.getById(id);
+        cliente.alteraStatus();
+
+        return REDIRECT_CLIENTES;
+    }
+
+    @GetMapping("/remover/{id}")
+    public String removerCliente(@PathVariable Long id){
+        clienteRepository.deleteById(id);
+        return REDIRECT_CLIENTES;
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String onError(){
+        return REDIRECT_CLIENTES;
+    }
 
     @GetMapping("/novoCliente")
     public String novoCliente(ClienteDTO clienteDTO){
@@ -56,17 +87,18 @@ public class NovoClienteController {
 
         model.addAttribute("cliente", cliente);
 
-        return "cliente/alteraCliente";
+        return "alteraCliente";
     }
 
+    //todo validar no back
+    @Transactional
     @PostMapping("/atualizar")
     public String atualizar(ClienteDTO clienteDTO) {
         Cliente cliente = clienteRepository.getById(clienteDTO.getId());
 
-        ClienteMapper mapper = new ClienteMapper();
-        cliente = mapper.alterar(cliente, clienteDTO);
+        new ClienteMapper().alterar(cliente, clienteDTO);
 
-        clienteRepository.save(cliente);
-        return "redirect:/clientes";
+        return REDIRECT_CLIENTES;
     }
+
 }
