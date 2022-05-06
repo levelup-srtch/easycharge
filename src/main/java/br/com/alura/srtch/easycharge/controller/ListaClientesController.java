@@ -3,6 +3,7 @@ package br.com.alura.srtch.easycharge.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ public class ListaClientesController {
 	
 	@GetMapping("/listaclientes")
 	public String home(Model model) {
-		List<Cliente> clientes = clienterepository.findAll();
+		List<Cliente> clientes = clienterepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
 		model.addAttribute("clientes", clientes);
 		return "listaclientes"; 
 	}
