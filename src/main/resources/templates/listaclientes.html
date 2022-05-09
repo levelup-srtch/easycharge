@@ -24,7 +24,9 @@
 			<div>Local: <span th:text="${cliente.endereco.cidade + '/' + cliente.endereco.estado}">Static content </span></div>
 			<div>Renda: R$<span th:text="${cliente.renda}">  </span> </div>
 			<div>Status: <span th:text="${cliente.status}">  </span> </div>
-			<div> <a th:href="@{/cliente/delete(id=${cliente.id})}"> <button type="button" class="btn btn-danger">Remover </button> </a> </div>
+			<div>  <a th:href="@{/cliente/delete(id=${cliente.id})}"> <button type="button" class="btn btn-danger">Remover </button> </a> </div>
+			<div>  <a th:href="@{/cliente/alterarStatus(id=${cliente.id})}"> <button type="button" class="btn btn-warning">Alterar Status </button> </a> </div>
+			
 			</div>
 		</div>
 	</body>

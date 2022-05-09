@@ -48,4 +48,14 @@ public class ClienteController {
 	        return "redirect:/listaclientes";
 	
 	 }
+	 
+	 
+
+	    @GetMapping("/cliente/alterarStatus")
+	    public String alterarStatus(@RequestParam Long id){
+	        Cliente cliente = clienterepository.getById(id);
+	        cliente.alteracaoStatus(cliente);
+	        clienterepository.save(cliente);
+	        return "redirect:/listaclientes";
+	    }
 }

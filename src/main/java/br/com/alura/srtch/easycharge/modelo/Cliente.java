@@ -179,4 +179,15 @@ public class Cliente {
         ", status=" + status +
         '}';
   }
+
+
+  public Cliente alteracaoStatus(Cliente cliente) {
+	   if (cliente.getStatus().equals(StatusCliente.ATIVO)){
+           cliente.setStatus(StatusCliente.SUSPENSO);
+       } else {
+           cliente.setStatus(StatusCliente.ATIVO);
+       }
+       return cliente;
+	
+  	}
 }
