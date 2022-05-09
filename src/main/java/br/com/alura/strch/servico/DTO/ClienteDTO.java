@@ -35,6 +35,7 @@ public class ClienteDTO implements Serializable {
     @CsvBindByName
     private BigDecimal renda;
 
+
     @CsvBindByName
     private StatusCliente status;
 

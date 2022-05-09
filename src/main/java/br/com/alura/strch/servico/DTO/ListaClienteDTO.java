@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class ListaClienteDTO implements Serializable {
 
+
     private Long id;
     private String nome;
     private SelectDTO cargo;

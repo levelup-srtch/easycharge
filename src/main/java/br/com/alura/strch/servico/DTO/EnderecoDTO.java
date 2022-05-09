@@ -1,11 +1,9 @@
 package br.com.alura.strch.servico.DTO;
 
-import br.com.alura.strch.dominio.Cliente;
 import com.opencsv.bean.CsvBindByName;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter

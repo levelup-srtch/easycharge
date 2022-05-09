@@ -8,11 +8,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "dividas")
+
+
 public class DividaDTO implements Serializable{
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+
         private Long id;
         private BigDecimal valor;
         private LocalDate dataAbertura = LocalDate.now();
