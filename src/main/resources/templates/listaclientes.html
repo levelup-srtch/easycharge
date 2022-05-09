@@ -26,7 +26,8 @@
 			<div>Status: <span th:text="${cliente.status}">  </span> </div>
 			<div>  <a th:href="@{/cliente/delete(id=${cliente.id})}"> <button type="button" class="btn btn-danger">Remover </button> </a> </div>
 			<div>  <a th:href="@{/cliente/alterarStatus(id=${cliente.id})}"> <button type="button" class="btn btn-warning">Alterar Status </button> </a> </div>
-			
+			<div>  <a th:href="@{/cliente/alterarCliente/{id}(id=${cliente.id})}"> <button type="button" class="btn btn-info">Atualizar Dados </button> </a> </div>
+				
 			</div>
 		</div>
 	</body>

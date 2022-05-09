@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+
 
 import br.com.alura.srtch.easycharge.modelo.Cliente;
 import br.com.alura.srtch.easycharge.modelo.Endereco;
@@ -180,6 +180,27 @@ public class RequisicaoNovoCliente {
 		cliente.setStatus(status);
 		
 		return cliente;
+	}
+	
+	public  Cliente editar (Cliente cliente, RequisicaoNovoCliente clienteDTO){
+		//cliente.setId(id);
+		cliente.setNome(nome);
+		cliente.setCpf(cpf);
+		cliente.setTelefone(telefone);
+		cliente.setEmail(email);
+		//cliente.setEndereco(new Endereco(rua, numero, complemento, bairro, cidade, estado)); funciona mas cria endereços novos
+		cliente.getEndereco().setCidade(cidade);
+		cliente.getEndereco().setBairro(bairro);
+		cliente.getEndereco().setComplemento(complemento);
+		cliente.getEndereco().setEstado(estado);
+		cliente.getEndereco().setNumero(numero);
+		cliente.getEndereco().setRua(rua);
+
+		cliente.setProfissao(profissao);
+		cliente.setRenda(renda);
+		cliente.setStatus(status);
+		return cliente;
+		
 	}
 	
 }
