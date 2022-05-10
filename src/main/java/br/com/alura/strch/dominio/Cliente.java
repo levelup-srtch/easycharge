@@ -3,14 +3,19 @@ package br.com.alura.strch.dominio;
 
 import br.com.alura.strch.dominio.enuns.StatusCliente;
 import com.opencsv.bean.CsvBindByName;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "clientes")
 public class Cliente implements Serializable {
+  private static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +39,7 @@ public class Cliente implements Serializable {
   @CsvBindByName
   private BigDecimal renda;
 
+  @Enumerated(EnumType.STRING)
   @CsvBindByName
   private StatusCliente status;
 
@@ -41,76 +47,7 @@ public class Cliente implements Serializable {
   @JoinColumn(name = "id_endereco", referencedColumnName = "id")
   private Endereco endereco;
 
-  public String getNome() {
-    return nome;
-  }
-
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
-
-  public String getCpf() {
-    return cpf;
-  }
-
-  public void setCpf(String cpf) {
-    this.cpf = cpf;
-  }
-
-  public String getTelefone() {
-    return telefone;
-  }
-
-  public void setTelefone(String telefone) {
-    this.telefone = telefone;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getProfissao() {
-    return profissao;
-  }
-
-  public void setProfissao(String profissao) {
-    this.profissao = profissao;
-  }
-
-  public BigDecimal getRenda() {
-    return renda;
-  }
-
-  public void setRenda(BigDecimal renda) {
-    this.renda = renda;
-  }
-
-  public StatusCliente getStatus() {
-    return status;
-  }
-
-  public void setStatus(StatusCliente status) {
-    this.status = status;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Endereco getEndereco() {
-    return endereco;
-  }
-
-  public void setEndereco(Endereco endereco) {
-    this.endereco = endereco;
+  public Cliente() {
   }
 
   public Cliente(String nome, String cpf, String telefone, String email, String profissao, BigDecimal renda, StatusCliente status, Endereco endereco) {
@@ -123,9 +60,4 @@ public class Cliente implements Serializable {
     this.status = status;
     this.endereco = endereco;
   }
-
-  public Cliente() {
-  }
-
-
 }

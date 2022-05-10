@@ -3,14 +3,19 @@ package br.com.alura.strch.dominio;
 import br.com.alura.strch.dominio.enuns.FormaDeCobraca;
 import br.com.alura.strch.dominio.enuns.TipoDeAcordo;
 import br.com.alura.strch.dominio.enuns.TipoDeAgente;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "cobrancas")
 public class Cobranca implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +41,7 @@ public class Cobranca implements Serializable {
 
     private Integer numeroDeParcela;
 
+    @Enumerated(EnumType.STRING)
     @ManyToOne(fetch = FetchType.LAZY)
     private Divida divida;
 
@@ -55,83 +61,4 @@ public class Cobranca implements Serializable {
         this.divida = divida;
     }
 
-    public LocalDate getDataDaCobranca() {
-        return dataDaCobranca;
-    }
-
-    public void setDataDaCobranca(LocalDate dataDaCobranca) {
-        this.dataDaCobranca = dataDaCobranca;
-    }
-
-    public FormaDeCobraca getFormaDeCobraca() {
-        return formaDeCobraca;
-    }
-
-    public void setFormaDeCobraca(FormaDeCobraca formaDeCobraca) {
-        this.formaDeCobraca = formaDeCobraca;
-    }
-
-    public String getAgente() {
-        return agente;
-    }
-
-    public void setAgente(String agente) {
-        this.agente = agente;
-    }
-
-    public TipoDeAgente getTipoDeAgente() {
-        return tipoDeAgente;
-    }
-
-    public void setTipoDeAgente(TipoDeAgente tipoDeAgente) {
-        this.tipoDeAgente = tipoDeAgente;
-    }
-
-    public String getComentarioAgente() {
-        return comentarioAgente;
-    }
-
-    public void setComentarioAgente(String comentarioAgente) {
-        this.comentarioAgente = comentarioAgente;
-    }
-
-    public String getDescricaoDoAcordo() {
-        return descricaoDoAcordo;
-    }
-
-    public void setDescricaoDoAcordo(String descricaoDoAcordo) {
-        this.descricaoDoAcordo = descricaoDoAcordo;
-    }
-
-    public TipoDeAcordo getTipoDeAcordo() {
-        return tipoDeAcordo;
-    }
-
-    public void setTipoDeAcordo(TipoDeAcordo tipoDeAcordo) {
-        this.tipoDeAcordo = tipoDeAcordo;
-    }
-
-    public LocalDate getDataPromessaPagmento() {
-        return dataPromessaPagmento;
-    }
-
-    public void setDataPromessaPagmento(LocalDate dataPromessaPagmento) {
-        this.dataPromessaPagmento = dataPromessaPagmento;
-    }
-
-    public Integer getNumeroDeParcela() {
-        return numeroDeParcela;
-    }
-
-    public void setNumeroDeParcela(Integer numeroDeParcela) {
-        this.numeroDeParcela = numeroDeParcela;
-    }
-
-    public Divida getDivida() {
-        return divida;
-    }
-
-    public void setDivida(Divida divida) {
-        this.divida = divida;
-    }
 }
