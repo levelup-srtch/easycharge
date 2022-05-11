@@ -1,4 +1,4 @@
-package br.com.alura.srtch.dto;
+package br.com.alura.srtch.form;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -6,10 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-public class ClienteDTO {
-
-    @NotBlank
-    private Long id;
+public class ClienteForm {
 
     @NotBlank
     private String nome;
@@ -135,14 +132,6 @@ public class ClienteDTO {
         this.bairro = bairro;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
@@ -162,4 +151,5 @@ public class ClienteDTO {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }

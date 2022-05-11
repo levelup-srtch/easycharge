@@ -69,6 +69,25 @@ public class Cliente {
     return dadosPessoais;
   }
 
+  public String getNome(){
+    return dadosPessoais.getNome();
+  }
+
+  public String getCpf(){
+    return dadosPessoais.getCpf();
+  }
+
+  public String getTelefone(){
+    return dadosPessoais.getTelefone();
+  }
+
+  public String getEmail(){
+    return dadosPessoais.getEmail();
+  }
+  public String getProfissao(){
+    return dadosPessoais.getProfissao();
+  }
+
   public void setDadosPessoais(DadosPessoais dadosPessoais) {
     this.dadosPessoais = dadosPessoais;
   }

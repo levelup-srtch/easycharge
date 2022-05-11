@@ -1,6 +1,7 @@
 package br.com.alura.srtch.mapper;
 
 import br.com.alura.srtch.dto.ClienteDTO;
+import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.DadosPessoais;
 import br.com.alura.srtch.model.Endereco;
@@ -11,12 +12,12 @@ import java.util.List;
 
 public class ClienteMapper {
 
-    public List<Cliente> cadastrar(List<ClienteDTO> clientesDTO) {
+    public List<Cliente> cadastrar(List<ClienteForm> forms) {
         List<Cliente> clientes = new ArrayList<>();
         DadosPessoais dadosPessoais;
         Endereco endereco;
         StatusCliente statusCliente = StatusCliente.ATIVO;
-        for (ClienteDTO cda : clientesDTO) {
+        for (ClienteForm cda : forms) {
             dadosPessoais = new DadosPessoais(cda.getCpf(), cda.getNome(), cda.getProfissao(), cda.getTelefone(), cda.getEmail());
             endereco = new Endereco(cda.getRua(), cda.getNumero(), cda.getBairro(), cda.getCidade(), cda.getEstado());
             if (cda.getComplemento() != null) {
@@ -30,35 +31,35 @@ public class ClienteMapper {
         return clientes;
     }
 
-    public Cliente cadastrar(ClienteDTO clienteDTO) {
+    public Cliente cadastrar(ClienteForm form) {
         DadosPessoais dadosPessoais;
         Endereco endereco;
         StatusCliente statusCliente = StatusCliente.ATIVO;
-        dadosPessoais = new DadosPessoais(clienteDTO.getCpf(), clienteDTO.getNome(), clienteDTO.getProfissao(), clienteDTO.getTelefone(), clienteDTO.getEmail());
-        endereco = new Endereco(clienteDTO.getRua(), clienteDTO.getNumero(), clienteDTO.getBairro(), clienteDTO.getCidade(), clienteDTO.getEstado());
-        if (clienteDTO.getComplemento() != null) {
-            endereco.setComplemento(clienteDTO.getComplemento());
+        dadosPessoais = new DadosPessoais(form.getCpf(), form.getNome(), form.getProfissao(), form.getTelefone(), form.getEmail());
+        endereco = new Endereco(form.getRua(), form.getNumero(), form.getBairro(), form.getCidade(), form.getEstado());
+        if (form.getComplemento() != null) {
+            endereco.setComplemento(form.getComplemento());
         }
-        if (clienteDTO.getStatus().equals("SUSPENSO")) {
+        if (form.getStatus().equals("SUSPENSO")) {
             statusCliente = StatusCliente.SUSPENSO;
         }
-        return new Cliente(clienteDTO.getRenda(), dadosPessoais, endereco, statusCliente);
+        return new Cliente(form.getRenda(), dadosPessoais, endereco, statusCliente);
     }
 
-    public void alterar(Cliente cliente, ClienteDTO clienteDTO){
-        DadosPessoais dadosPessoais = new DadosPessoais(clienteDTO.getCpf(), clienteDTO.getNome(),
-                clienteDTO.getProfissao(), clienteDTO.getTelefone(), clienteDTO.getEmail());
+    public void alterar(Cliente cliente, ClienteDTO dto){
+        DadosPessoais dadosPessoais = new DadosPessoais(dto.getCpf(), dto.getNome(),
+                dto.getProfissao(), dto.getTelefone(), dto.getEmail());
 
-        Endereco endereco = new Endereco(clienteDTO.getRua(), clienteDTO.getNumero(), clienteDTO.getBairro(),
-                clienteDTO.getCidade(), clienteDTO.getEstado());
-        if(clienteDTO.getComplemento() != null){
-            endereco.setComplemento(clienteDTO.getComplemento());
+        Endereco endereco = new Endereco(dto.getRua(), dto.getNumero(), dto.getBairro(),
+                dto.getCidade(), dto.getEstado());
+        if(dto.getComplemento() != null){
+            endereco.setComplemento(dto.getComplemento());
         }
 
-        cliente.setRenda(clienteDTO.getRenda());
+        cliente.setRenda(dto.getRenda());
         cliente.setDadosPessoais(dadosPessoais);
         cliente.setEndereco(endereco);
-        if(clienteDTO.getStatus().equals("ATIVO")){
+        if(dto.getStatus().equals("ATIVO")){
             cliente.setStatus(StatusCliente.ATIVO);
         }else {
             cliente.setStatus(StatusCliente.SUSPENSO);

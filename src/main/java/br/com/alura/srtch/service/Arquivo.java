@@ -1,11 +1,11 @@
 package br.com.alura.srtch.service;
 
-import br.com.alura.srtch.dto.ClienteDTO;
+import br.com.alura.srtch.form.ClienteForm;
 
 import java.util.List;
 
 public interface Arquivo {
 
-    List<ClienteDTO> arquivo(String arquivo);
+    List<ClienteForm> arquivo(String arquivo);
 
 }

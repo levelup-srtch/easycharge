@@ -1,7 +1,7 @@
 package br.com.alura.srtch.test;
 
-import br.com.alura.srtch.controller.ClienteController;
-import br.com.alura.srtch.dto.ClienteDTO;
+import br.com.alura.srtch.controller.ClientesController;
+import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.service.TipoDoArquivo;
 
 import java.util.List;
@@ -14,9 +14,9 @@ public class TestaCadastrarClientes {
 
         String arquivo = args[0];
 
-        List<ClienteDTO> recebeClienteDoArquivos = new TipoDoArquivo().validaTipoDoArquivo(arquivo);
+        List<ClienteForm> recebeClienteDoArquivos = new TipoDoArquivo().validaTipoDoArquivo(arquivo);
 
-        ClienteController clienteController = new ClienteController();
+        ClientesController clienteController = new ClientesController();
         clienteController.cadastrarDTO(recebeClienteDoArquivos);
 
     }
