@@ -1,0 +1,26 @@
+<mat-card class="tabela mat-elevation-z8">
+
+     <mat-form-field appearance="fill">
+          <mat-label>nome</mat-label>
+          <input matInput>
+     </mat-form-field>
+     <mat-form-field appearance="fill">
+          <mat-label>cpf</mat-label>
+          <input matInput>
+     </mat-form-field>
+
+
+     <div class="button ">
+          <div class="salvar ">
+               <button mat-raised-button (click)="createCliente()" color="primary">
+                    Salvar
+               </button>
+          </div>
+          <div class="cancel">
+               <button mat-raised-button (click)="cancelar()">
+                    Cancelar
+               </button>
+          </div>
+     </div>
+</mat-card>
+

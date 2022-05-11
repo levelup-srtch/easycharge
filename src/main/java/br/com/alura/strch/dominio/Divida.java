@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "dividas")
 public class Divida implements Serializable {
-    private static final long serialVersionUID = 1L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

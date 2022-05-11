@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class CobrancaDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
+
 
     private Long id;
 

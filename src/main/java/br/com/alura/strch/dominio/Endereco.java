@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "enderecos")
 public class Endereco implements Serializable {
-    private static final long serialVersionUID = 1L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,13 +36,11 @@ public class Endereco implements Serializable {
     @CsvBindByName
     private String estado;
 
-    @OneToOne(mappedBy = "endereco")
-    private Cliente cliente;
 
     public Endereco() {
     }
 
-    public Endereco(Long id, String rua, String numero, String complemento, String bairro, String cidade, String estado, Cliente cliente) {
+    public Endereco(Long id, String rua, String numero, String complemento, String bairro, String cidade, String estado) {
         this.id = id;
         this.rua = rua;
         this.numero = numero;
@@ -50,6 +48,6 @@ public class Endereco implements Serializable {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
-        this.cliente = cliente;
+
     }
 }

@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "clientes")
 public class Cliente implements Serializable {
-  private static final long serialVersionUID = 1L;
+
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +43,7 @@ public class Cliente implements Serializable {
   @CsvBindByName
   private StatusCliente status;
 
-  @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "id_endereco", referencedColumnName = "id")
   private Endereco endereco;
 

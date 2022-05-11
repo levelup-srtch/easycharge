@@ -1,0 +1,8 @@
+.button{
+    display: flex;
+    justify-content: flex-end;
+    bottom: 0;
+}
+.salvar{
+    padding-right: 15px;
+}
