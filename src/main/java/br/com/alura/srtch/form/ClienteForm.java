@@ -1,9 +1,6 @@
 package br.com.alura.srtch.form;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class ClienteForm {
@@ -42,8 +39,7 @@ public class ClienteForm {
     @NotBlank
     private String profissao;
 
-    @NotNull
-    @Min(1)
+    @NotNull @Positive
     private BigDecimal renda;
 
     private String status;

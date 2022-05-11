@@ -1,55 +1,61 @@
 package br.com.alura.srtch.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import br.com.alura.srtch.model.Cliente;
+import br.com.alura.srtch.model.StatusCliente;
+
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class ClienteDTO {
 
-    @NotBlank
-    private Long id;
+    private final Long id;
 
-    @NotBlank
-    private String nome;
+    private final String nome;
 
-    @NotBlank
-//    @CPF
-    private String cpf;
+    private final String cpf;
 
-    @NotBlank
-    private String telefone;
+    private final String telefone;
 
-    @NotBlank
-    @Email
-    private String email;
+    private final String email;
 
-    @NotBlank
-    private String rua;
+    private final String rua;
 
-    @NotBlank
-    private String numero;
+    private final String numero;
 
-    private String complemento;
+    private final String complemento;
 
-    @NotBlank
-    private String bairro;
+    private final String bairro;
 
-    @NotBlank
-    private String cidade;
+    private final String cidade;
 
-    @NotBlank
-    private String estado;
+    private final String estado;
 
-    @NotBlank
-    private String profissao;
+    private final String profissao;
 
-    @NotNull
-    @Min(1)
-    private BigDecimal renda;
+    private final BigDecimal renda;
 
-    private String status;
+    private final StatusCliente status;
+
+    public ClienteDTO(Cliente cliente){
+        this.id = cliente.getId();
+        this.nome = cliente.getNome();
+        this.cpf = cliente.getCpf();
+        this.telefone = cliente.getTelefone();
+        this.email = cliente.getEmail();
+        this.rua = cliente.getRua();
+        this.numero = cliente.getNumero();
+        this.complemento = cliente.getComplemento();
+        this.bairro = cliente.getBairro();
+        this.cidade = cliente.getCidade();
+        this.estado = cliente.getEstado();
+        this.profissao = cliente.getProfissao();
+        this.renda = cliente.getRenda();
+        this.status = cliente.getStatus();
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;
@@ -99,67 +105,7 @@ public class ClienteDTO {
         return renda;
     }
 
-    public String getStatus() {
+    public StatusCliente getStatus() {
         return status;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public void setProfissao(String profissao) {
-        this.profissao = profissao;
-    }
-
-    public void setRenda(BigDecimal renda) {
-        this.renda = renda;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

@@ -37,7 +37,7 @@ public class ClientesRestControler {
         clienteRepository.save(cliente);
 
         URI uri = uriBuilder.path("/api/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
-        return ResponseEntity.created(uri).body(new ClienteDTO());
+        return ResponseEntity.created(uri).body(new ClienteDTO(cliente));
     }
 
 }

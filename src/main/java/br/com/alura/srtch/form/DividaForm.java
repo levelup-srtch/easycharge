@@ -1,25 +1,28 @@
 package br.com.alura.srtch.form;
 
+import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.StatusDivida;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class DividaForm {
 
-    @NotBlank @Min(1)
+    @NotNull @Positive //@Max(value = 12 * )
     private BigDecimal valor = BigDecimal.ZERO;
 
+    @NotNull @PastOrPresent
     private LocalDate dataDeAbertura;
 
+    @PastOrPresent
     private LocalDate dataDeQuitacao;
 
     private StatusDivida status = StatusDivida.ABERTA;
 
     private String descricaoDeQuitacao;
 
+    @NotNull
     private Long idCliente;
 
     public BigDecimal getValor() {

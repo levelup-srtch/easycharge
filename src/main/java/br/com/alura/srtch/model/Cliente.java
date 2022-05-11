@@ -84,6 +84,7 @@ public class Cliente {
   public String getEmail(){
     return dadosPessoais.getEmail();
   }
+
   public String getProfissao(){
     return dadosPessoais.getProfissao();
   }
@@ -94,6 +95,30 @@ public class Cliente {
 
   public Endereco getEndereco() {
     return endereco;
+  }
+
+  public String getRua() {
+    return endereco.getRua();
+  }
+
+  public String getNumero() {
+    return endereco.getNumero();
+  }
+
+  public String getComplemento() {
+    return endereco.getComplemento();
+  }
+
+  public String getBairro() {
+    return endereco.getBairro();
+  }
+
+  public String getCidade() {
+    return endereco.getCidade();
+  }
+
+  public String getEstado() {
+    return endereco.getEstado();
   }
 
   public void setEndereco(Endereco endereco) {

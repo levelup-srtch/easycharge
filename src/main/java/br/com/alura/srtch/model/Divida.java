@@ -30,7 +30,7 @@ public class Divida {
     @Column(length=255)
     private String descricaoDeQuitacao;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne //(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Cliente cliente;
 

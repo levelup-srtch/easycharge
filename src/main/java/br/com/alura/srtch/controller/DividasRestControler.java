@@ -33,11 +33,16 @@ public class DividasRestControler {
 
     @PostMapping
     public ResponseEntity<DividaDTO> cadastrar(@RequestBody @Valid DividaForm form, UriComponentsBuilder uriBuilder){
+        if(!clienteRepository.existsById(form.getIdCliente())){
+            System.out.println("id não encontrado");
+            return ResponseEntity.notFound().build();
+        }
+
         Divida divida = new DividaMapper().cadastrar(form, clienteRepository);
         dividaRepository.save(divida);
 
         URI uri = uriBuilder.path("/api/dividas/{id}").buildAndExpand(divida.getId()).toUri();
-        return ResponseEntity.created(uri).body(new DividaDTO());
+        return ResponseEntity.created(uri).body(new DividaDTO(divida));
     }
 
 }

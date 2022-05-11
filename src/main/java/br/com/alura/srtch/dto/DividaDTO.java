@@ -23,7 +23,7 @@ public class DividaDTO {
 
     private String descricaoDeQuitacao;
 
-    private Cliente cliente;
+    private Long idCliente;
 
     public DividaDTO() {
     }
@@ -35,7 +35,7 @@ public class DividaDTO {
         this.dataDeQuitacao = divida.getDataDeQuitacao();
         this.status = divida.getStatus();
         this.descricaoDeQuitacao = divida.getDescricaoDeQuitacao();
-        this.cliente = divida.getCliente();
+        this.idCliente = divida.getCliente().getId();
     }
 
     public Long getId() {
@@ -62,8 +62,8 @@ public class DividaDTO {
         return descricaoDeQuitacao;
     }
 
-    public Cliente getIdCliente() {
-        return cliente;
+    public Long getIdCliente() {
+        return idCliente;
     }
 
     public static List<DividaDTO> converter(List<Divida> dividas){
