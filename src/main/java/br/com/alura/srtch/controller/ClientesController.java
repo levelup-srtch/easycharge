@@ -1,12 +1,13 @@
 package br.com.alura.srtch.controller;
 
-import br.com.alura.srtch.dto.ClienteDTO;
+import br.com.alura.srtch.dto.ClienteDto;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -32,18 +33,23 @@ public class ClientesController {
     @GetMapping("/clientes")
     public String listarCliente(Model model){
 
-        List<Cliente> clientes = clienteRepository.findAll(Sort.by(Sort.Direction.ASC, "status").and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
+        Iterable<Cliente> clientes = clienteRepository.findAll(Sort.by(Sort.Direction.ASC, "status").and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
 
         model.addAttribute("clientes", clientes);
 
         return "clientes";
     }
 
-    //todo mudar os nomes, tirar verbos, colocar substantivos
+    //todo mudar os nomes, tirar verbos, colocar substantivos na url
 
     @Transactional
     @GetMapping("/clientes/alterarStatus/{id}")
     public String alterarStatus(@PathVariable Long id) {
+        if(!clienteRepository.existsById(id)){
+            System.out.println("id não encontrado");
+            return ResponseEntity.notFound().toString();
+        }
+
         Cliente cliente = clienteRepository.getById(id);
         cliente.alteraStatus();
 
@@ -52,6 +58,11 @@ public class ClientesController {
 
     @GetMapping("/clientes/remover/{id}")
     public String removerCliente(@PathVariable Long id){
+        if(!clienteRepository.existsById(id)){
+            System.out.println("id não encontrado");
+            return ResponseEntity.notFound().toString();
+        }
+
         clienteRepository.deleteById(id);
         return REDIRECT_CLIENTES;
     }
@@ -86,7 +97,12 @@ public class ClientesController {
 
     //todo passar os dados do cliente para o clienteDTO
     @GetMapping("/clientes/alteraCliente/{id}")
-    public String alteraCliente(@PathVariable Long id, ClienteDTO clienteDTO, Model model){
+    public String alteraCliente(@PathVariable Long id, ClienteDto clienteDTO, Model model){
+        if(!clienteRepository.existsById(id)){
+            System.out.println("id não encontrado");
+            return ResponseEntity.notFound().toString();
+        }
+
         Cliente cliente = clienteRepository.getById(id);
 
         model.addAttribute("cliente", cliente);
@@ -97,7 +113,7 @@ public class ClientesController {
     //todo validar no back
     @Transactional
     @PostMapping("/clientes/atualizar")
-    public String atualizar(@Valid ClienteDTO clienteDTO, BindingResult result) {
+    public String atualizar(@Valid ClienteDto clienteDTO, BindingResult result) {
         if(result.hasErrors()){
             return FORM_ALTERA_CLIENTE;
         }

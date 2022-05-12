@@ -1,6 +1,5 @@
 package br.com.alura.srtch.service;
 
-import br.com.alura.srtch.dto.ClienteDTO;
 import br.com.alura.srtch.form.ClienteForm;
 
 import java.util.List;

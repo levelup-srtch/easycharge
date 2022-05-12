@@ -1,6 +1,5 @@
 package br.com.alura.srtch.dto;
 
-import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.model.StatusDivida;
 
@@ -9,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DividaDTO {
+public class DividaDto {
 
     private Long id;
 
@@ -25,10 +24,10 @@ public class DividaDTO {
 
     private Long idCliente;
 
-    public DividaDTO() {
+    public DividaDto() {
     }
 
-    public DividaDTO(Divida divida){
+    public DividaDto(Divida divida){
         this.id = divida.getId();
         this.valor = divida.getValor();
         this.dataDeAbertura = divida.getDataDeAbertura();
@@ -66,7 +65,7 @@ public class DividaDTO {
         return idCliente;
     }
 
-    public static List<DividaDTO> converter(List<Divida> dividas){
-        return dividas.stream().map(DividaDTO::new).collect(Collectors.toList());
+    public static List<DividaDto> converter(List<Divida> dividas){
+        return dividas.stream().map(DividaDto::new).collect(Collectors.toList());
     }
 }

@@ -2,12 +2,13 @@ package br.com.alura.srtch.dto;
 
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.StatusCliente;
+import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RelatorioClienteDTO {
+public class ApiClientesDto{
 
     private final String nome;
     private final String CPF;
@@ -16,7 +17,7 @@ public class RelatorioClienteDTO {
     private final BigDecimal renda;
     private final StatusCliente status;
 
-    public RelatorioClienteDTO(Cliente cliente) {
+    public ApiClientesDto(Cliente cliente) {
         this.nome = cliente.getDadosPessoais().getNome();
         this.CPF = cliente.getDadosPessoais().getCpf();
         this.telefone = cliente.getDadosPessoais().getTelefone();
@@ -49,7 +50,7 @@ public class RelatorioClienteDTO {
         return status;
     }
 
-    public static List<RelatorioClienteDTO> converter(List<Cliente> clientes){
-        return clientes.stream().map(RelatorioClienteDTO::new).collect(Collectors.toList());
+    public static List<ApiClientesDto> converter(List<Cliente> clientes){
+        return clientes.stream().map(ApiClientesDto::new).collect(Collectors.toList());
     }
 }

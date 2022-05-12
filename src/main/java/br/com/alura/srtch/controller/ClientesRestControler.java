@@ -1,12 +1,15 @@
 package br.com.alura.srtch.controller;
 
-import br.com.alura.srtch.dto.ClienteDTO;
-import br.com.alura.srtch.dto.RelatorioClienteDTO;
+import br.com.alura.srtch.dto.ClienteDto;
+import br.com.alura.srtch.dto.ApiClientesDto;
+import br.com.alura.srtch.projection.RelatorioClientesProjecao;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -22,22 +25,32 @@ public class ClientesRestControler {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @GetMapping("{page}")
+    public void listaPaginada(@PathVariable Integer page){
+
+    }
+
     @GetMapping
-    public List<RelatorioClienteDTO> lista(String nome){
-        List<Cliente> clientes = clienteRepository.findAll();
-        if(nome != null){
-            clientes = clienteRepository.findByDadosPessoaisNome(nome);
-        }
-        return RelatorioClienteDTO.converter(clientes);
+    public List<ApiClientesDto> lista(){
+        Iterable<Cliente> clientes = clienteRepository.findAll(
+                Sort.by(Sort.Direction.ASC, "status").
+                        and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
+
+        return ApiClientesDto.converter((List<Cliente>) clientes);
     }
 
     @PostMapping
-    public ResponseEntity<ClienteDTO> cadastrar(@RequestBody @Valid ClienteForm form, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteForm form, UriComponentsBuilder uriBuilder){
         Cliente cliente = new ClienteMapper().cadastrar(form);
         clienteRepository.save(cliente);
 
         URI uri = uriBuilder.path("/api/clientes/{id}").buildAndExpand(cliente.getId()).toUri();
-        return ResponseEntity.created(uri).body(new ClienteDTO(cliente));
+        return ResponseEntity.created(uri).body(new ClienteDto(cliente));
+    }
+
+    @GetMapping("/report")
+    public List<RelatorioClientesProjecao> listarReport(){
+        return clienteRepository.findNomeValorDasDividasCobrancas();
     }
 
 }

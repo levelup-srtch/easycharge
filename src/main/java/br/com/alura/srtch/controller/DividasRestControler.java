@@ -1,6 +1,6 @@
 package br.com.alura.srtch.controller;
 
-import br.com.alura.srtch.dto.DividaDTO;
+import br.com.alura.srtch.dto.DividaDto;
 import br.com.alura.srtch.form.DividaForm;
 import br.com.alura.srtch.mapper.DividaMapper;
 import br.com.alura.srtch.model.Divida;
@@ -26,13 +26,13 @@ public class DividasRestControler {
     private DividaRepository dividaRepository;
 
     @GetMapping
-    public List<DividaDTO> lista(String nome){
+    public List<DividaDto> lista(){
         List<Divida> dividas = dividaRepository.findAll();
-        return DividaDTO.converter(dividas);
+        return DividaDto.converter(dividas);
     }
 
     @PostMapping
-    public ResponseEntity<DividaDTO> cadastrar(@RequestBody @Valid DividaForm form, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<DividaDto> cadastrar(@RequestBody @Valid DividaForm form, UriComponentsBuilder uriBuilder){
         if(!clienteRepository.existsById(form.getIdCliente())){
             System.out.println("id não encontrado");
             return ResponseEntity.notFound().build();
@@ -42,7 +42,7 @@ public class DividasRestControler {
         dividaRepository.save(divida);
 
         URI uri = uriBuilder.path("/api/dividas/{id}").buildAndExpand(divida.getId()).toUri();
-        return ResponseEntity.created(uri).body(new DividaDTO(divida));
+        return ResponseEntity.created(uri).body(new DividaDto(divida));
     }
 
 }

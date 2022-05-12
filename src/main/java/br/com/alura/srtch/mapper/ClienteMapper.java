@@ -1,6 +1,6 @@
 package br.com.alura.srtch.mapper;
 
-import br.com.alura.srtch.dto.ClienteDTO;
+import br.com.alura.srtch.dto.ClienteDto;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.DadosPessoais;
@@ -46,7 +46,7 @@ public class ClienteMapper {
         return new Cliente(form.getRenda(), dadosPessoais, endereco, statusCliente);
     }
 
-    public void alterar(Cliente cliente, ClienteDTO dto){
+    public void alterar(Cliente cliente, ClienteDto dto){
         DadosPessoais dadosPessoais = new DadosPessoais(dto.getCpf(), dto.getNome(),
                 dto.getProfissao(), dto.getTelefone(), dto.getEmail());
 

@@ -3,10 +3,9 @@ package br.com.alura.srtch.dto;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.StatusCliente;
 
-import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
-public class ClienteDTO {
+public class ClienteDto {
 
     private final Long id;
 
@@ -36,7 +35,7 @@ public class ClienteDTO {
 
     private final StatusCliente status;
 
-    public ClienteDTO(Cliente cliente){
+    public ClienteDto(Cliente cliente){
         this.id = cliente.getId();
         this.nome = cliente.getNome();
         this.cpf = cliente.getCpf();
