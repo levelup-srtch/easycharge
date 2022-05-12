@@ -26,7 +26,7 @@ public class APIListaClientesController {
 		List<Cliente> clientes = clienterepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
 		model.addAttribute("clientes", clientes);
 		// return Arrays.asList(clientes,clientes,clientes); // para retornar um array com varias listas de clientes
-		 return (clientes);
+		  return (clientes);
 	}
 	
 	
