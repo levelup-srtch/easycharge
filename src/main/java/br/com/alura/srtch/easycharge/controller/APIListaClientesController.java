@@ -4,16 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.srtch.easycharge.dto.ClienteDTO;
 import br.com.alura.srtch.easycharge.modelo.Cliente;
 import br.com.alura.srtch.easycharge.repository.ClienteRepository;
 
-@Controller
+//@Controller
+@RestController
 public class APIListaClientesController {
 	
 	@Autowired
@@ -32,11 +31,18 @@ public class APIListaClientesController {
 	*/
 	
 	@RequestMapping("/api/listaclientes")
-	@ResponseBody
-	public List<ClienteDTO> home2(Model model) { 
+	//@ResponseBody
+	 // public List<ClienteDTO> home2(Model model) { 
+	 public List<ClienteDTO> lista(String nome) { 
+		if (nome == null) {
 		List<Cliente> clientes = clienterepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
-		model.addAttribute("clientes", clientes);
+		//model.addAttribute("clientes", clientes);
 		   return ClienteDTO.convert(clientes);
+		} else {
+			List<Cliente> clientes = clienterepository.findByNome(nome);
+			return ClienteDTO.convert(clientes);
+			
+		}
 	}
 	
 	
