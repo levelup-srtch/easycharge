@@ -6,6 +6,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import br.com.alura.srtch.easycharge.modelo.Cliente;
+import br.com.alura.srtch.easycharge.modelo.Endereco;
+import br.com.alura.srtch.easycharge.modelo.StatusCliente;
+
 public class ClienteForm {
 
 	    @NotBlank
@@ -32,7 +36,7 @@ public class ClienteForm {
 	    @NotNull
 	    @Min (1)
 	    private BigDecimal renda;
-	    private String status;
+	    private StatusCliente status;
 
 	    public String getNome() {
 	        return nome;
@@ -82,7 +86,7 @@ public class ClienteForm {
 	        return renda;
 	    }
 
-	    public String getStatus() {
+	    public StatusCliente getStatus() {
 	        return status;
 	    }
 
@@ -134,11 +138,23 @@ public class ClienteForm {
 	        this.renda = renda;
 	    }
 
-	    public void setStatus(String status) {
+	    public void setStatus(StatusCliente status) {
 	        this.status = status;
 	    }
 	    
-	   
+	    public Cliente toCliente() {
+			Cliente cliente = new Cliente();
+			cliente.setNome(nome);
+			cliente.setCpf(cpf);
+			cliente.setTelefone(telefone);
+			cliente.setEmail(email);
+			cliente.setEndereco(new Endereco(rua, numero, complemento, bairro, cidade, estado));
+			cliente.setProfissao(profissao);
+			cliente.setRenda(renda);
+			cliente.setStatus(status);
+			
+			return cliente;
+		}
 	    
 }
 

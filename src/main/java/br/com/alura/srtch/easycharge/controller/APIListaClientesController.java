@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.srtch.easycharge.dto.ClienteDTO;
 import br.com.alura.srtch.easycharge.dto.RequisicaoNovoCliente;
+import br.com.alura.srtch.easycharge.form.ClienteForm;
 import br.com.alura.srtch.easycharge.modelo.Cliente;
 import br.com.alura.srtch.easycharge.repository.ClienteRepository;
 
@@ -56,7 +57,7 @@ public class APIListaClientesController {
 	}
 	
 	 @PostMapping
-	 public ResponseEntity<ClienteDTO> cadastrar(@RequestBody @Valid RequisicaoNovoCliente requisicao, UriComponentsBuilder uriBuilder){
+	 public ResponseEntity<ClienteDTO> cadastrar(@RequestBody @Valid ClienteForm requisicao, UriComponentsBuilder uriBuilder){
 	           
 		 Cliente cliente = requisicao.toCliente();
 		 clienterepository.save(cliente);
