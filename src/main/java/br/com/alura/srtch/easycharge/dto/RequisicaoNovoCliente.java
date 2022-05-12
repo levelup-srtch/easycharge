@@ -16,7 +16,7 @@ public class RequisicaoNovoCliente {
 	   private Long id;
 	   @NotBlank
 	   private String nome;
-	   @NotBlank
+	   @NotBlank // colocar alguma validação para campo único talvez
 	   private String cpf;
 	   @NotBlank
 	   private String telefone;

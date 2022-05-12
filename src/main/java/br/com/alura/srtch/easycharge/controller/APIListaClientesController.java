@@ -1,18 +1,28 @@
 package br.com.alura.srtch.easycharge.controller;
 
+import java.net.URI;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.srtch.easycharge.dto.ClienteDTO;
+import br.com.alura.srtch.easycharge.dto.RequisicaoNovoCliente;
 import br.com.alura.srtch.easycharge.modelo.Cliente;
 import br.com.alura.srtch.easycharge.repository.ClienteRepository;
 
 //@Controller
 @RestController
+@RequestMapping("/api/cliente")
 public class APIListaClientesController {
 	
 	@Autowired
@@ -30,7 +40,7 @@ public class APIListaClientesController {
 	}
 	*/
 	
-	@RequestMapping("/api/listaclientes")
+	@GetMapping
 	//@ResponseBody
 	 // public List<ClienteDTO> home2(Model model) { 
 	 public List<ClienteDTO> lista(String nome) { 
@@ -45,6 +55,14 @@ public class APIListaClientesController {
 		}
 	}
 	
-	
+	 @PostMapping
+	 public ResponseEntity<ClienteDTO> cadastrar(@RequestBody @Valid RequisicaoNovoCliente requisicao, UriComponentsBuilder uriBuilder){
+	           
+		 Cliente cliente = requisicao.toCliente();
+		 clienterepository.save(cliente);
+		
+		 URI uri = uriBuilder.path("/cliente/{id}").buildAndExpand(cliente.getId()).toUri();
+		 return ResponseEntity.created(uri).body(new ClienteDTO(cliente));
+	 }
 	
 }
