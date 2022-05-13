@@ -35,7 +35,8 @@ public class DividasRestControler {
     public ResponseEntity<DividaDto> cadastrar(@RequestBody @Valid DividaForm form, UriComponentsBuilder uriBuilder){
         if(!clienteRepository.existsById(form.getIdCliente())){
             System.out.println("id não encontrado");
-            return ResponseEntity.notFound().build();
+            //todo .body ou response body exception
+            return ResponseEntity.badRequest().build();
         }
 
         Divida divida = new DividaMapper().cadastrar(form, clienteRepository);

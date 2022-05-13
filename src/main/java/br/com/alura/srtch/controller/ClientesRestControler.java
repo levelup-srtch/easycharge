@@ -1,15 +1,14 @@
 package br.com.alura.srtch.controller;
 
 import br.com.alura.srtch.dto.ClienteDto;
-import br.com.alura.srtch.dto.ApiClientesDto;
+import br.com.alura.srtch.dto.ClientesRequestDto;
 import br.com.alura.srtch.projection.RelatorioClientesProjecao;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -25,18 +24,26 @@ public class ClientesRestControler {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @GetMapping("{page}")
-    public void listaPaginada(@PathVariable Integer page){
+    @GetMapping("/{page}")
+    public Page<ClientesRequestDto> listaPaginada(@PathVariable Integer page){
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC, "status")
+                .and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
 
+        return clienteRepository.findAll(pageable).map(ClientesRequestDto::new);
     }
 
     @GetMapping
-    public List<ApiClientesDto> lista(){
-        Iterable<Cliente> clientes = clienteRepository.findAll(
-                Sort.by(Sort.Direction.ASC, "status").
-                        and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
+    public List<ClientesRequestDto> lista(String nome){
+        List<Cliente> clientes;
+        if(nome == null){
+            clientes = clienteRepository.findAll(
+                    Sort.by(Sort.Direction.ASC, "status").
+                            and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
 
-        return ApiClientesDto.converter((List<Cliente>) clientes);
+        } else {
+            clientes = clienteRepository.findByDadosPessoaisNome(nome);
+        }
+        return ClientesRequestDto.converter(clientes);
     }
 
     @PostMapping

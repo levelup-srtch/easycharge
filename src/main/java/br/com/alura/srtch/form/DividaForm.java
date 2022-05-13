@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 public class DividaForm {
 
+    //todo fazer a validação no controller com if
     @NotNull @Positive //@Max(value = 12 * )
     private BigDecimal valor = BigDecimal.ZERO;
 

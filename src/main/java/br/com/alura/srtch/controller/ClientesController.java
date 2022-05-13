@@ -33,7 +33,7 @@ public class ClientesController {
     @GetMapping("/clientes")
     public String listarCliente(Model model){
 
-        Iterable<Cliente> clientes = clienteRepository.findAll(Sort.by(Sort.Direction.ASC, "status").and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
+        List<Cliente> clientes = clienteRepository.findAll(Sort.by(Sort.Direction.ASC, "status").and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
 
         model.addAttribute("clientes", clientes);
 

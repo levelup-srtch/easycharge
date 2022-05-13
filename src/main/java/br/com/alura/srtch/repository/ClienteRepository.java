@@ -1,8 +1,8 @@
 package br.com.alura.srtch.repository;
 
-import br.com.alura.srtch.projection.RelatorioClientesProjecao;
 import br.com.alura.srtch.model.Cliente;
-import org.springframework.data.jpa.repository.JpaRepository;
+import br.com.alura.srtch.projection.RelatorioClientesProjecao;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -13,11 +13,15 @@ import java.util.List;
 public interface ClienteRepository extends PagingAndSortingRepository<Cliente, Long> {
     Cliente getById(Long id);
 
+    @Override
+    List<Cliente> findAll();
+
+    @Override
+    List<Cliente> findAll(Sort sort);
+
     List<Cliente> findByDadosPessoaisNome(String nome);
 
-
-
-    @Query(value = "select cliente.nome, sum(divida.valor), contagemCobrancas.contagem\n" +
+    @Query(value = "select cliente.nome as nome, sum(divida.valor) as dividaValor, contagemCobrancas.contagem as cobrancaContagem\n" +
             "    from cliente\n" +
             "    left join divida\n" +
             "         on  cliente.id=divida.cliente_id\n" +

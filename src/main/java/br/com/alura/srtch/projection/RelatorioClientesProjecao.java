@@ -7,4 +7,5 @@ public interface RelatorioClientesProjecao {
         String getNome();
         BigDecimal getDividaValor();
         Integer getCobrancaContagem();
+
 }
