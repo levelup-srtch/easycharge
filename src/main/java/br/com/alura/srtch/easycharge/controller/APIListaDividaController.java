@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.srtch.easycharge.dto.DividaDTO;
 import br.com.alura.srtch.easycharge.form.DividaForm;
-import br.com.alura.srtch.easycharge.modelo.Cliente;
 import br.com.alura.srtch.easycharge.modelo.Divida;
 import br.com.alura.srtch.easycharge.repository.DividaRepository;
 
@@ -46,7 +46,7 @@ public class APIListaDividaController {
 	//@ResponseBody
 	 // public List<DividaDTO> home2(Model model) { 
 	 public List<DividaDTO> home(Model model)  { 
-		List<Divida> dividas = dividarepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
+		List<Divida> dividas = dividarepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
 		//model.addAttribute("clientes", clientes);
 		   return DividaDTO.converte(dividas);
 		
@@ -55,6 +55,7 @@ public class APIListaDividaController {
 	
 	
 	 @PostMapping
+	 @Transactional
 	 public ResponseEntity<DividaDTO> cadastrar(@RequestBody @Valid DividaForm requisicao, UriComponentsBuilder uriBuilder){
 	     
 		
