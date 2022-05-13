@@ -5,25 +5,28 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+
 import br.com.alura.srtch.easycharge.modelo.Cliente;
 import br.com.alura.srtch.easycharge.modelo.Divida;
 import br.com.alura.srtch.easycharge.modelo.StatusDivida;
-import br.com.alura.srtch.easycharge.repository.ClienteRepository;
 
 public class DividaForm {
 
     private Long id;
-
+    @Positive
     private BigDecimal valor;
-
+    @NotNull @PastOrPresent
     private Date dataDeAbertura;
-
+    @PastOrPresent
     private Date dataDeQuitacao;
-
+    @NotNull
     private StatusDivida status;
 
     private String descricaoDeQuitacao;
-
+    @NotNull
     private Long idCliente;
 
     public DividaForm() {
@@ -75,18 +78,22 @@ public class DividaForm {
 	public Long getId() {
 		return id;
 	}
-
+	
+	
 	public BigDecimal getValor() {
 		return valor;
 	}
-
+	
+	
 	public Date getDataDeAbertura() {
 		return dataDeAbertura;
 	}
-
+	
+	
 	public Date getDataDeQuitacao() {
 		return dataDeQuitacao;
 	}
+	
 
 	public StatusDivida getStatus() {
 		return status;
@@ -95,7 +102,7 @@ public class DividaForm {
 	public String getDescricaoDeQuitacao() {
 		return descricaoDeQuitacao;
 	}
-
+	
 	public Long getIdCliente() {
 		return idCliente;
 	}
