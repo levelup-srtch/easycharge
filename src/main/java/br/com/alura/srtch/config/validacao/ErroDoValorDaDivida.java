@@ -6,7 +6,7 @@ import br.com.alura.srtch.repository.DividaRepository;
 
 import java.math.BigDecimal;
 
-public class ErroDoValorDivida {
+public class ErroDoValorDaDivida {
     public static boolean validar(BigDecimal valor, Long idCliente, ClienteRepository clienteRepository, DividaRepository dividaRepository) {
         Cliente cliente = clienteRepository.getById(idCliente);
         BigDecimal valorTotal = dividaRepository.buscaSomaDoValorDaDivida(idCliente);
