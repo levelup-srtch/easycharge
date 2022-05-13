@@ -1,15 +1,17 @@
 package br.com.alura.srtch.controller;
 
 import br.com.alura.srtch.dto.ClienteDto;
-import br.com.alura.srtch.dto.ClientesRequestDto;
-import br.com.alura.srtch.projection.RelatorioClientesProjecao;
+import br.com.alura.srtch.dto.ClientesResponseDto;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
+import br.com.alura.srtch.projection.RelatorioClientesProjecao;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -26,13 +28,13 @@ public class ClientesRestControler {
     private ClienteRepository clienteRepository;
 
     @GetMapping
-    public Page<ClientesRequestDto> lista(Integer page){
+    public Page<ClientesResponseDto> lista(Integer page){
         if(page == null){
             page = 0;
         }
         Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC, "status")
                 .and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
-        return clienteRepository.findAll(pageable).map(ClientesRequestDto::new);
+        return clienteRepository.findAll(pageable).map(ClientesResponseDto::new);
     }
 
     @PostMapping

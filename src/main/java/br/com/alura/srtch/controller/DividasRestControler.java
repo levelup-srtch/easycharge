@@ -1,5 +1,6 @@
 package br.com.alura.srtch.controller;
 
+import br.com.alura.srtch.config.validacao.ErroDoValorDivida;
 import br.com.alura.srtch.dto.DividaDto;
 import br.com.alura.srtch.form.DividaForm;
 import br.com.alura.srtch.mapper.DividaMapper;
@@ -38,7 +39,9 @@ public class DividasRestControler {
             //todo .body ou response body exception
             return ResponseEntity.badRequest().build();
         }
-
+        if (ErroDoValorDivida.validar(form.getValor(), form.getIdCliente(), clienteRepository, dividaRepository)){
+            return ResponseEntity.internalServerError().build();
+        }
         Divida divida = new DividaMapper().cadastrar(form, clienteRepository);
         dividaRepository.save(divida);
 

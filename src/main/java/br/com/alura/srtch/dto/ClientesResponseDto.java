@@ -4,11 +4,8 @@ import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.StatusCliente;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
 
-//todo response
-public class ClientesRequestDto {
+public class ClientesResponseDto {
 
     private final String nome;
     private final String CPF;
@@ -17,7 +14,7 @@ public class ClientesRequestDto {
     private final BigDecimal renda;
     private final StatusCliente status;
 
-    public ClientesRequestDto(Cliente cliente) {
+    public ClientesResponseDto(Cliente cliente) {
         this.nome = cliente.getDadosPessoais().getNome();
         this.CPF = cliente.getDadosPessoais().getCpf();
         this.telefone = cliente.getDadosPessoais().getTelefone();
@@ -48,10 +45,6 @@ public class ClientesRequestDto {
 
     public StatusCliente getStatus() {
         return status;
-    }
-
-    public static List<ClientesRequestDto> converter(List<Cliente> clientes){
-        return clientes.stream().map(ClientesRequestDto::new).collect(Collectors.toList());
     }
 
 }
