@@ -100,7 +100,7 @@ public class ClienteDTO {
 	}
 
 
-	public static List<ClienteDTO> convert(List<Cliente> clientes) {
+	public static List<ClienteDTO> converte(List<Cliente> clientes) {
 		return clientes.stream().map(ClienteDTO::new).collect(Collectors.toList());
 	}
 	

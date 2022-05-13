@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.srtch.easycharge.dto.ClienteDTO;
-import br.com.alura.srtch.easycharge.dto.RequisicaoNovoCliente;
 import br.com.alura.srtch.easycharge.form.ClienteForm;
 import br.com.alura.srtch.easycharge.modelo.Cliente;
 import br.com.alura.srtch.easycharge.repository.ClienteRepository;
@@ -48,10 +47,10 @@ public class APIListaClientesController {
 		if (nome == null) {
 		List<Cliente> clientes = clienterepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
 		//model.addAttribute("clientes", clientes);
-		   return ClienteDTO.convert(clientes);
+		   return ClienteDTO.converte(clientes);
 		} else {
 			List<Cliente> clientes = clienterepository.findByNome(nome);
-			return ClienteDTO.convert(clientes);
+			return ClienteDTO.converte(clientes);
 			
 		}
 	}

@@ -160,6 +160,10 @@ public class Cliente {
 	}
 	
 	*/
+	 
+	  public Cliente(Long id){
+	        this.id = id;
+	    }
 
   @Override
   public String toString() {
