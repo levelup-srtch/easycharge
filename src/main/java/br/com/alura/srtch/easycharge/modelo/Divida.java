@@ -45,7 +45,8 @@ public class Divida {
 	private String descricaoDeQuitacao;
  	
 
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	//@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cliente", referencedColumnName = "id")
 	//@Column(length=255,nullable=false)
 	private Cliente cliente;

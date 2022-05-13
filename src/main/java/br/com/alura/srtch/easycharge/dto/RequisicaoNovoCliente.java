@@ -39,7 +39,7 @@ public class RequisicaoNovoCliente {
 	   @Min (1)
 	   private BigDecimal renda;
 	  // @Pattern(regexp = "^ATIVO$|^SUSPENSO$")
-	   private StatusCliente  status;
+	   private StatusCliente  status = StatusCliente.ATIVO;
 
 	   //aula 5 bin validation nos atributos
 	   

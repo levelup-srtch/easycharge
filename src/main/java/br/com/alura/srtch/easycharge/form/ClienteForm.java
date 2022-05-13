@@ -36,7 +36,8 @@ public class ClienteForm {
 	    @NotNull
 	    @Min (1)
 	    private BigDecimal renda;
-	    private StatusCliente status;
+	    
+	    private StatusCliente status  = StatusCliente.ATIVO;
 
 	    public String getNome() {
 	        return nome;

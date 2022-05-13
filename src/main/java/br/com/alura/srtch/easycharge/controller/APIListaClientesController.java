@@ -22,7 +22,7 @@ import br.com.alura.srtch.easycharge.repository.ClienteRepository;
 
 //@Controller
 @RestController
-@RequestMapping("/api/cliente")
+@RequestMapping("/api/clientes")
 public class APIListaClientesController {
 	
 	@Autowired

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,16 +19,19 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.alura.srtch.easycharge.dto.DividaDTO;
 import br.com.alura.srtch.easycharge.form.DividaForm;
 import br.com.alura.srtch.easycharge.modelo.Divida;
+import br.com.alura.srtch.easycharge.repository.ClienteRepository;
 import br.com.alura.srtch.easycharge.repository.DividaRepository;
 
 //@Controller
 @RestController
-@RequestMapping("/api/divida")
+@RequestMapping("/api/dividas")
 public class APIListaDividaController {
 	
 	@Autowired
 	private DividaRepository dividarepository;
 	
+	@Autowired
+	private ClienteRepository clienterepository;
 	/*
 	@RequestMapping("/api/listaclientes")
 	@ResponseBody
@@ -45,7 +47,7 @@ public class APIListaDividaController {
 	@GetMapping
 	//@ResponseBody
 	 // public List<DividaDTO> home2(Model model) { 
-	 public List<DividaDTO> home(Model model)  { 
+	 public List<DividaDTO> listaDivida()  { 
 		List<Divida> dividas = dividarepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
 		//model.addAttribute("clientes", clientes);
 		   return DividaDTO.converte(dividas);
@@ -57,13 +59,17 @@ public class APIListaDividaController {
 	 @PostMapping
 	 @Transactional
 	 public ResponseEntity<DividaDTO> cadastrar(@RequestBody @Valid DividaForm requisicao, UriComponentsBuilder uriBuilder){
-	     
-		
-		 Divida divida = requisicao.toDivida();
+		 if(! clienterepository.existsById(requisicao.getIdCliente())){
+	            System.out.println("id não encontrado");
+	            return ResponseEntity.badRequest().build();
+		 } else {
+ 		 Divida divida = requisicao.toDivida();
 		 dividarepository.save(divida);
+		 
+		 
 		
 		 URI uri = uriBuilder.path("divida/{id}").buildAndExpand(divida.getIdDivida()).toUri();
 		 return ResponseEntity.created(uri).body(new DividaDTO(divida));
+		 }
 	 }
-	
 }

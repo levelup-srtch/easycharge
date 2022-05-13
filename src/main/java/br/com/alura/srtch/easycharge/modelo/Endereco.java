@@ -28,7 +28,7 @@ public class Endereco {
   private String numero;
 
   
-  @Column(name = "complemento",length=255,nullable=false)
+  @Column(name = "complemento",length=255,nullable=true)
   private String complemento;
 
   
