@@ -9,6 +9,7 @@ import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -24,26 +25,14 @@ public class ClientesRestControler {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @GetMapping("/{page}")
-    public Page<ClientesRequestDto> listaPaginada(@PathVariable Integer page){
+    @GetMapping
+    public Page<ClientesRequestDto> lista(Integer page){
+        if(page == null){
+            page = 0;
+        }
         Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC, "status")
                 .and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
-
         return clienteRepository.findAll(pageable).map(ClientesRequestDto::new);
-    }
-
-    @GetMapping
-    public List<ClientesRequestDto> lista(String nome){
-        List<Cliente> clientes;
-        if(nome == null){
-            clientes = clienteRepository.findAll(
-                    Sort.by(Sort.Direction.ASC, "status").
-                            and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
-
-        } else {
-            clientes = clienteRepository.findByDadosPessoaisNome(nome);
-        }
-        return ClientesRequestDto.converter(clientes);
     }
 
     @PostMapping

@@ -2,22 +2,14 @@ package br.com.alura.srtch.repository;
 
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.projection.RelatorioClientesProjecao;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface ClienteRepository extends PagingAndSortingRepository<Cliente, Long> {
-    Cliente getById(Long id);
-
-    @Override
-    List<Cliente> findAll();
-
-    @Override
-    List<Cliente> findAll(Sort sort);
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     List<Cliente> findByDadosPessoaisNome(String nome);
 
