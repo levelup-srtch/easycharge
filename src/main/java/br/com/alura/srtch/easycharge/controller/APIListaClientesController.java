@@ -19,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.alura.srtch.easycharge.dto.ClienteDTO;
 import br.com.alura.srtch.easycharge.form.ClienteForm;
 import br.com.alura.srtch.easycharge.modelo.Cliente;
+import br.com.alura.srtch.easycharge.projection.RelatorioClientesProjection;
 import br.com.alura.srtch.easycharge.repository.ClienteRepository;
 
 //@Controller
@@ -57,6 +58,13 @@ public class APIListaClientesController {
 			
 		}
 	}
+	
+	
+	
+	@GetMapping("/report")
+    public List<RelatorioClientesProjection> listarReport(){
+        return clienterepository.ClienteDividas();
+    }
 	
 	 @PostMapping
 	 public ResponseEntity<ClienteDTO> cadastrar(@RequestBody @Valid ClienteForm requisicao, UriComponentsBuilder uriBuilder){
