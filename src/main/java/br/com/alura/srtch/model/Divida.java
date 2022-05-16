@@ -13,7 +13,7 @@ public class Divida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length=10)
-    private long id;
+    private Long id;
 
     @Column(nullable=false)
     private BigDecimal valor = BigDecimal.ZERO;
@@ -30,7 +30,7 @@ public class Divida {
     @Column(length=255)
     private String descricaoDeQuitacao;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne //(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Cliente cliente;
 
@@ -52,7 +52,7 @@ public class Divida {
         this.cobrancas.add(cobranca);
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

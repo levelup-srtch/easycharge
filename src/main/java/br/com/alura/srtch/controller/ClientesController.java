@@ -1,11 +1,13 @@
 package br.com.alura.srtch.controller;
 
-import br.com.alura.srtch.dto.ClienteDTO;
+import br.com.alura.srtch.dto.ClienteDto;
+import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -19,14 +21,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class ClienteController {
+public class ClientesController {
 
     @Autowired
     private ClienteRepository clienteRepository;
 
     private static final String REDIRECT_CLIENTES = "redirect:/clientes";
-
     private static final String FORM_CLIENTE = "novoCliente";
+    private static final String FORM_ALTERA_CLIENTE = "alteraCliente";
 
     @GetMapping("/clientes")
     public String listarCliente(Model model){
@@ -38,17 +40,29 @@ public class ClienteController {
         return "clientes";
     }
 
+    //todo mudar os nomes, tirar verbos, colocar substantivos na url
+
     @Transactional
-    @GetMapping("/alterarStatus/{id}")
+    @GetMapping("/clientes/alterarStatus/{id}")
     public String alterarStatus(@PathVariable Long id) {
+        if(!clienteRepository.existsById(id)){
+            System.out.println("id não encontrado");
+            return ResponseEntity.notFound().toString();
+        }
+
         Cliente cliente = clienteRepository.getById(id);
         cliente.alteraStatus();
 
         return REDIRECT_CLIENTES;
     }
 
-    @GetMapping("/remover/{id}")
+    @GetMapping("/clientes/remover/{id}")
     public String removerCliente(@PathVariable Long id){
+        if(!clienteRepository.existsById(id)){
+            System.out.println("id não encontrado");
+            return ResponseEntity.notFound().toString();
+        }
+
         clienteRepository.deleteById(id);
         return REDIRECT_CLIENTES;
     }
@@ -58,31 +72,37 @@ public class ClienteController {
         return REDIRECT_CLIENTES;
     }
 
-    @GetMapping("/novoCliente")
-    public String novoCliente(ClienteDTO clienteDTO){
+    @GetMapping("/clientes/novoCliente")
+    public String novoCliente(br.com.alura.srtch.form.ClienteForm clienteForm){
         return FORM_CLIENTE;
     }
 
-    @PostMapping("/cadastrar")
-    public String cadastrar(@Valid ClienteDTO clienteDTO, BindingResult result){
+    @PostMapping("/clientes/cadastrar")
+    public String cadastrar(@Valid ClienteForm clienteForm, BindingResult result){
         if(result.hasErrors()){
             return FORM_CLIENTE;
         }
 
-        Cliente cliente = new ClienteMapper().cadastrar(clienteDTO);
+        Cliente cliente = new ClienteMapper().cadastrar(clienteForm);
         clienteRepository.save(cliente);
 
         return REDIRECT_CLIENTES;
     }
 
     //todo para adicionar os clientes do arquivo json
-    public void cadastrarDTO(@Valid List<ClienteDTO> clienteDTOList){
-        List<Cliente> clientes = new ClienteMapper().cadastrar(clienteDTOList);
+    public void cadastrarDTO(@Valid List<ClienteForm> clienteFormList){
+        List<Cliente> clientes = new ClienteMapper().cadastrar(clienteFormList);
         clientes.forEach(cliente -> clienteRepository.save(cliente));
     }
 
-    @GetMapping("/alteraCliente/{id}")
-    public String alteraCliente(@PathVariable Long id, Model model){
+    //todo passar os dados do cliente para o clienteDTO
+    @GetMapping("/clientes/alteraCliente/{id}")
+    public String alteraCliente(@PathVariable Long id, ClienteDto clienteDTO, Model model){
+        if(!clienteRepository.existsById(id)){
+            System.out.println("id não encontrado");
+            return ResponseEntity.notFound().toString();
+        }
+
         Cliente cliente = clienteRepository.getById(id);
 
         model.addAttribute("cliente", cliente);
@@ -92,10 +112,13 @@ public class ClienteController {
 
     //todo validar no back
     @Transactional
-    @PostMapping("/atualizar")
-    public String atualizar(ClienteDTO clienteDTO) {
-        Cliente cliente = clienteRepository.getById(clienteDTO.getId());
+    @PostMapping("/clientes/atualizar")
+    public String atualizar(@Valid ClienteDto clienteDTO, BindingResult result) {
+        if(result.hasErrors()){
+            return FORM_ALTERA_CLIENTE;
+        }
 
+        Cliente cliente = clienteRepository.getById(clienteDTO.getId());
         new ClienteMapper().alterar(cliente, clienteDTO);
 
         return REDIRECT_CLIENTES;

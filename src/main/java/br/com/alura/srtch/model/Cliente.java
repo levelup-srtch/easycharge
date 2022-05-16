@@ -69,12 +69,56 @@ public class Cliente {
     return dadosPessoais;
   }
 
+  public String getNome(){
+    return dadosPessoais.getNome();
+  }
+
+  public String getCpf(){
+    return dadosPessoais.getCpf();
+  }
+
+  public String getTelefone(){
+    return dadosPessoais.getTelefone();
+  }
+
+  public String getEmail(){
+    return dadosPessoais.getEmail();
+  }
+
+  public String getProfissao(){
+    return dadosPessoais.getProfissao();
+  }
+
   public void setDadosPessoais(DadosPessoais dadosPessoais) {
     this.dadosPessoais = dadosPessoais;
   }
 
   public Endereco getEndereco() {
     return endereco;
+  }
+
+  public String getRua() {
+    return endereco.getRua();
+  }
+
+  public String getNumero() {
+    return endereco.getNumero();
+  }
+
+  public String getComplemento() {
+    return endereco.getComplemento();
+  }
+
+  public String getBairro() {
+    return endereco.getBairro();
+  }
+
+  public String getCidade() {
+    return endereco.getCidade();
+  }
+
+  public String getEstado() {
+    return endereco.getEstado();
   }
 
   public void setEndereco(Endereco endereco) {
