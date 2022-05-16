@@ -8,15 +8,15 @@ import br.com.alura.srtch.repository.ClienteRepository;
 
 public class DividaMapper {
 
-    public Divida cadastrar(DividaForm form, ClienteRepository clienteRepository) {
-        Cliente cliente = clienteRepository.getById(form.getIdCliente());
+    public Divida cadastrar(DividaForm form, ClienteRepository repository) {
+        Cliente cliente = repository.getById(form.getIdCliente());
 
         Divida divida = new Divida(form.getValor(), form.getStatus(), cliente);
-        if (form.getDataDeAbertura() != null) {
-            divida.setDataDeAbertura(form.getDataDeAbertura());
-        }
         if (form.getDataDeQuitacao() != null) {
             divida.setDataDeQuitacao(form.getDataDeQuitacao());
+        }
+        if (form.getDescricaoDeQuitacao() != null) {
+            divida.setDescricaoDeQuitacao(form.getDescricaoDeQuitacao());
         }
         if (form.getStatus().equals("QUITADA")) {
             divida.setStatus(StatusDivida.QUITADA);

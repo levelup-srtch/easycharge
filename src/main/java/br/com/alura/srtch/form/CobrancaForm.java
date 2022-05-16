@@ -1,69 +1,43 @@
-package br.com.alura.srtch.model;
+package br.com.alura.srtch.form;
 
-import javax.persistence.*;
+import br.com.alura.srtch.model.MeioDeContato;
+import br.com.alura.srtch.model.TipoAcordo;
+import br.com.alura.srtch.model.TipoAgente;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "cobranca")
-public class Cobranca {
+public class CobrancaForm {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(length=10)
-    private long id;
-
-    @Column(nullable=false)
+    @NotNull @PastOrPresent
     private LocalDate dataDeRealizacao;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable=false)
+    @NotNull
     private MeioDeContato meioDeContato;
 
-    @Column(nullable=false, length=50)
+    @NotBlank
     private String agente;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable=false)
+    @NotNull
     private TipoAgente tipoDeAgente;
 
-    @Column(nullable=false, length=500)
+    @NotNull @Length(max = 500)
     private String comentarioDoAgente;
 
-    @Enumerated(EnumType.STRING)
-    private TipoAcordo tipoDeAcordo;
-
-    @Column(length=500)
+    @Length(max = 500)
     private String acordo;
 
+    private TipoAcordo tipoDeAcordo;
+
+    @Future
     private LocalDate dataDePromessaDePagamento;
 
+    @Min(1)@Max(12)
     private Integer numeroDeParcelas;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    private Divida divida;
-
-    public Cobranca() {
-    }
-
-    public Cobranca(LocalDate dataDeRealizacao, MeioDeContato meioDeContato, String agente, TipoAgente tipoDeAgente, String comentarioDoAgente, Divida divida) {
-        this.dataDeRealizacao = dataDeRealizacao;
-        this.meioDeContato = meioDeContato;
-        this.agente = agente;
-        this.tipoDeAgente = tipoDeAgente;
-        this.comentarioDoAgente = comentarioDoAgente;
-//        this.tipoDeAcordo = tipoDeAcordo;
-//        this.acordo = acordo;
-        this.divida = divida;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    @NotNull
+    private Long idDivida;
 
     public LocalDate getDataDeRealizacao() {
         return dataDeRealizacao;
@@ -137,25 +111,11 @@ public class Cobranca {
         this.numeroDeParcelas = numeroDeParcelas;
     }
 
-    public Divida getDivida() {
-        return divida;
+    public Long getIdDivida() {
+        return idDivida;
     }
 
-    public void setDivida(Divida divida) {
-        this.divida = divida;
-    }
-
-    @Override
-    public String toString() {
-        return "Cobranca{" +
-                "dataDeRealizacao=" + dataDeRealizacao +
-                ", meioDeContato=" + meioDeContato +
-                ", agente='" + agente + '\'' +
-                ", tipoDeAgente=" + tipoDeAgente +
-                ", comentarioDoAgente='" + comentarioDoAgente + '\'' +
-                ", tipoDeAcordo=" + tipoDeAcordo +
-                ", acordo='" + acordo + '\'' +
-                ", divida=" + divida +
-                '}';
+    public void setIdDivida(Long idDivida) {
+        this.idDivida = idDivida;
     }
 }
