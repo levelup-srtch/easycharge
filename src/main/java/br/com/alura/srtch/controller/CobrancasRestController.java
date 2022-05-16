@@ -1,2 +1,4 @@
-package br.com.alura.srtch.controller;public class CobrancasRestController {
+package br.com.alura.srtch.controller;
+
+public class CobrancasRestController {
 }

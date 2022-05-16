@@ -6,6 +6,7 @@ import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -122,6 +123,12 @@ public class ClientesController {
         new ClienteMapper().alterar(cliente, clienteDTO);
 
         return REDIRECT_CLIENTES;
+    }
+
+    @GetMapping("/api/aW52YWxpZGEgcmVsYXTDs3JpbyBkZSBjbGllbnRlcw")
+    @CacheEvict(value = "listaDeClientes", allEntries = true)
+    public String invalidaCache(){
+        return "redirect:/api/clientes/report";
     }
 
 }

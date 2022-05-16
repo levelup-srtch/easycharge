@@ -8,12 +8,10 @@ import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.projection.RelatorioClientesProjecao;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.JsonPath;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping
-public class ClientesRestControler {
+public class ClientesRestController {
 
     @Autowired
     private ClienteRepository clienteRepository;
