@@ -10,6 +10,9 @@ public class ErroDoValorDaDivida {
     public static boolean validar(BigDecimal valor, Long idCliente, ClienteRepository clienteRepository, DividaRepository dividaRepository) {
         Cliente cliente = clienteRepository.getById(idCliente);
         BigDecimal valorTotal = dividaRepository.buscaSomaDoValorDaDivida(idCliente);
+        if(valorTotal == null){
+            valorTotal = BigDecimal.ZERO;
+        }
         if (valorTotal.add(valor).doubleValue() > new BigDecimal(12).multiply(cliente.getRenda()).doubleValue()){
             return true;
         }

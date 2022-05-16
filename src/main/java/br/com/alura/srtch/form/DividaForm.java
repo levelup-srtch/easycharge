@@ -1,9 +1,10 @@
 package br.com.alura.srtch.form;
 
-import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.StatusDivida;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
