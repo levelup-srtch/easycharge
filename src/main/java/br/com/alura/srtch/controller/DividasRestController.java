@@ -8,8 +8,10 @@ import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.repository.ClienteRepository;
 import br.com.alura.srtch.repository.DividaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -35,12 +37,10 @@ public class DividasRestController {
     @PostMapping
     public ResponseEntity<DividaDto> cadastrar(@RequestBody @Valid DividaForm form, UriComponentsBuilder uriBuilder){
         if(!clienteRepository.existsById(form.getIdCliente())){
-            System.out.println("id não encontrado");
-            //todo .body ou response body exception
-            return ResponseEntity.badRequest().build();
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id do cliente não encontrado");
         }
         if (ErroDoValorDaDivida.validar(form.getValor(), form.getIdCliente(), clienteRepository, dividaRepository)){
-            return ResponseEntity.badRequest().build();
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Valor das dívidas supera 12x a renda do cliente");
         }
         Divida divida = new DividaMapper().cadastrar(form, clienteRepository);
         dividaRepository.save(divida);
