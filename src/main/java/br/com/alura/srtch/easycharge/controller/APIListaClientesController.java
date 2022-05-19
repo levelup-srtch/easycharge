@@ -52,7 +52,6 @@ public class APIListaClientesController {
 	}
 	
 	
-	
 	@GetMapping("/report")
 	@org.springframework.cache.annotation.Cacheable(value = "listaClientes")
     public List<RelatorioClientesProjection> listarReport(){
@@ -70,4 +69,6 @@ public class APIListaClientesController {
 		 return ResponseEntity.created(uri).body(new ClienteDTO(cliente));
 	 }
 	
+	 
+	 
 }
