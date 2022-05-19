@@ -3,9 +3,11 @@ package br.com.alura.srtch.easycharge.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +47,7 @@ public class APIListaDividaController {
 	*/
 	
 	@GetMapping
+	@org.springframework.cache.annotation.Cacheable(value = "listaClientes")
 	//@ResponseBody
 	 // public List<DividaDTO> home2(Model model) { 
 	 public List<DividaDTO> listaDivida()  { 
@@ -58,6 +61,7 @@ public class APIListaDividaController {
 	
 	 @PostMapping
 	 @Transactional
+	 @CacheEvict(value = "listaClientes", allEntries = true)
 	 public ResponseEntity<DividaDTO> cadastrar(@RequestBody @Valid DividaForm requisicao, UriComponentsBuilder uriBuilder){
 		 if(! clienterepository.existsById(requisicao.getIdCliente())){
 	            System.out.println("id não encontrado");

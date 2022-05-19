@@ -3,9 +3,11 @@ package br.com.alura.srtch.easycharge.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,20 +32,9 @@ public class APIListaClientesController {
 	@Autowired
 	private ClienteRepository clienterepository;
 	
-	/*
-	@RequestMapping("/api/listaclientes")
-	@ResponseBody
-	public List<Cliente> home(Model model) { 
-	//public List<List<Cliente>> home(Model model) { // para retornar um array com varias listas de clientes
-		List<Cliente> clientes = clienterepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
-		model.addAttribute("clientes", clientes);
-		// return Arrays.asList(clientes,clientes,clientes); // para retornar um array com varias listas de clientes
-		   return (clientes);
-	}
-	*/
-	
 	
 	@GetMapping
+	@org.springframework.cache.annotation.Cacheable(value = "listaClientes")
 	//@ResponseBody
 	 // public List<ClienteDTO> home2(Model model) { 
 	 public List<ClienteDTO> lista(String nome) { 
@@ -63,11 +54,13 @@ public class APIListaClientesController {
 	
 	
 	@GetMapping("/report")
+	@org.springframework.cache.annotation.Cacheable(value = "listaClientes")
     public List<RelatorioClientesProjection> listarReport(){
         return clienterepository.ClienteDividas();
     }
 	
 	 @PostMapping
+	 @CacheEvict(value = "listaClientes", allEntries = true)
 	 public ResponseEntity<ClienteDTO> cadastrar(@RequestBody @Valid ClienteForm requisicao, UriComponentsBuilder uriBuilder){
 	           
 		 Cliente cliente = requisicao.toCliente();
