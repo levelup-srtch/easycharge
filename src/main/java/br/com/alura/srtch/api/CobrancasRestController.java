@@ -1,4 +1,4 @@
-package br.com.alura.srtch.controller;
+package br.com.alura.srtch.api;
 
 import br.com.alura.srtch.dto.CobrancaDto;
 import br.com.alura.srtch.form.CobrancaForm;

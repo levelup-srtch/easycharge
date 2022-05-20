@@ -1,6 +1,5 @@
-package br.com.alura.srtch.controller;
+package br.com.alura.srtch.api;
 
-import br.com.alura.srtch.service.ValorDaDividaInvalido;
 import br.com.alura.srtch.dto.DividaDto;
 import br.com.alura.srtch.form.DividaForm;
 import br.com.alura.srtch.mapper.DividaMapper;
@@ -8,6 +7,7 @@ import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.repository.ClienteRepository;
 import br.com.alura.srtch.repository.DividaRepository;
+import br.com.alura.srtch.service.ValorDaDividaInvalido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
