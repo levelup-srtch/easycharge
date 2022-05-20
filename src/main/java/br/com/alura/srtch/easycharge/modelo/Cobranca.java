@@ -175,6 +175,9 @@ public class Cobranca {
 		this.divida = divida;
 	}
 
+	public Cobranca(Long id){
+        this.id = id;
+    }
 
 
 	@Override

@@ -51,7 +51,7 @@ public class Divida {
 	//@Column(length=255,nullable=false)
 	private Cliente cliente;
 	
-	@OneToMany(mappedBy = "divida", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "divida", cascade = CascadeType.PERSIST)
 	private final List<Cobranca> cobrancas = new ArrayList<>();
 	
 	
@@ -123,6 +123,10 @@ public class Divida {
 	        return cobrancas;
 	    }
 	  
+	 public Divida(Long id){
+	        this.id = id;
+	    }
+
 		  
 
 	@Override
