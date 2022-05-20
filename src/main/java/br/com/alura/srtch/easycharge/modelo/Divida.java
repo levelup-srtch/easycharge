@@ -73,7 +73,7 @@ public class Divida {
 		this.cliente = cliente;
 	}
 	
-	 public long getIdDivida() {
+	 public long getId() {
 	        return id;
 	    }
 	

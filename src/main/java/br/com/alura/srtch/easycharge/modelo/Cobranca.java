@@ -54,9 +54,10 @@ public class Cobranca {
 	private int numeroDeParcelas;
  	
 	@ManyToOne(fetch = FetchType.LAZY)
-	 @JoinColumn(nullable = false)
-	 private Divida divida;
+	@JoinColumn(nullable = false,name = "divida", referencedColumnName = "id")
 
+	 private Divida divida;
+ 
 	
 	 
 	

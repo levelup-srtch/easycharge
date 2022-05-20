@@ -72,7 +72,7 @@ public class APIListaDividaController {
 		 
 		 
 		
-		 URI uri = uriBuilder.path("divida/{id}").buildAndExpand(divida.getIdDivida()).toUri();
+		 URI uri = uriBuilder.path("divida/{id}").buildAndExpand(divida.getId()).toUri();
 		 return ResponseEntity.created(uri).body(new DividaDTO(divida));
 		 }
 	 }

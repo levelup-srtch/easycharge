@@ -6,6 +6,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 
 import org.hibernate.validator.constraints.Length;
@@ -19,16 +20,16 @@ import br.com.alura.srtch.easycharge.modelo.TipoDeAgente;
 public class CobrancaForm {
 
 
-	@NotBlank @PastOrPresent
+	@PastOrPresent
 	private Date dataDeRealizacao;
 	
-	@NotBlank
+	
 	private MeioDeContato meioDeContato;
 	
 	@NotBlank
 	private String agente;
 	
-	@NotBlank
+	@NotNull
 	private TipoDeAgente tipoDeAgente;
 	
 	@NotBlank @Length(max = 500)
@@ -43,16 +44,17 @@ public class CobrancaForm {
 	@Future
 	private Date dataDePromessaDePagamento;
  	
-	@NotBlank @Min(1)@Max(12)
+	@Min(1)@Max(12)
 	private int numeroDeParcelas;
 	
-	@NotBlank
+	
 	private Long idDivida ;
 
 	public CobrancaForm() {
 
 	}
 
+	/*
 	public CobrancaForm(Date dataDeRealizacao, MeioDeContato meioDeContato, String agente,
 			TipoDeAgente tipoDeAgente, String comentarioDoAgente, String acordo, TipoDeAcordo tipoDeAcordo,
 			Date dataDePromessaDePagamento, int numeroDeParcelas, Long idDivida) {
@@ -69,7 +71,7 @@ public class CobrancaForm {
 		this.numeroDeParcelas = numeroDeParcelas;
 		this.idDivida = idDivida;
 	}
-	
+	*/
 	
 	public CobrancaForm(Cobranca cobranca) {
 		
@@ -83,10 +85,10 @@ public class CobrancaForm {
 		this.tipoDeAcordo = getTipoDeAcordo();
 		this.dataDePromessaDePagamento = getDataDePromessaDePagamento();
 		this.numeroDeParcelas = getNumeroDeParcelas();
-		this.idDivida = cobranca.getDivida().getIdDivida();
+		this.idDivida = cobranca.getDivida().getId();
 	}
 	
-	public Cobranca tocobranca() {
+	public Cobranca toCobranca() {
 		Divida divida = new Divida(idDivida);
 		Cobranca cobranca = new Cobranca();
 		cobranca.setDivida(divida);
@@ -143,8 +145,51 @@ public class CobrancaForm {
 		return numeroDeParcelas;
 	}
 
-	public Long getDivida() {
+	public Long getIdDivida() {
 		return idDivida;
+	}
+	
+	
+	
+
+	public void setDataDeRealizacao(Date dataDeRealizacao) {
+		this.dataDeRealizacao = dataDeRealizacao;
+	}
+
+	public void setMeioDeContato(MeioDeContato meioDeContato) {
+		this.meioDeContato = meioDeContato;
+	}
+
+	public void setAgente(String agente) {
+		this.agente = agente;
+	}
+
+	public void setTipoDeAgente(TipoDeAgente tipoDeAgente) {
+		this.tipoDeAgente = tipoDeAgente;
+	}
+
+	public void setComentarioDoAgente(String comentarioDoAgente) {
+		this.comentarioDoAgente = comentarioDoAgente;
+	}
+
+	public void setAcordo(String acordo) {
+		this.acordo = acordo;
+	}
+
+	public void setTipoDeAcordo(TipoDeAcordo tipoDeAcordo) {
+		this.tipoDeAcordo = tipoDeAcordo;
+	}
+
+	public void setDataDePromessaDePagamento(Date dataDePromessaDePagamento) {
+		this.dataDePromessaDePagamento = dataDePromessaDePagamento;
+	}
+
+	public void setNumeroDeParcelas(int numeroDeParcelas) {
+		this.numeroDeParcelas = numeroDeParcelas;
+	}
+
+	public void setIdDivida(Long idDivida) {
+		this.idDivida = idDivida;
 	}
 
 	@Override

@@ -53,7 +53,7 @@ public class CobrancaDTO {
 		this.tipoDeAcordo = cobranca.getTipoDeAcordo();
 		this.dataDePromessaDePagamento = cobranca.getDataDePromessaDePagamento();
 		this.numeroDeParcelas = cobranca.getNumeroDeParcelas();
-		this.idDivida = cobranca.getDivida().getIdDivida();
+		this.idDivida =   cobranca.getDivida().getIdDivida();
 	}
 	
 

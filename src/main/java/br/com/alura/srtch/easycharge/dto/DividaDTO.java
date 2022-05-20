@@ -28,7 +28,7 @@ public class DividaDTO {
     }
 
     public DividaDTO(Divida divida){
-        this.id = divida.getIdDivida();
+        this.id = divida.getId();
         this.valor = divida.getValorDaDivida();
         this.dataDeAbertura = divida.getDataDeAbertura();
         this.dataDeQuitacao = divida.getDataDeQuitacao();
