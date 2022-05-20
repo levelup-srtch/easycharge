@@ -1,9 +1,10 @@
 package br.com.alura.srtch.controller;
 
-import br.com.alura.srtch.config.validacao.RecuperacaoJudicial;
+import br.com.alura.srtch.service.ValorDaDividaInvalido;
 import br.com.alura.srtch.dto.DividaDto;
 import br.com.alura.srtch.form.DividaForm;
 import br.com.alura.srtch.mapper.DividaMapper;
+import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.repository.ClienteRepository;
 import br.com.alura.srtch.repository.DividaRepository;
@@ -36,13 +37,12 @@ public class DividasRestController {
 
     @PostMapping
     public ResponseEntity<DividaDto> cadastrar(@RequestBody @Valid DividaForm form, UriComponentsBuilder uriBuilder){
-        if(!clienteRepository.existsById(form.getIdCliente())){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id do cliente não encontrado");
-        }
-        if (RecuperacaoJudicial.validar(form.getValor(), form.getIdCliente(), clienteRepository, dividaRepository)){
+        Cliente cliente = clienteRepository.findById(form.getIdCliente())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id do cliente não encontrado"));
+        if (ValorDaDividaInvalido.validar(form.getValor(), cliente, dividaRepository)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Valor das dívidas supera 12x a renda do cliente");
         }
-        Divida divida = new DividaMapper().cadastrar(form, clienteRepository);
+        Divida divida = new DividaMapper().cadastrar(form, cliente);
         dividaRepository.save(divida);
 
         URI uri = uriBuilder.path("/api/dividas/{id}").buildAndExpand(divida.getId()).toUri();

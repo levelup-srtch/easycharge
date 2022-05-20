@@ -4,12 +4,10 @@ import br.com.alura.srtch.form.DividaForm;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.model.StatusDivida;
-import br.com.alura.srtch.repository.ClienteRepository;
 
 public class DividaMapper {
 
-    public Divida cadastrar(DividaForm form, ClienteRepository repository) {
-        Cliente cliente = repository.getById(form.getIdCliente());
+    public Divida cadastrar(DividaForm form, Cliente cliente) {
 
         Divida divida = new Divida(form.getValor(), form.getStatus(), cliente);
         if (form.getDataDeQuitacao() != null) {
