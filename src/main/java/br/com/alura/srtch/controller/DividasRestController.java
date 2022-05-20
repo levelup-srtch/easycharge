@@ -1,6 +1,6 @@
 package br.com.alura.srtch.controller;
 
-import br.com.alura.srtch.config.validacao.ErroDoValorDaDivida;
+import br.com.alura.srtch.config.validacao.RecuperacaoJudicial;
 import br.com.alura.srtch.dto.DividaDto;
 import br.com.alura.srtch.form.DividaForm;
 import br.com.alura.srtch.mapper.DividaMapper;
@@ -39,7 +39,7 @@ public class DividasRestController {
         if(!clienteRepository.existsById(form.getIdCliente())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id do cliente não encontrado");
         }
-        if (ErroDoValorDaDivida.validar(form.getValor(), form.getIdCliente(), clienteRepository, dividaRepository)){
+        if (RecuperacaoJudicial.validar(form.getValor(), form.getIdCliente(), clienteRepository, dividaRepository)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Valor das dívidas supera 12x a renda do cliente");
         }
         Divida divida = new DividaMapper().cadastrar(form, clienteRepository);
