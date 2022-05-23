@@ -7,6 +7,7 @@ import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.DadosPessoais;
 import br.com.alura.srtch.model.Endereco;
 import br.com.alura.srtch.model.StatusCliente;
+import br.com.alura.srtch.repository.ClienteRepository;
 
 public class ClienteMapper {
 
@@ -25,7 +26,9 @@ public class ClienteMapper {
         return new Cliente(form.getRenda(), dadosPessoais, endereco, statusCliente);
     }
 
-    public void alterar(Cliente cliente, AtualizacaoWebClienteForm form) {
+    public void atualizar(ClienteRepository clienteRepository, AtualizacaoWebClienteForm form) {
+        Cliente cliente = clienteRepository.getById(form.getId());
+        cliente.setCpf(form.getCpf());
         cliente.setNome(form.getNome());
         cliente.setTelefone(form.getTelefone());
         cliente.setEmail(form.getEmail());
@@ -47,8 +50,7 @@ public class ClienteMapper {
         }
     }
 
-    public Cliente atualizar(Cliente cliente, AtualizacaoClienteForm form) {
-
+    public Cliente atualizarApi(Cliente cliente, AtualizacaoClienteForm form) {
         cliente.setNome(form.getNome());
         cliente.setTelefone(form.getTelefone());
         cliente.setEmail(form.getEmail());

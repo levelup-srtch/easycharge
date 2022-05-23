@@ -48,6 +48,7 @@ public class AtualizacaoWebClienteForm {
     @Positive
     private BigDecimal renda;
 
+    @NotBlank
     private String status;
 
     public Long getId() {

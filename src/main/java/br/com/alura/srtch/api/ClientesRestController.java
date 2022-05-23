@@ -63,7 +63,7 @@ public class ClientesRestController {
     @Transactional
     public ResponseEntity<ClienteDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoClienteForm form) {
         Cliente cliente = clienteRepository.getById(id);
-        Cliente atualizado = new ClienteMapper().atualizar(cliente, form);
+        Cliente atualizado = new ClienteMapper().atualizarApi(cliente, form);
 
         return ResponseEntity.ok(new ClienteDto(atualizado));
     }
