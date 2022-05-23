@@ -1,7 +1,8 @@
-package br.com.alura.srtch.controller;
+package br.com.alura.srtch.api;
 
 import br.com.alura.srtch.dto.ClienteDto;
 import br.com.alura.srtch.dto.ClientesResponseDto;
+import br.com.alura.srtch.form.AtualizacaoClienteForm;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
@@ -52,5 +53,18 @@ public class ClientesRestController {
         return clienteRepository.findNomeValorDasDividasCobrancas();
     }
 
+    @GetMapping("/api/clientes/{id}")
+    public ClienteDto detalhar(@PathVariable Long id) {
+        Cliente cliente = clienteRepository.getById(id);
+        return new ClienteDto(cliente);
+    }
 
+    @PutMapping("/api/clientes/{id}")
+    @Transactional
+    public ResponseEntity<ClienteDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoClienteForm form) {
+        Cliente cliente = clienteRepository.getById(id);
+        Cliente atualizado = new ClienteMapper().atualizar(cliente, form);
+
+        return ResponseEntity.ok(new ClienteDto(atualizado));
+    }
 }

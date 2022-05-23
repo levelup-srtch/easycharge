@@ -9,7 +9,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.lang.module.ResolutionException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,15 @@ public class ErroDeValidacaoHandler {
             dto.add(erro);
         });
 
+        return dto;
+    }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ResponseStatusException.class)
+    public List<ErroDeFormularioDto> handle(ResponseStatusException exception){
+        List<ErroDeFormularioDto> dto = new ArrayList<>();
+        ErroDeFormularioDto erroDeFormularioDto = new ErroDeFormularioDto("", exception.getReason());
+        dto.add(erroDeFormularioDto);
         return dto;
     }
 

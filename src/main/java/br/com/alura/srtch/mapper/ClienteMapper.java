@@ -1,11 +1,13 @@
 package br.com.alura.srtch.mapper;
 
 import br.com.alura.srtch.dto.ClienteDto;
+import br.com.alura.srtch.form.AtualizacaoClienteForm;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.DadosPessoais;
 import br.com.alura.srtch.model.Endereco;
 import br.com.alura.srtch.model.StatusCliente;
+import br.com.alura.srtch.repository.ClienteRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,22 +49,48 @@ public class ClienteMapper {
     }
 
     public void alterar(Cliente cliente, ClienteDto dto){
-        DadosPessoais dadosPessoais = new DadosPessoais(dto.getCpf(), dto.getNome(),
-                dto.getProfissao(), dto.getTelefone(), dto.getEmail());
-
-        Endereco endereco = new Endereco(dto.getRua(), dto.getNumero(), dto.getBairro(),
-                dto.getCidade(), dto.getEstado());
-        if(dto.getComplemento() != null){
-            endereco.setComplemento(dto.getComplemento());
-        }
-
+        cliente.setNome(dto.getNome());
+        cliente.setTelefone(dto.getTelefone());
+        cliente.setEmail(dto.getEmail());
+        cliente.setRua(dto.getRua());
+        cliente.setNumero(dto.getNumero());
+        cliente.setBairro(dto.getBairro());
+        cliente.setCidade(dto.getCidade());
+        cliente.setEstado(dto.getEstado());
+        cliente.setProfissao(dto.getProfissao());
         cliente.setRenda(dto.getRenda());
-        cliente.setDadosPessoais(dadosPessoais);
-        cliente.setEndereco(endereco);
-        if(dto.getStatus().equals("ATIVO")){
+
+        if(dto.getComplemento() != null){
+            cliente.setComplemento(dto.getComplemento());
+        }
+        if(dto.getStatus().name().equals("ATIVO")){
             cliente.setStatus(StatusCliente.ATIVO);
         }else {
             cliente.setStatus(StatusCliente.SUSPENSO);
         }
+    }
+
+    public Cliente atualizar(Cliente cliente, AtualizacaoClienteForm form) {
+
+        cliente.setNome(form.getNome());
+        cliente.setTelefone(form.getTelefone());
+        cliente.setEmail(form.getEmail());
+        cliente.setRua(form.getRua());
+        cliente.setNumero(form.getNumero());
+        cliente.setBairro(form.getBairro());
+        cliente.setCidade(form.getCidade());
+        cliente.setEstado(form.getEstado());
+        cliente.setProfissao(form.getProfissao());
+        cliente.setRenda(form.getRenda());
+
+        if(form.getComplemento() != null){
+            cliente.setComplemento(form.getComplemento());
+        }
+        if(form.getStatus().equals("ATIVO")){
+            cliente.setStatus(StatusCliente.ATIVO);
+        }else {
+            cliente.setStatus(StatusCliente.SUSPENSO);
+        }
+        return cliente;
     }
 }
