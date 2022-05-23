@@ -8,8 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -32,20 +30,13 @@ public class Divida implements Serializable {
     @Enumerated(EnumType.STRING)
     private StatusDivida statusDivida;
 
-    @OneToMany(mappedBy = "divida", cascade = CascadeType.ALL)
-    private final List<Cobranca> cobrancas = new ArrayList<>();
-
-
     public Divida() {
     }
-
-    public Divida(Long id, BigDecimal valor, LocalDate dataAbertura, LocalDate dataQuitacao, String descricao, Cliente cliente, StatusDivida statusDivida) {
-        this.id = id;
+    public Divida(BigDecimal valor, LocalDate dataAbertura, Cliente cliente, StatusDivida statusDivida, String descricao) {
         this.valor = valor;
         this.dataAbertura = dataAbertura;
-        this.dataQuitacao = dataQuitacao;
-        this.descricao = descricao;
         this.cliente = cliente;
         this.statusDivida = statusDivida;
+        this.descricao = descricao;
     }
 }

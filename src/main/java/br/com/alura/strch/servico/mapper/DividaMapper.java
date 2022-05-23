@@ -6,5 +6,4 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = {})
 public interface DividaMapper extends EntityMepper<DividaDTO, Divida> {
-
 }

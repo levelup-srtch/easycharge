@@ -17,10 +17,6 @@ import java.util.Optional;
 public interface DividaRepositorio extends JpaRepository <Divida, Long>, JpaSpecificationExecutor<Divida> {
     boolean existsById(long id);
     boolean existsByDataAbertura(LocalDate data);
-    boolean existsByCliente(Cliente cliente);
-
-
-    List <Divida> getAllByCliente(Cliente cliente);
 
 
 
