@@ -15,10 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,8 +27,8 @@ public class ClientesController {
     private ClienteRepository clienteRepository;
 
     private static final String REDIRECT_CLIENTES = "redirect:/clientes";
-    private static final String FORM_CLIENTE = "novoCliente";
-    private static final String FORM_ALTERA_CLIENTE = "alteraCliente";
+    private static final String FORM_CLIENTE = "formulario";
+    private static final String FORM_ALTERA_CLIENTE = "formularioAtualizacao";
 
     @GetMapping("/clientes")
     public String listarCliente(Model model){
@@ -43,10 +40,11 @@ public class ClientesController {
         return "clientes";
     }
 
-    //todo mudar os nomes, tirar verbos, colocar substantivos na url
+    //TODO mudar os nomes, tirar verbos, colocar substantivos na url
 
+    //TODO mudar para patch ou put /clientes/{id}
+    @GetMapping("/clientes/status/{id}")
     @Transactional
-    @GetMapping("/clientes/alterarStatus/{id}")
     public String alterarStatus(@PathVariable Long id) {
         if(!clienteRepository.existsById(id)){
             System.out.println("id não encontrado");
@@ -59,6 +57,7 @@ public class ClientesController {
         return REDIRECT_CLIENTES;
     }
 
+    //TODO mudar para delete /clientes/{id}
     @GetMapping("/clientes/remover/{id}")
     public String removerCliente(@PathVariable Long id){
         if(!clienteRepository.existsById(id)){
@@ -75,12 +74,12 @@ public class ClientesController {
         return REDIRECT_CLIENTES;
     }
 
-    @GetMapping("/clientes/novoCliente")
+    @GetMapping("/clientes/formulario")
     public String novoCliente(br.com.alura.srtch.form.ClienteForm clienteForm){
         return FORM_CLIENTE;
     }
 
-    @PostMapping("/clientes/cadastrar")
+    @PostMapping("/clientes/novo")
     public String cadastrar(@Valid ClienteForm clienteForm, BindingResult result){
         if(result.hasErrors()){
             return FORM_CLIENTE;
@@ -93,7 +92,7 @@ public class ClientesController {
     }
 
     //todo passar os dados do cliente para o clienteDTO
-    @GetMapping("/clientes/alteraCliente/{id}")
+    @GetMapping("/clientes/formularioAtualizacao/{id}")
     public String alteraCliente(@PathVariable Long id, ClienteDto clienteDTO, Model model){
         if(!clienteRepository.existsById(id)){
             System.out.println("id não encontrado");
@@ -109,8 +108,8 @@ public class ClientesController {
 
     //todo validar no back
     @Transactional
-    @PostMapping("/clientes/atualizar")
-    public String atualizar(@Valid AtualizacaoWebClienteForm form, BindingResult result) {
+    @PostMapping("/clientes/altera")
+    public String altera(@Valid AtualizacaoWebClienteForm form, BindingResult result) {
         if(result.hasErrors()){
             return FORM_ALTERA_CLIENTE;
         }

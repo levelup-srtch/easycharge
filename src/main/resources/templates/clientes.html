@@ -27,7 +27,7 @@
             </li>
           </ul>
         </div>
-        <a class="nav-item" href="/clientes/novoCliente"><button type="button"
+        <a class="nav-item" href="/clientes/formulario"><button type="button"
             class="btn btn-outline-secondary fs-5">Novo
             Cliente</button></a>
       </div>
@@ -68,20 +68,20 @@
               <td><span th:text="${cliente.status}" th:name="${status}">status do cliente</td>
               <td>
                 <a class="btn btn-secondary w-100 h-100" role="button"
-                  th:href="@{/clientes/alterarStatus/{id}(id=${cliente.id})}">
+                  th:href="@{/clientes/status/{id}(id=${cliente.id})}">
                   <th:block th:switch="${cliente.status.name()}">
                     <span th:case="'ATIVO'">Suspender</span>
                     <span th:case="'SUSPENSO'">Ativar</span>
                   </th:block>
                 </a>
               </td>
-              <td>
-                <a class="btn btn-danger w-100 h-100" role="button"
+                <td>
+                <a class="btn btn-danger w-100 h-100" role="button" type="submit"
                   th:href="@{/clientes/remover/{id}(id=${cliente.id})}">Remover</a>
               </td>
               <td>
                 <a class="btn btn-primary w-100 h-100" role="button"
-                  th:href="@{/clientes/alteraCliente/{id}(id=${cliente.id})}">Alterar Cliente</a>
+                  th:href="@{/clientes/formAtualizacao/{id}(id=${cliente.id})}">Alterar Cliente</a>
               </td>
             </tr>
           </tbody>
