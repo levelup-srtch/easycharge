@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin()
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/api/endereco")
+@RequestMapping(value = "/api/enderecos")
 public class EnderecoRecurso {
 
     private final EnderecoServico enderecoServico;
