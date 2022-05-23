@@ -1,6 +1,5 @@
 package br.com.alura.strch.servico;
 
-import br.com.alura.strch.dominio.Cliente;
 import br.com.alura.strch.dominio.Endereco;
 import br.com.alura.strch.repositorio.EnderecoRepositori;
 import br.com.alura.strch.servico.DTO.EnderecoDTO;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -54,19 +52,4 @@ public class EnderecoServico implements Serializable {
     public List <EnderecoDTO> buscarPorFiltro(EnderecoFiltro enderecoFiltro){
         return enderecoMapper.toDTO(enderecoRepositori.findAll(enderecoFiltro.filter()));
     }
-
-//    public void adicionaCliente(Cliente cliente) {
-//        String estado = cliente.getEndereco().getEstado();
-//        List<Cliente> clientes = get(estado);
-//        if (clientes == null) {
-//            clientes = new ArrayList<>();
-//        }
-//        clientes.add(cliente);
-//        put(estado, clientes);
-//    }
-
-//    public void adicionarCliente (Cliente cliente){
-//        String endereco = cliente.getEndereco().getEstado();
-//        List <Cliente> clienteList = get(endereco);
-//    }
 }
