@@ -1,6 +1,8 @@
 package br.com.alura.srtch.controller;
 
 import br.com.alura.srtch.dto.ClienteDto;
+import br.com.alura.srtch.form.AtualizacaoClienteForm;
+import br.com.alura.srtch.form.AtualizacaoWebClienteForm;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
@@ -90,12 +92,6 @@ public class ClientesController {
         return REDIRECT_CLIENTES;
     }
 
-    //todo para adicionar os clientes do arquivo json
-    public void cadastrarDTO(@Valid List<ClienteForm> clienteFormList){
-        List<Cliente> clientes = new ClienteMapper().cadastrar(clienteFormList);
-        clientes.forEach(cliente -> clienteRepository.save(cliente));
-    }
-
     //todo passar os dados do cliente para o clienteDTO
     @GetMapping("/clientes/alteraCliente/{id}")
     public String alteraCliente(@PathVariable Long id, ClienteDto clienteDTO, Model model){
@@ -114,13 +110,13 @@ public class ClientesController {
     //todo validar no back
     @Transactional
     @PostMapping("/clientes/atualizar")
-    public String atualizar(@Valid ClienteDto clienteDTO, BindingResult result) {
+    public String atualizar(@Valid AtualizacaoWebClienteForm form, BindingResult result) {
         if(result.hasErrors()){
             return FORM_ALTERA_CLIENTE;
         }
 
-        Cliente cliente = clienteRepository.getById(clienteDTO.getId());
-        new ClienteMapper().alterar(cliente, clienteDTO);
+        Cliente cliente = clienteRepository.getById(form.getId());
+        new ClienteMapper().alterar(cliente, form);
 
         return REDIRECT_CLIENTES;
     }
