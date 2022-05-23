@@ -1,7 +1,6 @@
 package br.com.alura.strch.servico;
 
 import br.com.alura.strch.dominio.Cliente;
-import br.com.alura.strch.dominio.enuns.StatusCliente;
 import br.com.alura.strch.repositorio.ClienteRepositorio;
 import br.com.alura.strch.servico.DTO.ClienteDTO;
 import br.com.alura.strch.servico.DTO.SelectDTO;
@@ -14,9 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -55,13 +51,13 @@ public class ClienteServico implements Serializable {
     }
 
     public ClienteDTO salvar (ClienteDTO clienteDTO){
-//       if(validarCPF(clienteDTO) && validarEmail(clienteDTO)){
+//        if(validarCPF(clienteDTO) && validarEmail(clienteDTO)){
             Cliente cliente = clienteMapper.toEntity(clienteDTO);
             Cliente clienteSalvar = clienteRepositorio.save(cliente);
             return clienteMapper.toDTO(clienteSalvar);
-//        }
-//      throw new ObjectnotFoundException("" + clienteDTO.getCpf());
-    }
+        }
+//       throw new ObjectnotFoundException("" + clienteDTO.getCpf());
+//    }
 
     public ClienteDTO editar (ClienteDTO clienteDTO){
         Cliente cliente = clienteMapper.toEntity(clienteDTO);
@@ -72,22 +68,6 @@ public class ClienteServico implements Serializable {
     public List<ClienteDTO> buscarTodosFiltro(ClienteFiltro clienteFiltro) {
         return clienteMapper.toDTO(clienteRepositorio.findAll(clienteFiltro.filter()));
     }
-
-    public void somaRendaClientesSuspensos(List<Cliente>clientes) {
-        BigDecimal somaRendaClientesSuspensos = BigDecimal.ZERO;
-        int numeroClientesSuspensos = 0;
-
-        for (
-                Cliente cliente : clientes) {
-            if (StatusCliente.SUSPENSO.equals(cliente.getStatus())) {
-                numeroClientesSuspensos++;
-                somaRendaClientesSuspensos = somaRendaClientesSuspensos.add(cliente.getRenda());
-            }
-        }
-        BigDecimal mediaRendaClientesSuspensos = somaRendaClientesSuspensos.divide(BigDecimal.valueOf(numeroClientesSuspensos), 2, RoundingMode.HALF_UP);
-
-    }
-
 
 
 

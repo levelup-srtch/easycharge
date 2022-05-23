@@ -14,7 +14,7 @@ import java.util.List;
 @CrossOrigin
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/api/dividas")
+@RequestMapping(value = "api/dividas")
 public class DividaRecurso {
 
     private final DividaServico dividaServico;
