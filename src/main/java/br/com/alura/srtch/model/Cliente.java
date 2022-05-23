@@ -85,6 +85,10 @@ public class Cliente {
     return dadosPessoais.getCpf();
   }
 
+  public void setCpf(String cpf){
+    this.dadosPessoais.setCpf(cpf);
+  }
+
   public String getTelefone(){
     return dadosPessoais.getTelefone();
   }
