@@ -1,7 +1,6 @@
 package br.com.alura.srtch.controller;
 
 import br.com.alura.srtch.dto.ClienteDto;
-import br.com.alura.srtch.form.AtualizacaoClienteForm;
 import br.com.alura.srtch.form.AtualizacaoWebClienteForm;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
@@ -15,7 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,8 +29,8 @@ public class ClientesController {
     private ClienteRepository clienteRepository;
 
     private static final String REDIRECT_CLIENTES = "redirect:/clientes";
-    private static final String FORM_CLIENTE = "formulario";
-    private static final String FORM_ALTERA_CLIENTE = "formularioAtualizacao";
+    private static final String FORM_CLIENTE = "clientes/formulario";
+    private static final String FORM_ALTERA_CLIENTE = "clientes/formulario";
 
     @GetMapping("/clientes")
     public String listarCliente(Model model){
@@ -75,7 +77,7 @@ public class ClientesController {
     }
 
     @GetMapping("/clientes/formulario")
-    public String novoCliente(br.com.alura.srtch.form.ClienteForm clienteForm){
+    public String novoCliente(ClienteForm clienteForm){
         return FORM_CLIENTE;
     }
 
