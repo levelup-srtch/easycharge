@@ -9,6 +9,7 @@ import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -95,17 +97,15 @@ public class ClientesController {
 
     //todo passar os dados do cliente para o clienteDTO
     @GetMapping("/clientes/formularioAtualizacao/{id}")
-    public String alteraCliente(@PathVariable Long id, ClienteDto clienteDTO, Model model){
+    public String alteraCliente(@PathVariable Long id, AtualizacaoWebClienteForm atualizacaoWebClienteForm){
         if(!clienteRepository.existsById(id)){
-            System.out.println("id não encontrado");
             return ResponseEntity.notFound().toString();
         }
 
         Cliente cliente = clienteRepository.getById(id);
+        atualizacaoWebClienteForm.converter(cliente);
 
-        model.addAttribute("cliente", cliente);
-
-        return "alteraCliente";
+        return "clientes/formularioAtualizacao";
     }
 
     //todo validar no back
@@ -113,7 +113,7 @@ public class ClientesController {
     @PostMapping("/clientes/altera")
     public String altera(@Valid AtualizacaoWebClienteForm form, BindingResult result) {
         if(result.hasErrors()){
-            return FORM_ALTERA_CLIENTE;
+            return "clientes/formularioAtualizacao";
         }
 
         Cliente cliente = clienteRepository.getById(form.getId());

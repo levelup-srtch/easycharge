@@ -1,9 +1,8 @@
 package br.com.alura.srtch.form;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import br.com.alura.srtch.model.Cliente;
+
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class AtualizacaoWebClienteForm {
@@ -161,5 +160,22 @@ public class AtualizacaoWebClienteForm {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void converter(Cliente cliente){
+        this.id = cliente.getId();
+        this.cpf = cliente.getCpf();
+        this.nome = cliente.getNome();
+        this.telefone = cliente.getTelefone();
+        this.email = cliente.getEmail();
+        this.rua = cliente.getRua();
+        this.numero = cliente.getNumero();
+        this.complemento = cliente.getComplemento();
+        this.bairro = cliente.getBairro();
+        this.cidade = cliente.getCidade();
+        this.estado = cliente.getEstado();
+        this.profissao = cliente.getProfissao();
+        this.renda = cliente.getRenda();
+        this.status = cliente.getStatus().name();
     }
 }

@@ -49,17 +49,16 @@
 
     <h1 class="text-center mt-5 mb-4">Alterar Cliente</h1>
 
-    <form th:object="${clienteDTO}" class="row g-3" action="/clientes/altera" method="post">
-      <input type="hidden" th:field="*{id}" th:value="${cliente.id}">
+    <form th:object="${atualizacaoWebClienteForm}" class="row g-3" action="/clientes/altera" method="post">
+      <input type="hidden" th:field="*{id}">
       <div class="col-md-12 pt-2">
         <h4>Dados Pessoais:</h4>
       </div>
       <div class="col-md-4">
         <label class="form-label fs-5" for="nome">Nome Completo</label>
-        <input th:value="${cliente.dadosPessoais.nome}" th:field="*{nome}" type="text" th:errorclass="is-invalid" class="form-control"
-          placeholder="Nome Sobrenome">
+        <input th:field="*{nome}" type="text" th:errorclass="is-invalid" class="form-control">
         <small>Informe o nome do cliente</small>
-        <div class="invalid-feedback" th:errors="*{nome}">
+        <div class="invalid-feedback"  th:errors="*{nome}">
           Erros do nome do cliente
         </div>
       </div>
@@ -141,7 +140,8 @@
       <div class="col-md-4">
         <label for="estado" class="form-label fs-5">UF Estado</label>
         <select th:field="*{estado}" th:errorclass="is-invalid" class="form-select">
-          <option selected disabled value="">Selecione...</option>
+          <option disabled value="">Selecione...</option>
+          <option selected th:value="*{estado}" th:text="*{estado}">estado</option>
           <option value="AC">AC</option>
           <option value="AL">AL</option>
           <option value="AP">AP</option>
@@ -192,18 +192,19 @@
         <label class="form-label fs-5" for="renda">Renda</label>
         <div class="input-group">
           <span class="input-group-text" id="inputGroupPrepend">R$</span>
-          <input th:field="*{renda}" type="number" min="1" step="any" th:errorclass="is-invalid" class="form-control"
+          <input  th:field="*{renda}" type="number" min="1" step="any" th:errorclass="is-invalid" class="form-control"
             placeholder="Valor maior que 0" aria-describedby="inputGroupPrepend">
         </div>
-        <small>Informe a renda do cliente (deve ser maior que 1)</small>
+        <small>Informe a renda do cliente (deve ser maior que 0)</small>
         <div class="invalid-feedback" th:errors="*{renda}">
           Erros da renda do cliente
         </div>
       </div>
       <div class="col-md-4">
         <label for="status" class="form-label fs-5">Status</label>
-        <select th:field="*{status}" th:errorclass="is-invalid"class="form-select">
-          <option selected value="ATIVO">Ativo</option>
+        <select th:field="*{status}" th:errorclass="is-invalid" class="form-select">
+          <option selected th:text="*{status}" th:value="*{status}">status</option>
+          <option value="ATIVO">Ativo</option>
           <option value="SUSPENSO">Suspenso</option>
         </select>
         <small>Selecione o status do cliente</small>
