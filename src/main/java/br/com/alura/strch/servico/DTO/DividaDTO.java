@@ -22,7 +22,7 @@ public class DividaDTO implements Serializable{
         private String descricao;
 
         @ManyToOne(fetch = FetchType.LAZY)
-        private br.com.alura.strch.dominio.Cliente cliente;
+        private Cliente cliente;
 
         @Enumerated(EnumType.STRING)
         private StatusDivida statusDivida;
@@ -37,8 +37,5 @@ public class DividaDTO implements Serializable{
         this.cliente = cliente;
         this.statusDivida = statusDivida;
     }
-
-
-
 
 }
