@@ -4,11 +4,9 @@ import br.com.alura.strch.dominio.Cobranca;
 import br.com.alura.strch.dominio.Divida;
 import br.com.alura.strch.repositorio.CobrancaRepositori;
 import br.com.alura.strch.servico.DTO.CobrancaDTO;
-import br.com.alura.strch.servico.DTO.DividaDTO;
 import br.com.alura.strch.servico.DTO.SelectDTO;
 import br.com.alura.strch.servico.excecao.ObjectnotFoundException;
 import br.com.alura.strch.servico.filtro.CobrancaFiltro;
-import br.com.alura.strch.servico.filtro.DividaFiltro;
 import br.com.alura.strch.servico.mapper.CobrancaMapper;
 import br.com.alura.strch.servico.mapper.CobrancaSelectMapper;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
-
-import static org.apache.commons.lang3.ArrayUtils.toArray;
 
 @RequiredArgsConstructor
 @Transactional
@@ -30,6 +27,7 @@ public class CobrancaServico implements Serializable {
     private final CobrancaMapper cobrancaMapper;
     private final CobrancaRepositori cobrancaRepositori;
     private final CobrancaSelectMapper cobrancaSelectMapper;
+    private final Integer numeroParcelas = 0;
 
     public CobrancaDTO encontrarPorId(Long id){
         Cobranca cobranca = cobrancaRepositori.findById(id).orElseThrow(ObjectnotFoundException ::new);
@@ -74,6 +72,22 @@ public class CobrancaServico implements Serializable {
                 e.setDivida((Divida) listDivida);
                 cobrancaRepositori.save(e);
             }
+        }
+    }
+
+    public final Integer parecelas(){
+
+        try{
+            verificarParcelas(numeroParcelas);
+        }catch (InputMismatchException r){
+            r.printStackTrace();
+        }
+        return numeroParcelas;
+    }
+
+    public void verificarParcelas(Integer numeroParcelas){
+        if(numeroParcelas <1 || numeroParcelas > 12){
+            throw new IllegalArgumentException("Número maximo de Parcelas são 12");
         }
     }
 }
