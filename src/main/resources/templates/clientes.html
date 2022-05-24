@@ -35,7 +35,7 @@
               <td><span th:text="${cliente.dadosPessoais.cpf}">cpf</span></td>
               <td><span th:text="${cliente.dadosPessoais.telefone}">telefone</td>
               <td><span th:text="${cliente.endereco.cidade}">Cidade</span>/<span
-                  th:text="${cliente.endereco.estado}">Estado</td>
+                  th:text="${cliente.endereco.estado}">Estado</span></td>
               <td><span th:text="${'R$ '+ #numbers.formatDecimal(cliente.renda,3, 'POINT', 2, 'COMMA')}">renda do
                   cliente</td>
               <td><span th:text="${cliente.status}" th:name="${status}">status do cliente</td>

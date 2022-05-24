@@ -5,6 +5,8 @@
         <title th:case="Atualizar">Atualizar | Cliente</title>
         <title th:case="Formulário">Formulário | Cliente</title>
         <title th:case="clientes">Clientes | EasyCharge</title>
+        <title th:case="dividas">Dividas | EasyCharge</title>
+        <title th:case="home">Home | EasyCharge</title>
     </th:block>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -26,18 +28,24 @@
 <header th:fragment="header(valor)">
     <nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between p-3">
         <div class="container-fluid">
-            <a class="navbar-brand fs-3" href="/clientes">EasyCharge</a>
+            <a class="navbar-brand fs-3" href="/home">EasyCharge</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a th:classappend="${valor} == 'clientes' ? active" class="nav-link fs-5" aria-current="page"
                             href="/clientes">Clientes</a>
                     </li>
+                    <li class="nav-item">
+                        <a th:classappend="${valor} == 'dividas' ? active" class="nav-link fs-5" aria-current="page"
+                            href="/dividas">Dividas</a>
+                    </li>
                 </ul>
             </div>
             <th:block th:switch="${valor}">
                 <a th:case="clientes" class="nav-item" href="/clientes/formulario"><button type="button"
                         class="btn btn-outline-secondary fs-5">Novo Cliente</button></a>
+                <a th:case="dividas" class="nav-item" href="/dividas/formulario"><button type="button"
+                        class="btn btn-outline-secondary fs-5">Nova Divida</button></a>
             </th:block>
         </div>
     </nav>
