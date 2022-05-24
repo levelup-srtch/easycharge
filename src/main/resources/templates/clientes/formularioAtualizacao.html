@@ -1,28 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head th:replace="~{head :: head}"></head>
+<head th:replace="~{base :: head('Atualizar')}"></head>
 
 <body>
 
-  <header>
-    <nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between p-3">
-      <div class="container-fluid">
-        <a class="navbar-brand fs-3" href="/clientes">EasyCharge</a>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link fs-5" aria-current="page" href="/clientes">Clientes</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+  <header th:replace="~{base :: header('Atualizar')}"></header>
 
   <main id="#" class="container">
 
-    <h1 class="text-center mt-5 mb-4">Alterar Cliente</h1>
+    <h1 class="text-center my-5">Atualizar Cliente</h1>
 
     <form th:object="${atualizacaoWebClienteForm}" class="row g-3" action="/clientes/atualiza" method="post">
       <input type="hidden" th:field="*{id}">
@@ -33,15 +20,15 @@
         <label class="form-label fs-5" for="nome">Nome Completo</label>
         <input th:field="*{nome}" type="text" th:errorclass="is-invalid" class="form-control">
         <small>Informe o nome do cliente</small>
-        <div class="invalid-feedback"  th:errors="*{nome}">
+        <div class="invalid-feedback" th:errors="*{nome}">
           Erros do nome do cliente
         </div>
       </div>
       <div class="col-md-4">
         <label class="form-label fs-5" for="cpf">CPF</label>
         <input th:field="*{cpf}" type="text" th:errorclass="is-invalid" class="form-control"
-          placeholder="Apenas os números" onblur="formataCPF(this)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
-        <small>Informe o CPF do cliente</small>
+          placeholder="Apenas os números" onblur="formataCPF(this)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" maxlength="11">
+        <small>Informe somente os números do CPF do cliente</small>
         <div class="invalid-feedback" th:errors="*{cpf}">
           Erros do cpf do cliente
         </div>
@@ -50,7 +37,7 @@
       <div class="col-md-4">
         <label class="form-label fs-5" for="telefone">Telefone</label>
         <input th:field="*{telefone}" type="tel" th:errorclass="is-invalid" class="form-control"
-          placeholder="(__)9____-____">
+          placeholder="(__)9____-____" maxlength="14">
         <small>Informe o telefone do cliente</small>
         <div class="invalid-feedback" th:errors="*{telefone}">
           Erros do telefone do cliente
@@ -166,7 +153,7 @@
         <label class="form-label fs-5" for="renda">Renda</label>
         <div class="input-group">
           <span class="input-group-text" id="inputGroupPrepend">R$</span>
-          <input  th:field="*{renda}" type="number" min="1" step="any" th:errorclass="is-invalid" class="form-control"
+          <input th:field="*{renda}" type="number" min="1" step="any" th:errorclass="is-invalid" class="form-control"
             placeholder="Valor maior que 0" aria-describedby="inputGroupPrepend">
         </div>
         <small>Informe a renda do cliente (deve ser maior que 0)</small>
@@ -228,12 +215,6 @@
 
   main {
     font-family: 'Open Sans', sans-serif;
-  }
-
-  tr th,
-  td {
-    text-align: center;
-    vertical-align: middle;
   }
 </style>
 
