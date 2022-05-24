@@ -1,5 +1,6 @@
 package br.com.alura.srtch.controller;
 
+import br.com.alura.srtch.dto.ClientesResponseDto;
 import br.com.alura.srtch.form.AtualizacaoWebClienteForm;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
@@ -7,7 +8,10 @@ import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,11 +36,13 @@ public class ClientesController {
     private static final String FORM_ALTERA_CLIENTE = "clientes/formulario";
 
     @GetMapping("/clientes")
-    public String listarCliente(Model model){
+    public String listarCliente(@PageableDefault(sort = {"status", "dadosPessoais.nome"},
+            direction = Sort.Direction.ASC) Pageable pageable, Model model){
 
-        List<Cliente> clientes = clienteRepository.findAll(Sort.by(Sort.Direction.ASC, "status").and(Sort.by(Sort.Direction.ASC, "dadosPessoais.nome")));
+        Page<Cliente> clientes = clienteRepository.findAll(pageable);
+        Page<ClientesResponseDto> clientesResponse = ClientesResponseDto.converter(clientes);
 
-        model.addAttribute("clientes", clientes);
+        model.addAttribute("clientes", clientesResponse);
 
         return "clientes";
     }

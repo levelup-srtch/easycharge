@@ -11,7 +11,7 @@
 
     <h1 class="text-center my-5">Lista de Clientes</h1>
 
-    <div class="card">
+    <div class="card mb-5">
       <div class="card-body p-1">
         <table class="table table-striped table-hover pb-0 w-100 h-100">
           <thead>
@@ -31,11 +31,10 @@
           <tbody>
             <tr th:each="cliente : ${clientes}">
               <th scope="row"><span th:text="${cliente.id}" var="id">id</span></th>
-              <td><span th:text="${cliente.dadosPessoais.nome}">nome</span></td>
-              <td><span th:text="${cliente.dadosPessoais.cpf}">cpf</span></td>
-              <td><span th:text="${cliente.dadosPessoais.telefone}">telefone</td>
-              <td><span th:text="${cliente.endereco.cidade}">Cidade</span>/<span
-                  th:text="${cliente.endereco.estado}">Estado</span></td>
+              <td><span th:text="${cliente.nome}">nome</span></td>
+              <td><span th:text="${cliente.cpf}">cpf</span></td>
+              <td><span th:text="${cliente.telefone}">telefone</td>
+              <td><span th:text="${cliente.local}">Local</span></td>
               <td><span th:text="${'R$ '+ #numbers.formatDecimal(cliente.renda,3, 'POINT', 2, 'COMMA')}">renda do
                   cliente</td>
               <td><span th:text="${cliente.status}" th:name="${status}">status do cliente</td>
