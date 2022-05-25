@@ -12,7 +12,7 @@ public class DividaForm {
 
     //todo fazer a validação no controller com if
     @NotNull @Positive //@Max(value = 12 * )
-    private BigDecimal valor = BigDecimal.ZERO;
+    private BigDecimal valor;
 
     @NotNull @PastOrPresent
     private LocalDate dataDeAbertura;
@@ -20,6 +20,7 @@ public class DividaForm {
     @PastOrPresent
     private LocalDate dataDeQuitacao;
 
+    @NotNull
     private StatusDivida status = StatusDivida.ABERTA;
 
     private String descricaoDeQuitacao;

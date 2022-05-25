@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head th:replace="~{base :: head('Formulário')}"></head>
+<head th:replace="~{base :: head('formularioCliente')}"></head>
 
 <body>
 
-  <header th:replace="~{base :: header('Formulário')}"></header>
+  <header th:replace="~{base :: header('formularioCliente')}"></header>
 
   <main id="#" class="container">
 
@@ -187,8 +187,10 @@
 
   </main>
 
-</body>
+  <script src="/js/formulario.js"></script>
 
+</body>
+<!--
 <script>
   function formataCPF(cpf) {
     const elementoAlvo = cpf
@@ -203,7 +205,7 @@
     elementoAlvo.value = cpfAtualizado;
   }
 </script>
-
+-->
 <style>
   body {
     background-color: gainsboro;

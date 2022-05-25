@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{base :: head('formularioDivida')}"></head>
+
+<body>
+
+    <header th:replace="~{base :: header('formularioDivida')}"></header>
+
+    <main id="#" class="container">
+
+        <h1 class="text-center my-5">Cadastrar Divida</h1>
+
+        <form th:object="${dividaForm}" class="row g-3" action="/dividas/novo" method="post">
+
+            <div class="col-md-12 pt-2">
+                <h4>Dados da Divida:</h4>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label fs-5" for="valor">Valor</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="inputGroupPrepend">R$</span>
+                    <input th:field="*{valor}" type="number" min="1" step="any" th:errorclass="is-invalid" class="form-control"
+                        placeholder="Valor da divida" aria-describedby="inputGroupPrepend">
+                </div>
+                <div class="invalid-feedback" th:errors="*{valor}">
+                    Erros do valor da divida
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fs-5" for="dataDeAbertura">Data de Abertura</label>
+                <input th:field="*{dataDeAbertura}" type="date" onkeypress="return false" max="" th:errorclass="is-invalid" class="form-control pastOrPresent"
+                    placeholder="Data presente ou passada">
+                <small>Informe a data de abertura da divida</small>
+                <div class="invalid-feedback" th:errors="*{dataDeAbertura}">
+                    Erros da data de abertura da divida
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label fs-5" for="dataDeQuitacao">Data de Quitação</label>
+                <input th:field="*{dataDeQuitacao}" type="date"  onkeypress="return false" max="" class="form-control pastOrPresent"
+                    placeholder="Data presente ou passada">
+                <small>Informe o telefone do cliente</small>
+            </div>
+            <div class="col-md-4">
+                <label for="status" class="form-label fs-5">Status</label>
+                <select th:field="*{status}" th:errorclass="is-invalid" class="form-select">
+                    <option selected value="ABERTA">Aberta</option>
+                    <option value="QUITADA">Quitada</option>
+                    <option value="RECUPERACAO_JUDICIAL">Recuperação Judicial</option>
+                </select>
+                <small>Selecione o status da divida</small>
+                <div class="invalid-feedback" th:errors="*{status}">
+                    Erros do status da divida
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fs-5" for="descricaoDeQuitacao">Descricao da quitação</label>
+                <textarea th:field="*{descricaoDeQuitacao}" class="form-control"></textarea>
+                <small>Descrição da quitação da divida</small>
+            </div>
+
+            <div class="col-md-12 pt-2">
+                <h4>Cliente:</h4>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fs-5" for="idCliente">ID do Cliente</label>
+                <input th:field="*{idCliente}" type="number" min="1" step="any" th:errorclass="is-invalid" class="form-control"
+                    placeholder="Deve ser um cliente existente">
+                <small>Informe o id do cliente dessa divida</small>
+                <div class="invalid-feedback" th:errors="*{idCliente}">
+                    Erros do id do cliente
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="d-grid gap-2 col-6 mx-auto mt-4 pt-3 pb-3">
+                  <button class="btn btn-primary fs-5" type="submit">Cadastrar</button>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="text-center fs-5 mb-5">
+                  <a href="/dividas" class="link-dark">Cancelar</a>
+                </div>
+              </div>
+        </form>
+    </main>
+
+</body>
+
+<script>
+
+var today = new Date().toISOString().split('T')[0];
+
+for (let i = 0; i < document.getElementsByClassName("pastOrPresent").length; i++) {
+    document.getElementsByClassName("pastOrPresent")[i].setAttribute('max', today);
+}
+
+</script>
+
+<style>
+    body {
+        background-color: gainsboro;
+    }
+
+    header {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    main {
+        font-family: 'Open Sans', sans-serif;
+    }
+</style>
+
+</html>

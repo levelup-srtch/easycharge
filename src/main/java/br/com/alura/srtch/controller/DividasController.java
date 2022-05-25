@@ -3,14 +3,18 @@ package br.com.alura.srtch.controller;
 import br.com.alura.srtch.dto.DividaWebDto;
 import br.com.alura.srtch.form.AtualizacaoWebClienteForm;
 import br.com.alura.srtch.form.ClienteForm;
+import br.com.alura.srtch.form.DividaForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
+import br.com.alura.srtch.mapper.DividaMapper;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.repository.ClienteRepository;
 import br.com.alura.srtch.repository.DividaRepository;
+import br.com.alura.srtch.service.ValorDaDividaInvalido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -69,18 +74,23 @@ public class DividasController {
     }
 
     @GetMapping("/dividas/formulario")
-    public String novoCliente(ClienteForm clienteForm){
+    public String criarDivida(DividaForm dividaForm){
         return FORM_DIVIDA;
     }
 
     @PostMapping("/dividas/novo")
-    public String cadastrar(@Valid ClienteForm clienteForm, BindingResult result){
+    public String cadastrar(@Valid DividaForm dividaForm, BindingResult result){
         if(result.hasErrors()){
             return FORM_DIVIDA;
         }
+        Cliente cliente = clienteRepository.findById(dividaForm.getIdCliente())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id do cliente não encontrado"));
+        if (ValorDaDividaInvalido.validar(dividaForm.getValor(), cliente, dividaRepository)){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Valor das dívidas supera 12x a renda do cliente");
+        }
 
-        Cliente cliente = new ClienteMapper().cadastrar(clienteForm);
-        clienteRepository.save(cliente);
+        Divida divida = new DividaMapper().cadastrar(dividaForm, cliente);
+        dividaRepository.save(divida);
 
         return REDIRECT_DIVIDAS;
     }

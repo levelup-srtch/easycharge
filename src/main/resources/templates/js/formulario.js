@@ -1,6 +1,5 @@
-function formataCPF(cpf) {
-    const elementoAlvo = cpf
-    const cpfAtual = cpf.value
+function formataCPF(input) {
+    const cpfFormatado = input.value.replace(/\D/g, '');
 
     let cpfAtualizado;
 
