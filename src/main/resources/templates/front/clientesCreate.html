@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link href="css/clienteCreate.css" rel="stylesheet">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <script src="https://kit.fontawesome.com/177a4b9dc3.js" crossorigin="anonymous"></script>
+
+     <title>Easy-Charge</title>
+</head>
+<body>
+     <nav class="navbar navbar-light ">
+          <div class="container-fluid">
+               <a class="navbar-brand " href="#" >
+                    <img src="img/logo.png" class="logo ">
+               </a>
+               <span class="navtitulo ">Easy Charge</span>
+          </div>
+     </nav>
+
+     <form class="card">
+          <div class="form col-md-12 "> <h4 class="nome" >CADASTRO DE CLIENTES </h4> </div>
+          <div class="form">
+               <div class="espaco col-md-4">
+                    <label class="form-label fs-5" for="nome">NOME</label>
+                    <input th:field="*{nome}" type="text" th:errorclass="is-invalid" class="form-control"
+                           placeholder="Nome Completo">
+                    <div class="invalid-feedback" th:errors="*{nome}">
+                         Erros do nome do cliente
+                    </div>
+                    <label for="email" class="form-label fs-5">E-MAIL</label>
+                    <div class="input-group">
+                         <span class="input-group-text" id="inputGroupPrepend">@</span>
+                         <input th:field="*{email}" type="text" th:errorclass="is-invalid" class="form-control"
+                                placeholder="email@email.com" aria-describedby="inputGroupPrepend">
+                    </div>
+                    <div class="invalid-feedback" th:errors="*{email}">
+                    Erros do email do cliente
+                    </div>
+                    <label class="form-label fs-5" for="renda">RENDA</label>
+                    <input th:field="*{renda}" type="tel" th:errorclass="is-invalid" class="form-control"
+                           placeholder="12122">
+                    <div class="invalid-feedback" th:errors="*{renda}">
+                         Erros do telefone do cliente
+                    </div>
+                    <label class="form-label fs-5" for="numero">Número</label>
+                    <input th:field="*{numero}" type="text" th:errorclass="is-invalid" class="form-control" placeholder="00">
+
+                    <div class="invalid-feedback" th:errors="*{numero}">
+                         Erros do número do cliente
+                    </div>
+               </div>
+
+               <div class="col-md-4 espaco">
+                    <label class="form-label fs-5" for="cpf">CPF</label>
+                    <input th:field="*{cpf}" type="text" th:errorclass="is-invalid" class="form-control"
+                           placeholder="000.000.000-00" onblur="formataCPF(this)" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                    <div class="invalid-feedback" th:errors="*{cpf}">
+                         Erros do cpf do cliente
+                    </div>
+
+                    <label class="form-label fs-5" for="profissao">PROFISSAO</label>
+                    <input th:field="*{profissao}" type="tel" th:errorclass="is-invalid" class="form-control"
+                           placeholder="12122">
+                    <div class="invalid-feedback" th:errors="*{profissao}">
+                         Erros do telefone do cliente
+                    </div>
+
+                    <label class="form-label fs-5" for="rua">Rua</label>
+                    <input th:field="*{rua}" type="text" th:errorclass="is-invalid" class="form-control"
+                           placeholder="r. das palmeiras">
+                    <div class="invalid-feedback" th:errors="*{rua}">
+                         Erros da rua do cliente
+                    </div>
+                    <label class="form-label fs-5" for="complemento">Complemento</label>
+                    <input th:field="*{complemento}" type="text" class="form-control" placeholder="Bloco A">
+               </div>
+               <div class="col-md-4 espaco">
+                    <label class="form-label fs-5" for="telefone">TELEFONE</label>
+                    <input th:field="*{telefone}" type="tel" th:errorclass="is-invalid" class="form-control"
+                           placeholder="(99)99999-9999">
+                    <div class="invalid-feedback" th:errors="*{telefone}">
+                         Erros do telefone do cliente
+                    </div>
+                    <label class="form-label fs-5" for="status">STATUS</label>
+                    <input th:field="*{renda}" type="tel" th:errorclass="is-invalid" class="form-control"
+                           placeholder="12122">
+                    <div class="invalid-feedback" th:errors="*{status}">
+                         Erros do telefone do cliente
+                    </div>
+
+                    <label class="form-label fs-5" for="bairro">Bairro</label>
+                    <input th:field="*{bairro}" type="text" th:errorclass="is-invalid" class="form-control"
+                           placeholder="Asa Norte">
+                    <div class="invalid-feedback" th:errors="*{bairro}">
+                         Erros do bairro do cliente
+                    </div>
+                    <label class="form-label fs-5" for="cidade">Cidade</label>
+                    <input th:field="*{cidade}" type="text" th:errorclass="is-invalid" class="form-control" placeholder="Brasília">
+                    <div class="invalid-feedback" th:errors="*{cidade}">
+                         Erros da cidade do cliente
+                    </div>
+               </div>
+          </div>
+          <div class="button">
+               <button  class="salvar btn btn-primary">Salvar</button>
+               <button type="submit" class="delete btn btn-secondary">Cancelar</button>
+          </div>
+     </form>
+
+
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>
