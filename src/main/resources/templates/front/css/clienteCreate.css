@@ -1,43 +1,16 @@
 .navbar{
-    background-color: #b6b9be;
-    box-shadow: 10px 5px 5px black;
+    box-shadow: 0 0 2em black;
 }
+.card{
+    box-shadow:  0 0 1em black;
+}
+.form{
+    display: flex;
+
+
+}
+
 .logo{
     max-height: 33px;
     align-items: center;
-}
-.navtitulo{
-    padding-right: 45%;
-    font-size: 1.8rem;
-}
-.card {
-    margin: 100px 250px;
-    box-shadow: 10px 5px 5px black;
-}
-
-.form{
-    display: flex;
-    margin: 10px 15px 40px;
-    text-align: center;
-}
-
-.button{
-    display: flex;
-    margin: 19px 19px 15px ;
-
-}
-.salvar{
-    width: 9rem;
-}
-.delete{
-    width: 9rem;
-    margin-left: 10px;
-}
-
-.dados{
-    text-align: center;
-}
-
-.espaco{
-    padding-right: 25px;
 }

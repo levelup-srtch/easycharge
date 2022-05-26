@@ -1,31 +1,5 @@
-.navbar{
-    background-color: #b6b9be;
-    box-shadow: 10px 5px 5px black;
-}
-
-.navtitulo{
-    padding-right: 45%;
-    font-size: 1.8rem;
-}
-
 .logo{
     max-height: 33px;
     align-items: center;
 }
-.table{
-    margin-top: 16px;
-}
-.card{
-    margin:220px 250px;
-    box-shadow: 10px 5px 5px black;
-    width: 120em;
-}
-.button{
-    margin: 19px 19px 15px ;
-   width: 12rem;
-}
 
-.icons-delete{
-    padding-left: 10px;
-    color: red;
-}
