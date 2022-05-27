@@ -15,23 +15,41 @@
 				</div>
 				<a href="/cliente/formulario"> <button type="button" class="btn btn-success">Novo Cliente </button> </a>
 			</nav>
-			</div>
 			
 			
-			<div th:each="cliente : ${clientes}">
-			<br>  
-			<div>ID:  <span th:text="${cliente.id}"> </span> </div>
-			<div>Cliente:  <span th:text="${cliente.nome}"> </span> </div>
-			<div>CPF: <span th:text="${cliente.cpf}">  </span> </div>
-			<div>Telefone: <span th:text="${cliente.telefone}">  </span> </div>
-			<div>Local: <span th:text="${cliente.endereco.cidade + '/' + cliente.endereco.estado}">Static content </span></div>
-			<div>Renda: R$<span th:text="${cliente.renda}">  </span> </div>
-			<div>Status: <span th:text="${cliente.status}">  </span> </div>
-			<div>  <a th:href="@{/cliente/delete(id=${cliente.id})}"> <button type="button" class="btn btn-danger">Remover </button> </a> </div>
-			<div>  <a th:href="@{/cliente/alterarStatus(id=${cliente.id})}"> <button type="button" class="btn btn-warning">Alterar Status </button> </a> </div>
-			<div>  <a th:href="@{/cliente/alterarCliente/{id}(id=${cliente.id})}"> <button type="button" class="btn btn-info">Atualizar Dados </button> </a> </div>
-				
-			</div>
+			<div>
+			<div class="table-responsive" ></div>
+			<form action="" class="card-body" method="post">
+                    <table class="table table-striped" >
+                        <tr>
+                            <th scope="col">NOME</th> 
+                            <th scope="col">CPF</th>
+                            <th scope="col">TELEFONE</th>
+                            <th scope="col">STATUS</th>
+                            <th scope="col">EMAIL</th>
+                            <th scope="col">PROFISSÃO</th>
+                            <th scope="col">RENDA</th>
+                            <th scope="col">ENDEREÇO </th>
+                            <th scope="col"> </th>
+                            <th scope="col"> </th>
+                            <th scope="col"> </th>
+                        </tr>
+                        <tr th:each="cliente : ${clientes}">
+                            <td><span th:text="${cliente.nome}">nome</span></td>
+                            <td><span th:text="${cliente.cpf}">cpf</span></td>
+                            <td><span th:text="${cliente.telefone}">telefone</td>
+                            <td><span th:text="${cliente.status}">status</span></td>
+                            <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;"> <span th:text="${cliente.email}">email</span></td>
+                            <td><span th:text="${cliente.profissao}">profissao</span></td>
+                            <td><span th:text="${cliente.renda}">renda</span></td>
+                            <td><span th:text="${cliente.endereco.cidade}">local</span>/<span th:text="${cliente.endereco.estado}"></span></td>
+                            <td><a th:href="@{/cliente/delete(id=${cliente.id})}"> <button type="button" class="btn btn-danger">Remover </button> </a> </td>
+                            <td><a th:href="@{/cliente/alterarStatus(id=${cliente.id})}"> <button type="button" class="btn btn-warning"> Status</button> </a> </td>
+                            <td> <a th:href="@{/cliente/alterarCliente/{id}(id=${cliente.id})}"> <button type="button" class="btn btn-info">Editar </button> </a> </td>
+                    </table>
+            </form>
+        	</div>
+			
 		</div>
 	</body>
 </html>
