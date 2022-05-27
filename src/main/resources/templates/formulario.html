@@ -13,57 +13,59 @@
 				</div>
 				<a href="/cliente/formulario"> <button type="button" class="btn btn-success">Novo Cliente</button> </a>
 			</nav>
+			
+			<div class="card mt-3 mb-2">
 			<form th:object="${requisicaoNovoCliente}" action ="/cliente/novo" method="POST">
 			
-				<div>
+				<div class="mb-3">
 					<label for="nome">Nome do Cliente</label>
 					<input th:field="*{nome}" placeholder="nome do cliente"/>
 				</div>
-				<div>	
+				<div class="mb-3">	
 					<label for="cpf">CPF</label>
 					<input th:field="*{cpf}" placeholder="cpf"/>
 				</div>
-				<div>
+				<div class="mb-3">
 					<label for="telefone">Telefone</label>
 					<input th:field="*{telefone}" placeholder="telefone"/>
 				</div>
-				<div>
+				<div class="mb-3">
 					<label for="email">E-mail</label>
 					<input th:field="*{email}" placeholder="email"/>
 				</div>
-				<div>
+				<div class="mb-3">
 					<label for="rua">Rua</label>
 					<input th:field="*{rua}" placeholder="rua"/>
 				</div>
-				<div>	
+				<div class="mb-3">	
 					<label for="numero">Número</label>
 					<input th:field="*{numero}" placeholder="numero"/>
-				</div>
-				<div>
+				</div >
+				<div class="mb-3">
 					<label for="complemento">Complemento </label>
 					<input th:field="*{complemento}" placeholder="complemento"/>
 				</div>
-				<div>
+				<div class="mb-3">
 					<label for="bairro">Bairro</label>
 					<input th:field="*{bairro}" placeholder="bairro"/>
 				</div>
-				<div>	
+				<div class="mb-3">	
 					<label for="cidade">Cidade</label>
 					<input th:field="*{cidade}" placeholder="cidade"/>
 				</div>
-				<div>	
+				<div class="mb-3">	
 					<label for="estado">Estado</label>
 					<input th:field="*{estado}" placeholder="estado"/>
 				</div>
-				<div>	
+				<div class="mb-3">	
 					<label for="profissao">Profissão</label>
 					<input th:field="*{profissao}" placeholder="profissao"/>
 				</div>
-				<div>	
+				<div class="mb-3">	
 					<label for="renda">Renda</label>
 					<input th:field="*{renda}" placeholder="renda"/>
 					<small>Maior que 1</small>
-				<div>	
+				<div class="mb-3">	
 					<label for="status">Status</label>
 					<input th:field="*{status}" placeholder="status" /> 
 					<small>ATIVO ou SUSPENSO</small>
@@ -72,6 +74,7 @@
 				<button type="submit">Cadastrar</button>
 			
 			</form>
+			</div>
 		</div>
 	</body>
 </html>
