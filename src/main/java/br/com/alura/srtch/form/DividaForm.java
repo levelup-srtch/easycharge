@@ -1,6 +1,7 @@
 package br.com.alura.srtch.form;
 
 import br.com.alura.srtch.model.StatusDivida;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
@@ -14,10 +15,10 @@ public class DividaForm {
     @NotNull @Positive //@Max(value = 12 * )
     private BigDecimal valor;
 
-    @NotNull @PastOrPresent
+    @NotNull @PastOrPresent @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataDeAbertura;
 
-    @PastOrPresent
+    @PastOrPresent @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataDeQuitacao;
 
     @NotNull

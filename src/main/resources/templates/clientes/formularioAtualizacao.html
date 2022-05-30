@@ -26,8 +26,8 @@
       </div>
       <div class="col-md-4">
         <label class="form-label fs-5" for="cpf">CPF</label>
-        <input th:field="*{cpf}" type="text" th:errorclass="is-invalid" class="form-control" onkeydown="formataCPF(this)"
-          placeholder="___.___.___-__" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" maxlength="14">
+        <input th:field="*{cpf}" type="text" th:errorclass="is-invalid" class="form-control"
+          onkeydown="formataCPF(this)" placeholder="___.___.___-__" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" maxlength="14">
         <small>Informe o CPF do Cliente</small>
         <div class="invalid-feedback" th:errors="*{cpf}">
           Erros do cpf do cliente
@@ -187,38 +187,8 @@
 
   </main>
 
-  <script src="../js/formulario.js"></script>
+  <script src="/js/formulario.js"></script>
 
 </body>
-
-<script>
-  function formataCPF(cpf) {
-    document.getElementById("cpf").addEventListener("keydown", formataCPF);
-    const elementoAlvo = cpf
-    const cpfAtual = cpf.value
-
-    let cpfAtualizado;
-
-    cpfAtualizado = cpfAtual.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,
-      function (regex, argumento1, argumento2, argumento3, argumento4) {
-        return argumento1 + '.' + argumento2 + '.' + argumento3 + '-' + argumento4;
-      })
-    elementoAlvo.value = cpfAtualizado;
-  }
-</script>
-
-<style>
-  body {
-    background-color: gainsboro;
-  }
-
-  header {
-    font-family: 'Montserrat', sans-serif;
-  }
-
-  main {
-    font-family: 'Open Sans', sans-serif;
-  }
-</style>
 
 </html>

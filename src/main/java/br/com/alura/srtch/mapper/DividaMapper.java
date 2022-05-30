@@ -9,7 +9,7 @@ public class DividaMapper {
 
     public Divida cadastrar(DividaForm form, Cliente cliente) {
 
-        Divida divida = new Divida(form.getValor(), form.getStatus(), cliente);
+        Divida divida = new Divida(form.getValor(), form.getDataDeAbertura(), form.getStatus(), cliente);
         if (form.getDataDeQuitacao() != null) {
             divida.setDataDeQuitacao(form.getDataDeQuitacao());
         }
