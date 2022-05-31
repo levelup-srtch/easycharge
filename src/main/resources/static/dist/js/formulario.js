@@ -12,6 +12,37 @@ formularioCliente.addEventListener('submit', function (event) {
 
 });
 
+const mensagensDeErro = {
+  nome: {
+    valueMissing: 'O campo nome não pode estar vazio'
+  },
+  cpf: {
+    valueMissing: 'O campo cpf não pode estar vazio'
+  },
+  telefone: {
+    valueMissing: 'O campo telefone não pode estar vazio'
+  },
+  email: {
+    valueMissing: 'O campo email não pode estar vazio',
+    typeMismatch: 'O email digitado não é válido'
+  },
+  rua: {
+    valueMissing: 'O campo rua não pode estar vazio'
+  },
+  numero: {
+    valueMissing: 'O campo número não pode estar vazio'
+  },
+  cidade: {
+    valueMissing: 'O campo cidade não pode estar vazio'
+  },
+  profissao: {
+    valueMissing: 'O campo profissão não pode estar vazio'
+  },
+  renda: {
+    valueMissing: 'O campo renda não pode estar vazio'
+  }
+}
+
 const inputsObrigatorios = document.querySelectorAll('input[required]');
 inputsObrigatorios.forEach((inputObrigatorio) => {
   inputObrigatorio.addEventListener('blur', function () {
@@ -48,3 +79,16 @@ function formataCPF(cpf) {
     })
   elementoAlvo.value = cpfAtualizado;
 }
+
+
+const inputTelefone = document.getElementById("telefone");
+inputTelefone.addEventListener('input', function () {
+  const digitado = inputTelefone.value;
+
+  let cleaned = ('' + digitado).replace(/\D/g, '');
+  //Check if the input is of correct length
+  let match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
+  let telefoneAtualizado = '(' + match[1] + ') ' + match[2] + '-' + match[3]
+
+  inputTelefone.value = telefoneAtualizado;
+});
