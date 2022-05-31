@@ -1,4 +1,6 @@
-<html>
+<!DOCTYPE html>
+
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -15,11 +17,11 @@
 			</nav>
 			
 			<div class="form-group">
-			<form th:object="${requisicaoNovoCliente}" action ="/cliente/novo" method="POST" class="formulario-checkout mt-3 mt-sm-0" novalidate>
+			<form th:object="${requisicaoNovoCliente}" action ="/cliente/novo" method="POST" class="formulario-checkout mt-3 mt-sm-0"  >
 			
 				<div class="form-group">
 					<label for="nome">Nome do Cliente</label>
-					<input th:field="*{nome}" placeholder="nome do cliente" class="form-control" type="text" id="nome" name="nome" required maxlength="200"/>
+					<input th:field="*{nome}" placeholder="nome do cliente" class="form-control" type="text" id="nome" name="nome"  maxlength="200" required/>
 					<div class="invalid-feedback">
                             O nome é obrigatório.
                         </div>				

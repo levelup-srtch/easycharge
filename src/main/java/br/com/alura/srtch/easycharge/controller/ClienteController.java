@@ -24,9 +24,9 @@ public class ClienteController {
 	@Autowired
 	private ClienteRepository clienterepository;
 
-	@GetMapping("/cliente/formulario")
+	@GetMapping("cliente/formulario")
 	public String formulario (RequisicaoNovoCliente requisicao) {
-		return "formulario";
+		return "cliente/formulario";
 	
 	}
 	
