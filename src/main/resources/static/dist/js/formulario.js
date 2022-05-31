@@ -1,61 +1,78 @@
-const formularioCliente = document.querySelector('.formulario-cliente');
+export function valida(input){
+  const tipoInput = input.dataset.tipo
 
-formularioCliente.addEventListener('submit', function (event) {
-  event.preventDefault();
+  if(validadores[tipoInput]){
+      validadores[tipoInput](input)
+  }
 
-  const inputsObrigatorios = document.querySelectorAll('input[required]');
-  inputsObrigatorios.forEach((inputObrigatorio) => {
-    if (!inputObrigatorio.value) {
-      inputObrigatorio.classList.add('is-invalid');
-    }
-  });
-
-});
-
-const mensagensDeErro = {
-  nome: {
-    valueMissing: 'O campo nome não pode estar vazio'
-  },
-  cpf: {
-    valueMissing: 'O campo cpf não pode estar vazio'
-  },
-  telefone: {
-    valueMissing: 'O campo telefone não pode estar vazio'
-  },
-  email: {
-    valueMissing: 'O campo email não pode estar vazio',
-    typeMismatch: 'O email digitado não é válido'
-  },
-  rua: {
-    valueMissing: 'O campo rua não pode estar vazio'
-  },
-  numero: {
-    valueMissing: 'O campo número não pode estar vazio'
-  },
-  cidade: {
-    valueMissing: 'O campo cidade não pode estar vazio'
-  },
-  profissao: {
-    valueMissing: 'O campo profissão não pode estar vazio'
-  },
-  renda: {
-    valueMissing: 'O campo renda não pode estar vazio'
+  if(input.validity.valid){
+      input.classList.remove('is-invalid')
+      input.classList.add('is-valid')
+      input.parentElement.querySelector('.invalid-feedback').innerHTML = ''
+  }else {
+      input.classList.add('is-invalid')
+      input.classList.remove('is-valid')
+      input.parentElement.querySelector('.invalid-feedback').innerHTML = mostraMensagemDeError(tipoInput,input)
   }
 }
 
-const inputsObrigatorios = document.querySelectorAll('input[required]');
-inputsObrigatorios.forEach((inputObrigatorio) => {
-  inputObrigatorio.addEventListener('blur', function () {
-    if (!inputObrigatorio.value) {
-      inputObrigatorio.classList.add('is-invalid');
-      inputObrigatorio.classList.remove('is-valid');
-    } else {
-      inputObrigatorio.classList.remove('is-invalid');
-      inputObrigatorio.classList.add('is-valid');
-    }
-  });
-});
 
+const tiposDeErro = [
+  'valueMissing',
+  'typeMismatch',
+  'customError',
+  'patternMismatch'
+]
+
+const mensagensDeErro = {
+  nome : {
+      valueMissing: 'O campo nome não pode estar vazio'
+  },
+  cpf:{
+      valueMissing: 'O campo cpf não pode estar vazio'
+  },
+  telefone:{
+      valueMissing: 'O campo telefone não pode estar vazio',
+      typeMismatch: 'O telefone digitado não é válido'
+  },
+  email: {
+      valueMissing: 'O campo email não pode estar vazio',
+      typeMismatch: 'o email digitado não é válido'
+  },
+  rua:{
+      valueMissing: 'O campo rua não pode estar vazio'
+  },
+  numero:{
+      valueMissing: 'O campo número não pode estar vazio'
+  },
+  bairro:{
+      valueMissing: 'O campo bairro não pode estar vazio '
+  },
+  cidade:{
+      valueMissing: 'O campo cidade não pode estar vazio'
+  },
+  profissao:{
+      valueMissing: 'O campo profissão não pode estar vazio'
+  },
+  renda:{
+      valueMissing: 'O campo renda não pode estar vazio',
+      customError: 'A renda não pode ser zero'
+  }
+
+}
+
+function mostraMensagemDeError(tipoDeInput, input){
+
+  let mensagem = ''
+
+  tiposDeErro.forEach(erro => {
+      if(input.validity[erro]){
+          mensagem = `${mensagem + mensagensDeErro[tipoDeInput][erro]};\n`
+      }
+  })
+
+  return mensagem
+}
 
 const inputCpf = document.getElementById("cpf");
 inputCpf.addEventListener('input', function () {

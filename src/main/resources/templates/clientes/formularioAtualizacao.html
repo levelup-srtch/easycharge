@@ -11,7 +11,7 @@
 
     <h1 class="text-center my-5">Atualizar Cliente</h1>
 
-    <form th:object="${atualizacaoWebClienteForm}" class="row g-3" action="/clientes/atualiza" method="post">
+    <form th:object="${atualizacaoWebClienteForm}" class="row g-3" action="/clientes/atualiza" method="post" novalidate>
       <input type="hidden" th:field="*{id}">
       <div class="col-md-12 pt-2">
         <h4>Dados Pessoais:</h4>
@@ -20,14 +20,17 @@
         <label class="form-label fs-5" for="nome">Nome Completo</label>
         <input th:field="*{nome}" type="text" th:errorclass="is-invalid" class="form-control" required>
         <small>Informe o nome do cliente</small>
-        <div class="invalid-feedback" th:errors="*{nome}">
-          Erros do nome do cliente
+        <div class="invalid-feedback">
+          <span th:errors="*{nome}">
+            Erros do nome do cliente
+          </span>
         </div>
       </div>
       <div class="col-md-4">
         <label class="form-label fs-5" for="cpf">CPF</label>
         <input th:field="*{cpf}" type="text" th:errorclass="is-invalid" class="form-control"
-          onkeydown="formataCPF(this)" placeholder="___.___.___-__" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" maxlength="14" required>
+          placeholder="___.___.___-__" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" maxlength="14"
+          required>
         <small>Informe o CPF do Cliente</small>
         <div class="invalid-feedback" th:errors="*{cpf}">
           Erros do cpf do cliente
@@ -71,7 +74,8 @@
       </div>
       <div class="col-md-2">
         <label class="form-label fs-5" for="numero">Número</label>
-        <input th:field="*{numero}" type="text" th:errorclass="is-invalid" class="form-control" placeholder="00" required>
+        <input th:field="*{numero}" type="text" th:errorclass="is-invalid" class="form-control" placeholder="00"
+          required>
         <small>Informe o número do endereço</small>
         <div class="invalid-feedback" th:errors="*{numero}">
           Erros do número do cliente
@@ -84,8 +88,8 @@
 
       <div class="col-md-4">
         <label class="form-label fs-5" for="bairro">Bairro</label>
-        <input th:field="*{bairro}" type="text" th:errorclass="is-invalid" class="form-control"
-          placeholder="Zona Norte" required>
+        <input th:field="*{bairro}" type="text" th:errorclass="is-invalid" class="form-control" placeholder="Zona Norte"
+          required>
         <small>Informe o bairro do cliente</small>
         <div class="invalid-feedback" th:errors="*{bairro}">
           Erros do bairro do cliente
@@ -93,7 +97,8 @@
       </div>
       <div class="col-md-4">
         <label class="form-label fs-5" for="cidade">Cidade</label>
-        <input th:field="*{cidade}" type="text" th:errorclass="is-invalid" class="form-control" placeholder="São Paulo" required>
+        <input th:field="*{cidade}" type="text" th:errorclass="is-invalid" class="form-control" placeholder="São Paulo"
+          required>
         <small>Informe a cidade do cliente</small>
         <div class="invalid-feedback" th:errors="*{cidade}">
           Erros da cidade do cliente
