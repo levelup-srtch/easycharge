@@ -25,12 +25,13 @@ public class HomeController {
 		*/
 	// @GetMapping("/home")
 	
-	@RequestMapping(value={"", "/", "welcome","home"})
-		//@ResponseBody
-	public String home() {
-		return "home";
+//	@RequestMapping(value={"", "/", "welcome","home"})
+//		//@ResponseBody
+//	public String home() {
+//		return "home";
+//	
+//	}
 	
-	}
 	
 	@GetMapping("/hello2")
 	public String hello () {

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.alura.srtch.easycharge.repository.ClienteRepository;
 
 @RestController
-@RequestMapping("/")
+ // @RequestMapping("/")
 public class InvalidateCache {
 	
 

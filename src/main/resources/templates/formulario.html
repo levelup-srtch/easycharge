@@ -14,12 +14,15 @@
 				<a href="/cliente/formulario"> <button type="button" class="btn btn-success">Novo Cliente</button> </a>
 			</nav>
 			
-			<div class="card mt-3 mb-2">
-			<form th:object="${requisicaoNovoCliente}" action ="/cliente/novo" method="POST">
+			<div class="form-group">
+			<form th:object="${requisicaoNovoCliente}" action ="/cliente/novo" method="POST" class="formulario-checkout mt-3 mt-sm-0" novalidate>
 			
-				<div class="mb-3">
+				<div class="form-group">
 					<label for="nome">Nome do Cliente</label>
-					<input th:field="*{nome}" placeholder="nome do cliente"/>
+					<input th:field="*{nome}" placeholder="nome do cliente" class="form-control" type="text" id="nome" name="nome" required maxlength="200"/>
+					<div class="invalid-feedback">
+                            O nome é obrigatório.
+                        </div>				
 				</div>
 				<div class="mb-3">	
 					<label for="cpf">CPF</label>
@@ -76,5 +79,6 @@
 			</form>
 			</div>
 		</div>
+		 <script src="/validacao.js"></script>
 	</body>
 </html>
