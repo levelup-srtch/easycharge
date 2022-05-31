@@ -18,7 +18,7 @@
       </div>
       <div class="col-md-4">
         <label class="form-label fs-5" for="nome">Nome Completo</label>
-        <input th:field="*{nome}" type="text" th:errorclass="is-invalid" class="form-control">
+        <input th:field="*{nome}" type="text" th:errorclass="is-invalid" class="form-control" required>
         <small>Informe o nome do cliente</small>
         <div class="invalid-feedback" th:errors="*{nome}">
           Erros do nome do cliente
@@ -27,7 +27,7 @@
       <div class="col-md-4">
         <label class="form-label fs-5" for="cpf">CPF</label>
         <input th:field="*{cpf}" type="text" th:errorclass="is-invalid" class="form-control"
-          onkeydown="formataCPF(this)" placeholder="___.___.___-__" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" maxlength="14">
+          onkeydown="formataCPF(this)" placeholder="___.___.___-__" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" maxlength="14" required>
         <small>Informe o CPF do Cliente</small>
         <div class="invalid-feedback" th:errors="*{cpf}">
           Erros do cpf do cliente
@@ -37,7 +37,7 @@
       <div class="col-md-4">
         <label class="form-label fs-5" for="telefone">Telefone</label>
         <input th:field="*{telefone}" type="tel" th:errorclass="is-invalid" class="form-control"
-          placeholder="(__)9____-____" maxlength="14">
+          placeholder="(__)9____-____" maxlength="14" required>
         <small>Informe o telefone do cliente</small>
         <div class="invalid-feedback" th:errors="*{telefone}">
           Erros do telefone do cliente
@@ -48,7 +48,7 @@
         <div class="input-group">
           <span class="input-group-text" id="inputGroupPrepend">@</span>
           <input th:field="*{email}" type="email" th:errorclass="is-invalid" class="form-control"
-            placeholder="email@email.com" aria-describedby="inputGroupPrepend">
+            placeholder="email@email.com" aria-describedby="inputGroupPrepend" required>
         </div>
         <small>Informe o e-mail do cliente</small>
         <div class="invalid-feedback" th:errors="*{email}">
@@ -63,7 +63,7 @@
       <div class="col-md-2">
         <label class="form-label fs-5" for="rua">Rua</label>
         <input th:field="*{rua}" type="text" th:errorclass="is-invalid" class="form-control"
-          placeholder="r. das palmeiras">
+          placeholder="r. das palmeiras" required>
         <small>Informe a rua do cliente</small>
         <div class="invalid-feedback" th:errors="*{rua}">
           Erros da rua do cliente
@@ -71,7 +71,7 @@
       </div>
       <div class="col-md-2">
         <label class="form-label fs-5" for="numero">Número</label>
-        <input th:field="*{numero}" type="text" th:errorclass="is-invalid" class="form-control" placeholder="00">
+        <input th:field="*{numero}" type="text" th:errorclass="is-invalid" class="form-control" placeholder="00" required>
         <small>Informe o número do endereço</small>
         <div class="invalid-feedback" th:errors="*{numero}">
           Erros do número do cliente
@@ -85,7 +85,7 @@
       <div class="col-md-4">
         <label class="form-label fs-5" for="bairro">Bairro</label>
         <input th:field="*{bairro}" type="text" th:errorclass="is-invalid" class="form-control"
-          placeholder="Zona Norte">
+          placeholder="Zona Norte" required>
         <small>Informe o bairro do cliente</small>
         <div class="invalid-feedback" th:errors="*{bairro}">
           Erros do bairro do cliente
@@ -93,7 +93,7 @@
       </div>
       <div class="col-md-4">
         <label class="form-label fs-5" for="cidade">Cidade</label>
-        <input th:field="*{cidade}" type="text" th:errorclass="is-invalid" class="form-control" placeholder="São Paulo">
+        <input th:field="*{cidade}" type="text" th:errorclass="is-invalid" class="form-control" placeholder="São Paulo" required>
         <small>Informe a cidade do cliente</small>
         <div class="invalid-feedback" th:errors="*{cidade}">
           Erros da cidade do cliente
@@ -143,7 +143,7 @@
       <div class="col-md-4">
         <label class="form-label fs-5" for="profissao">Profissão</label>
         <input th:field="*{profissao}" type="text" th:errorclass="is-invalid" class="form-control"
-          placeholder="Engenheiro">
+          placeholder="Engenheiro" required>
         <small>Informe a profissão do cliente</small>
         <div class="invalid-feedback" th:errors="*{profissao}">
           Erros da profissao do cliente
@@ -154,7 +154,7 @@
         <div class="input-group">
           <span class="input-group-text" id="inputGroupPrepend">R$</span>
           <input th:field="*{renda}" type="number" min="1" step="any" th:errorclass="is-invalid" class="form-control"
-            placeholder="Valor maior que 0" aria-describedby="inputGroupPrepend">
+            placeholder="Valor maior que 0" aria-describedby="inputGroupPrepend" required>
         </div>
         <small>Informe a renda do cliente (deve ser maior que 0)</small>
         <div class="invalid-feedback" th:errors="*{renda}">
@@ -187,7 +187,7 @@
 
   </main>
 
-  <script src="/js/formulario.js"></script>
+  <script src="/dist/js/formulario.js"></script>
 
 </body>
 
