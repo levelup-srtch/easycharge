@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./divida-create.component.css']
 })
 export class DividaCreateComponent implements OnInit {
+    hideRequiredControl: any;
+  floatLabelControl: any;
 
 
   constructor() { }
