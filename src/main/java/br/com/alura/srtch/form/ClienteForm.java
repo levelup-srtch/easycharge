@@ -5,41 +5,42 @@ import java.math.BigDecimal;
 
 public class ClienteForm {
 
-    @NotBlank
+    @NotBlank(message = "O campo nome não pode estar em branco")
     private String nome;
 
-    @NotBlank
+    @NotBlank(message = "O campo CPF não pode estar em branco")
 //    @CPF
     private String cpf;
 
-    @NotBlank
+    @NotBlank(message = "O campo telefone não pode estar em branco")
     private String telefone;
 
-    @NotBlank
+    @NotBlank(message = "O campo e-mail não pode estar em branco")
     @Email
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "O campo rua não pode estar em branco")
     private String rua;
 
-    @NotBlank
+    @NotBlank(message = "O campo número não pode estar em branco")
     private String numero;
 
     private String complemento;
 
-    @NotBlank
+    @NotBlank(message = "O campo bairro não pode estar em branco")
     private String bairro;
 
-    @NotBlank
+    @NotBlank(message = "O campo cidade não pode estar em branco")
     private String cidade;
 
-    @NotBlank
+    @NotBlank(message = "O campo estado não pode estar em branco")
     private String estado;
 
-    @NotBlank
+    @NotBlank(message = "O campo profissão não pode estar em branco")
     private String profissao;
 
-    @NotNull @Positive
+    @NotNull(message = "O campo renda não pode ser nulo")
+    @Positive(message = "O valor da renda precisa ser maior que 0")
     private BigDecimal renda;
 
     private String status;

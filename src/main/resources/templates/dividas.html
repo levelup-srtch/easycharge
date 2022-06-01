@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{base :: head('dividas')}"></head>
+
+<body>
+
+  <header th:replace="~{base :: header('dividas')}"></header>
+
+  <main id="#" class="container-fluid">
+
+    <h1 class="text-center my-5">Lista de Dividas</h1>
+
+    <div class="card mb-5">
+        <div class="card-body p-1">
+          <table class="table table-striped table-hover pb-0 w-100 h-100">
+            <thead>
+              <tr class="text-center">
+                <th scope="col">ID</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Data de Abertura</th>
+                <th scope="col">ID do Cliente</th>
+                <th scope="col">Status</th>
+                <th scope="col">Remover</th>
+              <th scope="col">Alterar Divida</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr th:each="divida : ${dividas}">
+            <th scope="row"><span th:text="${divida.id}" var="id">id</span></th>
+            <td><span th:text="${'R$ '+ #numbers.formatDecimal(divida.valor,3, 'POINT', 2, 'COMMA')}">valor</span></td>
+            <td><span th:text="${#temporals.format(divida.dataDeAbertura, 'dd/MM/yyyy')}">data de abertura</span></td>
+            <td><span th:text="${divida.idCliente}">id do cliente</span></td>
+            <td><span th:text="${divida.status.name()}">status</td>
+            <td>
+                <a class="btn btn-danger w-100 h-100" role="button" type="submit"
+                  th:href="@{/dividas/remover/{id}(id=${divida.id})}">Remover</a>
+              </td>
+              <td>
+                <a class="btn btn-primary w-100 h-100" role="button"
+                  th:href="@{/dividas/formularioAtualizacao/{id}(id=${divida.id})}">Alterar Divida</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+
+</html>
