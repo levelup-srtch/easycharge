@@ -6,7 +6,7 @@ export interface Cliente{
     email: string
     profissao: string
     renda: string
-    StatusCliente:any
+    status: string
     rua: string
     numero: string
     complemento: string

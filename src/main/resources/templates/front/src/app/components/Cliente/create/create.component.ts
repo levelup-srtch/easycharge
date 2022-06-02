@@ -17,9 +17,6 @@ export class CreateComponent implements OnInit {
   constructor(private router: Router, private clienteService: ClienteService) { }
 
   ngOnInit(): void {
-   this.formulario()
-  }
-  formulario():void{
     this.form = this.formBuilder.group({
       id:[null],
       nome: ['',[Validators.required]],
@@ -32,8 +29,8 @@ export class CreateComponent implements OnInit {
       Endereco: ['',[Validators.required]]
 
     });
-
   }
+
 
   createCliente(): void{
 

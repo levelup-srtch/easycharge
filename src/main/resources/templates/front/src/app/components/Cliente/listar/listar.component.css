@@ -1,11 +1,4 @@
-.tabela{
-    width: 100%;
-    background-color: #dae0ed;
-}
-.card-tabela{
+tabela {
+    largura : 100% ;
 
-    box-shadow: 0 0 1em #0c0c0c;
-}
-.button{
-    padding-top: 15px;
 }
