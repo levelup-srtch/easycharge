@@ -12,14 +12,13 @@ export function valida(input: HTMLInputElement) {
   }
 }
 
-
 const tiposDeErro = [
   'valueMissing',
   'typeMismatch',
   'patternMismatch'
 ]
 
-const mensagensDeErro = {
+const mensagensDeErro: any = {
   nome: {
     valueMissing: 'O campo nome não pode estar vazio',
     typeMismatch: 'O nome digitado não é válido',
@@ -67,7 +66,8 @@ function mostraMensagemDeError(tipoDeInput: string, input: HTMLInputElement) {
   let mensagem = ''
 
   tiposDeErro.forEach(erro => {
-    if (input.validity[erro]) {
+    const validity: any = input.validity
+    if (validity[erro]) {
       mensagem = `${mensagem + mensagensDeErro[tipoDeInput][erro]};\n`
     }
   })

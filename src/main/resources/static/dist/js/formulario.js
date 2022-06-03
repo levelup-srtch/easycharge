@@ -60,36 +60,37 @@ const mensagensDeErro = {
 function mostraMensagemDeError(tipoDeInput, input) {
     let mensagem = '';
     tiposDeErro.forEach(erro => {
-        if ((input.validity[erro])) {
+        const validity = input.validity;
+        if (validity[erro]) {
             mensagem = `${mensagem + mensagensDeErro[tipoDeInput][erro]};\n`;
         }
     });
     return mensagem;
 }
-const inputCpf = document.getElementById("cpf");
+const inputCpf = document.querySelector('#cpf');
 inputCpf.addEventListener('input', function () {
-    const digitado = inputCpf.nodeValue;
+    const digitado = inputCpf.value;
     const apenasNumeros = digitado.replace(/\D/g, '');
-    inputCpf.nodeValue = apenasNumeros;
+    inputCpf.value = apenasNumeros;
     formataCPF(inputCpf);
 });
 function formataCPF(cpf) {
     document.getElementById("cpf").addEventListener("keydown", function () {
         const elementoAlvo = cpf;
-        const cpfAtual = cpf.nodeValue;
+        const cpfAtual = cpf.value;
         let cpfAtualizado;
         cpfAtualizado = cpfAtual.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, (regex, argumento1, argumento2, argumento3, argumento4) => {
             return argumento1 + '.' + argumento2 + '.' + argumento3 + '-' + argumento4;
         });
-        elementoAlvo.nodeValue = cpfAtualizado;
+        elementoAlvo.value = cpfAtualizado;
     });
 }
-const inputTelefone = document.getElementById("telefone");
+const inputTelefone = document.querySelector("#telefone");
 inputTelefone.addEventListener('input', function () {
-    const digitado = inputTelefone.nodeValue;
+    const digitado = inputTelefone.value;
     let cleaned = ('' + digitado).replace(/\D/g, '');
     //Check if the input is of correct length
     let match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
     let telefoneAtualizado = '(' + match[1] + ') ' + match[2] + '-' + match[3];
-    inputTelefone.nodeValue = telefoneAtualizado;
+    inputTelefone.value = telefoneAtualizado;
 });
