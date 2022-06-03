@@ -39,7 +39,7 @@
       <div class="col-md-4">
         <label class="form-label fs-5" for="telefone">Telefone</label>
         <input th:field="*{telefone}" type="tel" th:errorclass="is-invalid" class="form-control"
-          placeholder="(__)9____-____" pattern="^\(\d{2}\) (9)\d{4}-\d{4}$" maxlength="15" data-tipo="telefone"
+          placeholder="(__)9____-____" pattern="^\(?\d{2}\)?\s?(9)\d{4}-?\d{4}$" maxlength="15" data-tipo="telefone"
           required>
         <div class="invalid-feedback fs-6">
           <span th:errors="*{telefone}">Erros do telefone do cliente</span>
@@ -56,8 +56,8 @@
           <div class="invalid-feedback fs-6">
             <span th:errors="*{email}">Erros do email do cliente</span>
           </div>
-          <small>Informe o e-mail do cliente</small>
         </div>
+        <small>Informe o email do cliente</small>
       </div>
 
       <div class="col-md-12 pt-2">
@@ -85,6 +85,7 @@
       <div class="col-md-4">
         <label class="form-label fs-5" for="complemento">Complemento</label>
         <input th:field="*{complemento}" type="text" class="form-control" placeholder="Bloco A" maxlength="300">
+        <small>Informe o complemento do cliente</small>
       </div>
 
       <div class="col-md-4">
@@ -164,8 +165,8 @@
           <div class="invalid-feedback fs-6">
             <span th:errors="*{renda}">Erros da renda do cliente</span>
           </div>
-          <small>Informe a renda do cliente (deve ser maior que 0)</small>
         </div>
+        <small>Informe a renda do cliente (deve ser maior que 0)</small>
       </div>
       <div class="col-md-4">
         <label for="status" class="form-label fs-5">Status</label>
