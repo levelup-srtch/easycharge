@@ -21,7 +21,6 @@ const tiposDeErro = [
 const mensagensDeErro: any = {
   nome: {
     valueMissing: 'O campo nome não pode estar vazio',
-    typeMismatch: 'O nome digitado não é válido',
     patternMismatch: 'O nome deve começar com uma letra maiúscula e não deve conter mais de 1 espaço entre os nomes'
   },
   cpf: {
@@ -30,13 +29,12 @@ const mensagensDeErro: any = {
   },
   telefone: {
     valueMissing: 'O campo telefone não pode estar vazio',
-    typeMismatch: 'O telefone digitado não é válido',
     patternMismatch: 'Digite apenas os números contendo o ddd e o 9 adicional, ou no seguinte formato:(DDD) 9xxxx-xxxx'
   },
   email: {
     valueMissing: 'O campo email não pode estar vazio',
     typeMismatch: 'O email digitado não é válido',
-    patternMismatch: 'O email digitado está imcompleto'
+    patternMismatch: 'O email digitado está incompleto'
   },
   rua: {
     valueMissing: 'O campo rua não pode estar vazio'

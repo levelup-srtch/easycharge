@@ -1,8 +1,5 @@
 package br.com.alura.srtch.form;
 
-import br.com.alura.srtch.model.Cliente;
-import br.com.alura.srtch.repository.ClienteRepository;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
