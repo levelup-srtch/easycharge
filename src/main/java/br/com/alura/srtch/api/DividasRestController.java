@@ -1,5 +1,6 @@
 package br.com.alura.srtch.api;
 
+import br.com.alura.srtch.dto.DividaComCpfDTO;
 import br.com.alura.srtch.dto.DividaDto;
 import br.com.alura.srtch.form.DividaForm;
 import br.com.alura.srtch.mapper.DividaMapper;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/dividas")
+@CrossOrigin
 public class DividasRestController {
 
     @Autowired
@@ -33,6 +35,12 @@ public class DividasRestController {
     public List<DividaDto> lista(){
         List<Divida> dividas = dividaRepository.findAll();
         return DividaDto.converter(dividas);
+    }
+
+    @GetMapping("/cpf")
+    public List<DividaComCpfDTO> listarComCpf(){
+        List<Divida> dividas = dividaRepository.findAll();
+        return DividaComCpfDTO.converter(dividas);
     }
 
     @PostMapping

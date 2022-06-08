@@ -8,15 +8,16 @@ import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.projection.RelatorioClientesProjecao;
 import br.com.alura.srtch.repository.ClienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -25,10 +26,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping
+@CrossOrigin
 public class ClientesRestController {
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository;
+
+    public ClientesRestController(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
+    }
 
     @GetMapping("/api/clientes")
     public Page<ClientesResponseDto> lista(@PageableDefault(size = 5, sort = {"dadosPessoais.nome", "status"},
@@ -67,4 +72,22 @@ public class ClientesRestController {
 
         return ResponseEntity.ok(new ClienteDto(atualizado));
     }
+
+    @DeleteMapping()
+    @Transactional
+    public ResponseEntity<ClienteDto> remover(@PathVariable Long id){
+        clienteRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/api/clientes/status/{id}")
+    @Transactional
+    public ResponseEntity<ClienteDto> atualizarStatus(@PathVariable Long id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id do cliente não encontrado"));
+
+        cliente.alteraStatus();
+        return ResponseEntity.ok().build();
+    }
+
 }
