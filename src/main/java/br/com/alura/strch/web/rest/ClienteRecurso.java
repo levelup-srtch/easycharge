@@ -51,4 +51,9 @@ public class ClienteRecurso {
     public ResponseEntity <List <ClienteDTO>> encontrarPorFiltro(ClienteFiltro clienteFiltro){
         return ResponseEntity.ok(clienteServico.buscarTodosFiltro(clienteFiltro));
     }
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity <Void> deletar(@PathVariable Long id){
+        clienteServico.deletar(id);
+        return ResponseEntity.noContent().build();
+    }
 }

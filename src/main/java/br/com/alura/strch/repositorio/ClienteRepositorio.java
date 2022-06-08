@@ -12,4 +12,6 @@ public interface ClienteRepositorio extends JpaRepository<Cliente, Long>, JpaSpe
     boolean existsByCpf(String cpf);
     boolean existsByEmail(String email);
     boolean existsByEndereco(String endereco);
+
+
 }

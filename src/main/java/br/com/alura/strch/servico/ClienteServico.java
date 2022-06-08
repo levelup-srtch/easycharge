@@ -68,7 +68,9 @@ public class ClienteServico implements Serializable {
     public List<ClienteDTO> buscarTodosFiltro(ClienteFiltro clienteFiltro) {
         return clienteMapper.toDTO(clienteRepositorio.findAll(clienteFiltro.filter()));
     }
-
+    public void deletar(Long id){
+       clienteRepositorio.deleteById(id);
+    }
 
 
 
