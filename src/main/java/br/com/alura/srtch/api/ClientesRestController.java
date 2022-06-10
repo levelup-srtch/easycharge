@@ -36,7 +36,7 @@ public class ClientesRestController {
     }
 
     @GetMapping("/api/clientes")
-    public Page<ClientesResponseDto> lista(@PageableDefault(size = 5, sort = {"dadosPessoais.nome", "status"},
+    public Page<ClientesResponseDto> lista(@PageableDefault(size = 5,sort = {"dadosPessoais.nome", "status"},
             direction = Direction.ASC) Pageable pageable) {
         Page<Cliente> clientes = clienteRepository.findAll(pageable);
         return ClientesResponseDto.converter(clientes);
@@ -73,7 +73,7 @@ public class ClientesRestController {
         return ResponseEntity.ok(new ClienteDto(atualizado));
     }
 
-    @DeleteMapping()
+    @DeleteMapping("/api/clientes/{id}")
     @Transactional
     public ResponseEntity<ClienteDto> remover(@PathVariable Long id){
         clienteRepository.deleteById(id);
