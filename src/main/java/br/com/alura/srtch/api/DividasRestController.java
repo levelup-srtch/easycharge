@@ -1,6 +1,6 @@
 package br.com.alura.srtch.api;
 
-import br.com.alura.srtch.dto.DividaComCpfDTO;
+import br.com.alura.srtch.dto.DividaComCpfDto;
 import br.com.alura.srtch.dto.DividaDto;
 import br.com.alura.srtch.form.DividaForm;
 import br.com.alura.srtch.mapper.DividaMapper;
@@ -10,8 +10,13 @@ import br.com.alura.srtch.repository.ClienteRepository;
 import br.com.alura.srtch.repository.DividaRepository;
 import br.com.alura.srtch.service.ValorDaDividaInvalido;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -38,13 +43,22 @@ public class DividasRestController {
     }
 
     @GetMapping("/cpf")
-    public List<DividaComCpfDTO> listarComCpf(){
-        List<Divida> dividas = dividaRepository.findAll();
-        return DividaComCpfDTO.converter(dividas);
+    public Page<DividaComCpfDto> listarComCpf(@PageableDefault(size = 5,sort = {"cliente.dadosPessoais.cpf", "status"},
+            direction = Sort.Direction.ASC) Pageable pageable){
+        Page<Divida> dividas = dividaRepository.findAll(pageable);
+        return DividaComCpfDto.converter(dividas);
     }
 
     @PostMapping
     public ResponseEntity<DividaDto> cadastrar(@RequestBody @Valid DividaForm form, UriComponentsBuilder uriBuilder){
+
+        Divida divida = verificarCliente(form, clienteRepository, dividaRepository);
+
+        URI uri = uriBuilder.path("/api/dividas/{id}").buildAndExpand(divida.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DividaDto(divida));
+    }
+
+    public static Divida verificarCliente(@RequestBody @Valid DividaForm form, ClienteRepository clienteRepository, DividaRepository dividaRepository) {
         Cliente cliente = clienteRepository.findById(form.getIdCliente())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id do cliente não encontrado"));
         if (ValorDaDividaInvalido.validar(form.getValor(), cliente, dividaRepository)){
@@ -52,9 +66,16 @@ public class DividasRestController {
         }
         Divida divida = new DividaMapper().cadastrar(form, cliente);
         dividaRepository.save(divida);
+        return divida;
+    }
 
-        URI uri = uriBuilder.path("/api/dividas/{id}").buildAndExpand(divida.getId()).toUri();
-        return ResponseEntity.created(uri).body(new DividaDto(divida));
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DividaComCpfDto> remover(@PathVariable Long id){
+        Divida divida = dividaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id do cliente não encontrado"));
+        clienteRepository.deleteById(divida.getId());
+        return ResponseEntity.ok().build();
     }
 
 }
