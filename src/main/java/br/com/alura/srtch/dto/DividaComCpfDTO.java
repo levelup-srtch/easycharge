@@ -2,6 +2,7 @@ package br.com.alura.srtch.dto;
 
 import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.model.StatusDivida;
+import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -62,8 +63,8 @@ public class DividaComCpfDTO {
         return cpf;
     }
 
-    public static List<DividaComCpfDTO> converter(List<Divida> dividas) {
-        return dividas.stream().map(DividaComCpfDTO::new).collect(Collectors.toList());
+    public static Page<DividaComCpfDTO> converter(Page<Divida> dividas) {
+        return dividas.map(DividaComCpfDTO::new);
     }
 
 }
