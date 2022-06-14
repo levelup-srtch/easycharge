@@ -43,7 +43,7 @@ public class DividasRestController {
     }
 
     @GetMapping("/cpf")
-    public Page<DividaComCpfDto> listarComCpf(@PageableDefault(size = 5,sort = {"cliente.dadosPessoais.cpf", "status"},
+    public Page<DividaComCpfDto> listarComCpf(@PageableDefault(size = 5,sort = {"cliente.dadosPessoais.cpf", "dataDeAbertura"},
             direction = Sort.Direction.ASC) Pageable pageable){
         Page<Divida> dividas = dividaRepository.findAll(pageable);
         return DividaComCpfDto.converter(dividas);
@@ -73,8 +73,8 @@ public class DividasRestController {
     @Transactional
     public ResponseEntity<DividaComCpfDto> remover(@PathVariable Long id){
         Divida divida = dividaRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id do cliente não encontrado"));
-        clienteRepository.deleteById(divida.getId());
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "id da divida não encontrado"));
+        dividaRepository.deleteById(divida.getId());
         return ResponseEntity.ok().build();
     }
 
