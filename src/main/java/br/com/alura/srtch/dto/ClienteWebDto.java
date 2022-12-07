@@ -5,8 +5,9 @@ import br.com.alura.srtch.model.StatusCliente;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-public class ClientesResponseDto {
+public class ClienteWebDto {
 
     private Long id;
     private final String nome;
@@ -16,7 +17,7 @@ public class ClientesResponseDto {
     private final BigDecimal renda;
     private final StatusCliente status;
 
-    public ClientesResponseDto(Cliente cliente) {
+    public ClienteWebDto(Cliente cliente) {
         this.id = cliente.getId();
         this.nome = cliente.getDadosPessoais().getNome();
         this.cpf = cliente.getDadosPessoais().getCpf();
@@ -54,8 +55,12 @@ public class ClientesResponseDto {
         return status;
     }
 
-    public static Page<ClientesResponseDto> converter(Page<Cliente> clientes){
-        return clientes.map(ClientesResponseDto::new);
+    public static Page<ClienteWebDto> converter(Page<Cliente> clientes){
+        return clientes.map(ClienteWebDto::new);
+    }
+
+    public static List<ClienteWebDto> converterLista(List<Cliente> clientes){
+        return clientes.stream().map(ClienteWebDto::new).toList();
     }
 
 }

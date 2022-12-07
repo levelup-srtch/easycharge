@@ -37,7 +37,7 @@ public class DividasRestController {
     private DividaRepository dividaRepository;
 
     @GetMapping
-    public List<DividaDto> lista(){
+    public List<DividaDto> listar(){
         List<Divida> dividas = dividaRepository.findAll();
         return DividaDto.converter(dividas);
     }

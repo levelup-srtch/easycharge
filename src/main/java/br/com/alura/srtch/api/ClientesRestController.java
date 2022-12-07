@@ -1,7 +1,7 @@
 package br.com.alura.srtch.api;
 
 import br.com.alura.srtch.dto.ClienteDto;
-import br.com.alura.srtch.dto.ClientesResponseDto;
+import br.com.alura.srtch.dto.ClienteWebDto;
 import br.com.alura.srtch.form.AtualizacaoClienteForm;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
@@ -36,10 +36,16 @@ public class ClientesRestController {
     }
 
     @GetMapping("/api/clientes")
-    public Page<ClientesResponseDto> lista(@PageableDefault(size = 5,sort = {"dadosPessoais.nome", "status"},
+    public Page<ClienteWebDto> listarPaginado(@PageableDefault(size = 5,sort = {"dadosPessoais.nome", "status"},
             direction = Direction.ASC) Pageable pageable) {
         Page<Cliente> clientes = clienteRepository.findAll(pageable);
-        return ClientesResponseDto.converter(clientes);
+        return ClienteWebDto.converter(clientes);
+    }
+
+    @GetMapping("/api/listaClientes")
+    public List<ClienteWebDto> listar() {
+        List<Cliente> clientes = clienteRepository.findAll();
+        return ClienteWebDto.converterLista(clientes);
     }
 
     @PostMapping("/api/clientes")

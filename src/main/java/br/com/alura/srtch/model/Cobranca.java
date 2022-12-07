@@ -52,8 +52,6 @@ public class Cobranca {
         this.agente = agente;
         this.tipoDeAgente = tipoDeAgente;
         this.comentarioDoAgente = comentarioDoAgente;
-//        this.tipoDeAcordo = tipoDeAcordo;
-//        this.acordo = acordo;
         this.divida = divida;
     }
 

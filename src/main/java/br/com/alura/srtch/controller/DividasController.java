@@ -2,7 +2,7 @@ package br.com.alura.srtch.controller;
 
 import br.com.alura.srtch.api.DividasRestController;
 import br.com.alura.srtch.dto.DividaWebDto;
-import br.com.alura.srtch.form.AtualizacaoWebClienteForm;
+import br.com.alura.srtch.form.AtualizacaoClienteForm;
 import br.com.alura.srtch.form.DividaForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
@@ -16,10 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -48,11 +45,7 @@ public class DividasController {
         return "dividas";
     }
 
-    //TODO mudar os nomes, tirar verbos, colocar substantivos na url
-
-
-    //TODO mudar para delete /clientes/{id}
-    @GetMapping("/dividas/remover/{id}")
+    @DeleteMapping("/dividas/{id}")
     public String removerCliente(@PathVariable Long id){
         if(!dividaRepository.existsById(id)){
             System.out.println("id não encontrado");
@@ -73,7 +66,7 @@ public class DividasController {
         return FORM_DIVIDA;
     }
 
-    @PostMapping("/dividas/novo")
+    @PostMapping("/dividas")
     public String cadastrar(@Valid DividaForm dividaForm, BindingResult result){
         if(result.hasErrors()){
             return FORM_DIVIDA;
@@ -82,10 +75,8 @@ public class DividasController {
 
         return REDIRECT_DIVIDAS;
     }
-
-    //todo passar os dados do cliente para o clienteDTO
     @GetMapping("/dividas/formularioAtualizacao/{id}")
-    public String alteraCliente(@PathVariable Long id, AtualizacaoWebClienteForm atualizacaoWebClienteForm){
+    public String alterarCliente(@PathVariable Long id, AtualizacaoClienteForm atualizacaoWebClienteForm){
         if(!clienteRepository.existsById(id)){
             return ResponseEntity.notFound().toString();
         }
@@ -96,10 +87,9 @@ public class DividasController {
         return "dividas/formularioAtualizacao";
     }
 
-    //todo validar no back
-    @PostMapping("/dividas/atualiza")
+    @PutMapping("/dividas")
     @Transactional
-    public String atualizar(@Valid AtualizacaoWebClienteForm form, BindingResult result) {
+    public String atualizar(@Valid AtualizacaoClienteForm form, BindingResult result) {
         if(result.hasErrors()){
             return "dividas/formularioAtualizacao";
         }

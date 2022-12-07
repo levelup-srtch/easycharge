@@ -29,7 +29,7 @@ public class CobrancasRestController {
     private DividaRepository dividaRepository;
 
     @GetMapping
-    public List<CobrancaDto> lista() {
+    public List<CobrancaDto> listar() {
         List<Cobranca> cobrancas = cobrancaRepository.findAll();
         return CobrancaDto.converter(cobrancas);
     }
